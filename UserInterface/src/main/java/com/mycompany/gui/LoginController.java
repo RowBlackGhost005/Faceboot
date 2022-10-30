@@ -29,6 +29,6 @@ public class LoginController {
 
     @FXML
     private void clickBtnRegister(MouseEvent event) throws IOException {
-        App.setRoot("SignUp");
+        GUIController.show("SignUp");
     }
 }

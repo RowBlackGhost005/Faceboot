@@ -22,12 +22,14 @@ Button.Login{
     
 
 }
-
+Button:hover{
+     -fx-cursor:hand;
+}
 Button.Login:hover{
     -fx-border: none;
     -fx-background-color: #6699ff;
     -fx-color: black;
-    -fx-cursor:hand;
+   
 }
 
 TextField , PasswordField{

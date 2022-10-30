@@ -33,12 +33,12 @@ public class SignUpController {
     @FXML
     private void clickCmbGender(MouseEvent event) {
         cmbGender.setItems(FXCollections.observableArrayList(
-        "Femenine","Masculine","Other"));
+        "Man","Woman","Other"));
     }
 
     @FXML
     private void clickBtnBack(MouseEvent event) throws IOException {
-        App.setRoot("Login");
+        GUIController.show("Login");
     }
 
     @FXML
@@ -56,7 +56,15 @@ public class SignUpController {
     }
 
     @FXML
-    private void clickBtnSignUp(MouseEvent event) {
+    private void clickBtnSignUp(MouseEvent event) throws IOException {
+        SignUp();
+    }
+
+    private void SignUp() throws IOException {
+        
+        
+        GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
+
     }
     
     
