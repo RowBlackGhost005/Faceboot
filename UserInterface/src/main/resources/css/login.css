@@ -1,0 +1,82 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+     -fx-background-color: #37383f;
+}
+
+Button.Login{
+    -fx-pref-width: 491px;
+    -fx-pref-height: 41px;
+    -fx-padding: 0px 10px 0px 10px;
+    -fx-background-color: #5965f3;
+    -fx-text-fill: white;
+    -fx-border-: none;
+    -fx-background-radius: 6px;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: center;
+    
+
+}
+
+Button.Login:hover{
+    -fx-border: none;
+    -fx-background-color: #6699ff;
+    -fx-color: black;
+    -fx-cursor:hand;
+}
+
+TextField , PasswordField{
+    -fx-pref-width: 491px;
+    -fx-pref-height: 32px;
+    -fx-padding: 4px 8px 4px 8px;
+    -fx-background-color: #2e3338;
+    -fx-color: #fff9f9;
+    -fx-border-color: #232323;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 3px 3px 3px 3px;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff9f9;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: left;
+
+}
+
+Label{
+    -fx-pref-height: 20px;
+    -fx-text-fill: #afb0b2;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-text-align: left;
+}
+
+Label.title{
+    -fx-font-weight:bold;
+    -fx-font-size: 30px;
+    -fx-text-fill: #fafbfb;
+}
+
+Button.btnGoogle{
+    -fx-pref-width: 212px;
+    -fx-pref-height: 41px;
+    -fx-background-image:url("../img/login-with-google.png");
+    -fx-background-color: transparent;
+    -fx-background-size:cover;
+}
+
+Button.btnTwitter{
+    -fx-pref-width: 212px;
+    -fx-pref-height: 41px;
+    -fx-background-image:url("../img/login-with-twitter.png");
+    -fx-background-color: transparent;
+    -fx-background-size:cover;
+}
+
