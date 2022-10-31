@@ -61,8 +61,7 @@ public class SignUpController {
     }
 
     private void SignUp() throws IOException {
-        
-        
+
         GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
 
     }

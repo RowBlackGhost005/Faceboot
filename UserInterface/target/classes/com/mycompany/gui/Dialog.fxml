@@ -7,9 +7,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../../../css/dialog.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.DialogController">
    <children>
-      <Button fx:id="btnOk" layoutX="278.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#clickBtnOk" text="Ok" />
-      <Label fx:id="lblTitle" layoutX="241.0" layoutY="83.0" styleClass="title" />
-      <Label fx:id="lblMessage" layoutX="168.0" layoutY="149.0" />
-      <ImageView fx:id="imgView" fitHeight="106.0" fitWidth="100.0" layoutX="241.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnOk" layoutX="279.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#clickBtnOk" text="Ok" AnchorPane.bottomAnchor="27.19999999999999" />
+      <Label fx:id="lblTitle" alignment="CENTER" layoutX="-3.0" layoutY="65.0" prefHeight="46.0" prefWidth="600.0" styleClass="title" text="Titulo" textAlignment="CENTER" />
+      <Label fx:id="lblMessage" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="-2.0" layoutY="148.0" prefWidth="600.0" text="fsdfdfsf" textAlignment="CENTER" />
+      <ImageView fx:id="imgView" fitHeight="106.0" fitWidth="100.0" layoutX="250.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

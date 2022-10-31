@@ -21,6 +21,8 @@ public class GUIController extends Application {
     public void start(Stage stage) throws IOException {
         guiBuilder=new GUIBuilder();
         scene = new Scene(loadFXML("Login"), 960, 540);
+        stage.setMinWidth(700);
+        stage.setMinHeight(400);
         stage.setScene(scene);
         stage.setTitle("Faceboot");
         stage.show();

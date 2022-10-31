@@ -1,4 +1,3 @@
 com\mycompany\gui\LoginController.class
 com\mycompany\gui\SignUpController.class
 com\mycompany\gui\GUIController.class
-module-info.class
