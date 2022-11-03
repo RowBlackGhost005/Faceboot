@@ -15,7 +15,7 @@ Label{
     -fx-text-fill: #afb0b2;
     -fx-font-weight: 400;
     -fx-font-size: 14px;
-    -fx-text-align: left;
+    -fx-text-alignment: center;
 }
 Label.title{
     -fx-font-weight:bold;
@@ -45,7 +45,7 @@ Label.completedIcon{
 }
 
 ImageView{
-
+    
     -fx-pref-width: 100px;
     -fx-pref-height: 100px;
 }

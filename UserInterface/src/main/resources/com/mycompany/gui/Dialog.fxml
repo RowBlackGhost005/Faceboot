@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../../../css/dialog.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masa.gui.DialogController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../../../css/dialog.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.DialogController">
    <children>
       <Button fx:id="btnOk" layoutX="279.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#clickBtnOk" text="Ok" AnchorPane.bottomAnchor="27.19999999999999" />
       <Label fx:id="lblTitle" alignment="CENTER" layoutX="-3.0" layoutY="65.0" prefHeight="46.0" prefWidth="600.0" styleClass="title" text="Titulo" textAlignment="CENTER" />

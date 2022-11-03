@@ -24,7 +24,10 @@ public class LoginController {
     private Pane mainBar;
 
     @FXML
-    private void clickBtnLogin(ActionEvent event) {
+    private void clickBtnLogin(ActionEvent event) throws IOException {
+        
+        GUIController.show("Faceboot");
+//        LogMessage log = new LogMessage();
     }
 
     @FXML

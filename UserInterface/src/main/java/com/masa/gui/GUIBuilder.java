@@ -22,6 +22,14 @@ public class GUIBuilder {
     public GUIBuilder() {
     }
     
+    /**
+     * Creates a new Dialog
+     * @param title Dialog title
+     * @param message Dialog message
+     * @param type Dialog type
+     * @return
+     * @throws IOException 
+     */
     public Stage buildDialog(String title, String message,int type) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Dialog.fxml"));
         Parent root = (Parent)fxmlLoader.load();  
@@ -30,14 +38,18 @@ public class GUIBuilder {
         controller.setMessage(message);
         Stage stage = new Stage();
         stage.setTitle(title);
+        stage.setResizable(false);
         stage.setScene(new Scene(root, 600, 400));
             stage.show();
-//        switch(type){
-//            case 0:{
-//                Image image= new Image(GUIBuilder.class.getResource("arrow.png").getPath());
-//                controller.setImage(image);
-//            }
-//        }
+        switch(type){
+            case 0:{
+                controller.setImage(new Image(getClass().getResourceAsStream("/img/valid.png")));
+                break;
+            }
+            case 1:{
+                controller.setImage(new Image(getClass().getResourceAsStream("/img/error.png")));
+            }
+        }
         return stage;
     }
     

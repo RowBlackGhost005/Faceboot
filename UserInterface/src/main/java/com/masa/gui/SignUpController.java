@@ -62,6 +62,7 @@ public class SignUpController {
     }
 
     private void SignUp() throws IOException {
+<<<<<<< HEAD:UserInterface/src/main/java/com/masa/gui/SignUpController.java
         
         String phone = txtPhoneNumber.getText();
         String name = txtName.getText();
@@ -77,6 +78,9 @@ public class SignUpController {
         GUIControllerLogic logic = new GUIControllerLogic();
         logic.registerUser(user);
         
+=======
+
+>>>>>>> origin/develop:UserInterface/src/main/java/com/mycompany/gui/SignUpController.java
         GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
 
     }

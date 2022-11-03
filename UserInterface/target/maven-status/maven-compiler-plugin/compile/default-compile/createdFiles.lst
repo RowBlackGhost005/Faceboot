@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 com\masa\gui\GUIControllerLogic.class
 com\masa\gui\GUIBuilder.class
 com\masa\gui\LoginController.class
 com\masa\gui\SignUpController.class
 com\masa\gui\DialogController.class
 com\masa\gui\GUIController.class
+=======
+com\mycompany\gui\LoginController.class
+com\mycompany\gui\SignUpController.class
+com\mycompany\gui\GUIController.class
+>>>>>>> origin/develop
