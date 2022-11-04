@@ -1,5 +1,6 @@
 package com.mycompany.gui;
 
+import entities.User;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,9 +14,9 @@ public class LoginController {
     @FXML
     private Button btnLoggin;
     @FXML
-    private TextField txtusuario;
+    private TextField txtLogin;
     @FXML
-    private TextField txtcontraseña;
+    private TextField txtPassword;
     @FXML
     private Button btnLogginWithGoogle;
     @FXML
@@ -24,11 +25,25 @@ public class LoginController {
     private Pane mainBar;
 
     @FXML
-    private void clickBtnLogin(ActionEvent event) {
+    private void clickBtnLogin(ActionEvent event) throws IOException {
+        Login();
     }
 
     @FXML
     private void clickBtnRegister(MouseEvent event) throws IOException {
         GUIController.show("SignUp");
+    }
+
+    private void Login() throws IOException {
+        User user = new User(txtLogin.getText(), txtPassword.getText());
+
+        try {
+            User existingUser = GUIController.logIn(user);
+            if (existingUser != null) {
+                GUIController.showDialog("Success", "Valid login!", 0);
+            }
+        } catch (Exception ex) {
+            GUIController.showDialog("Error", ex.getMessage(), 0);
+        }
     }
 }
