@@ -1,5 +1,6 @@
 package com.mycompany.gui;
 
+import entities.User;
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -33,7 +34,7 @@ public class SignUpController {
     @FXML
     private void clickCmbGender(MouseEvent event) {
         cmbGender.setItems(FXCollections.observableArrayList(
-        "Man","Woman","Other"));
+                "Male", "Female", "Other"));
     }
 
     @FXML
@@ -61,10 +62,23 @@ public class SignUpController {
     }
 
     private void SignUp() throws IOException {
+        User user = new User();
+        user.setName(txtName.getText());
+        user.setEmail(txtEmail.getText());
+        user.setPhone(txtPhoneNumber.getText());
+        user.setGender(cmbGender.getSelectionModel().getSelectedItem());
+        user.setBirthDate(String.valueOf(datePicker.getValue()));
+        user.setPassword(txtPassword.getText());
 
-        GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
+        try {
+            User registeredUser = GUIController.registerUser(user);
+            if (registeredUser != null) {
+                GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
+            }
+        } catch (Exception ex) {
+            GUIController.showDialog("Error", ex.getMessage(), 0);
+        }
 
     }
-    
-    
+
 }

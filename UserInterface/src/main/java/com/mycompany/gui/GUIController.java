@@ -1,5 +1,8 @@
 package com.mycompany.gui;
 
+import business.BusinessLogic;
+import interfaces.IBusinessLogic;
+import entities.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,26 +16,30 @@ import javafx.scene.layout.StackPane;
  * JavaFX GUIController
  */
 public class GUIController extends Application {
+
+    private static IBusinessLogic businessLogic;
     private static GUIBuilder guiBuilder;
     private static Scene scene;
 
-
     @Override
     public void start(Stage stage) throws IOException {
-        guiBuilder=new GUIBuilder();
+        
+        businessLogic = new BusinessLogic();
+        guiBuilder = new GUIBuilder();
         scene = new Scene(loadFXML("Login"), 960, 540);
         stage.setMinWidth(700);
         stage.setMinHeight(400);
         stage.setScene(scene);
         stage.setTitle("Faceboot");
         stage.show();
+        
     }
 
     static void show(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
-    
-    static void showDialog(String titulo, String mensaje, int tipo) throws IOException{
+
+    static void showDialog(String titulo, String mensaje, int tipo) throws IOException {
         Stage dialogo = guiBuilder.buildDialog(titulo, mensaje, tipo);
         dialogo.show();
     }
@@ -44,7 +51,15 @@ public class GUIController extends Application {
 
     public static void main(String[] args) {
         launch();
-        
+
+    }
+    
+    public static User registerUser(User user) throws Exception {
+        return businessLogic.registerUser(user);
+    }
+    
+    public static User logIn(User user) throws Exception {
+            return businessLogic.login(user);
     }
 
 }

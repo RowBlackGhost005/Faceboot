@@ -1,3 +1,6 @@
+com\mycompany\gui\GUIBuilder.class
 com\mycompany\gui\LoginController.class
 com\mycompany\gui\SignUpController.class
+com\mycompany\gui\FacebootController.class
 com\mycompany\gui\GUIController.class
+com\mycompany\gui\DialogController.class
