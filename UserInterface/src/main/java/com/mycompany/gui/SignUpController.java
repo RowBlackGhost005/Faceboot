@@ -73,7 +73,7 @@ public class SignUpController {
         try {
             User registeredUser = GUIController.registerUser(user);
             if (registeredUser != null) {
-                GUIController.showDialog("Success", "User registered!", 0);
+                GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
             }
         } catch (Exception ex) {
             GUIController.showDialog("Error", ex.getMessage(), 0);

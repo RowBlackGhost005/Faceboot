@@ -41,6 +41,8 @@ public class LoginController {
             User existingUser = GUIController.logIn(user);
             if (existingUser != null) {
                 GUIController.showDialog("Success", "Valid login!", 0);
+                GUIController.show("Faceboot");
+                //LogMessage log = new LogMessage();
             }
         } catch (Exception ex) {
             GUIController.showDialog("Error", ex.getMessage(), 0);
