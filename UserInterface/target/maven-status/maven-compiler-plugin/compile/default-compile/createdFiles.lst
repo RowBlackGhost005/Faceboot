@@ -1,12 +1,9 @@
-<<<<<<< HEAD
-com\masa\gui\GUIControllerLogic.class
-com\masa\gui\GUIBuilder.class
-com\masa\gui\LoginController.class
-com\masa\gui\SignUpController.class
-com\masa\gui\DialogController.class
-com\masa\gui\GUIController.class
-=======
+com\mycompany\gui\GUIBuilder.class
 com\mycompany\gui\LoginController.class
 com\mycompany\gui\SignUpController.class
+logic\GUILogic.class
+com\mycompany\gui\FacebootController.class
 com\mycompany\gui\GUIController.class
->>>>>>> origin/develop
+logic\IGUILogic.class
+com\mycompany\gui\Main.class
+com\mycompany\gui\DialogController.class

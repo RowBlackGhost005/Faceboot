@@ -117,14 +117,16 @@ public class CommHandler implements ICommHandler{
                 
             case "registeruser":
                 
-                User userToAdd = (User) request.getParam("User");
+                User userToAdd = (User) request.getParam("user");
                 
-                businessLogic.registerUser(userToAdd);
+                businessLogic.registerUser(userToAdd, false);
                 
                 communication.removePeer(peer);
                 break;
                 
             case "registeractivepeers":
+                
+                System.out.println(request);
                 
                 ArrayList<Peer> connectedPeers = (ArrayList<Peer>)request.getParam("peerlist");
                 

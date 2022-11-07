@@ -100,10 +100,12 @@ public class ClientSocket implements Runnable{
         while (isOn()) {
             try {
                 String clientMessage = recieved();
+                System.out.println("Listener: " + clientMessage);
                 if (clientMessage != null) {
                     //System.out.println("Peer: " + clientMessage);
                     getServer().handleOperation(clientMessage, this);
                 }
+                
             } catch (IOException ex) {
                 System.out.println("Error Hilo Received");
             } finally{
@@ -112,6 +114,9 @@ public class ClientSocket implements Runnable{
         }
     }
 }
+
+
+
 
 class SendLoop implements Runnable{
 

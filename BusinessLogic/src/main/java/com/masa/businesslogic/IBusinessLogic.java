@@ -9,5 +9,5 @@ import com.masa.domain.User;
  */
 public interface IBusinessLogic {
     
-    public User registerUser(User user);
+    public User registerUser(User user, boolean broadcast);
 }

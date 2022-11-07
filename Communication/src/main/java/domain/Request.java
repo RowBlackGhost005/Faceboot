@@ -103,6 +103,8 @@ public class Request {
                 return peer;
             case "peerlist":
                 return peers;
+            case "user":
+                return user;
             default:
                 return null;
         }

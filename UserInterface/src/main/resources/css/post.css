@@ -1,0 +1,92 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+GridPane{
+    -fx-padding: 8px 8px 10px 8px;
+    -fx-background-color: #40444b;
+    -fx-background-radius: 14px;
+}
+
+AnchorPane{
+    -fx-background-color: #40444b;
+}
+.scroll-pane{
+    -fx-border-color:transparent;
+   -fx-background-color: transparent;
+}
+
+AnchorPane.tags, AnchorPane.taggedUsers{
+    -fx-background-color:#2e3137;
+    -fx-background-radius: 6px;
+    -fx-border-radius:6px;
+}
+
+.scroll-bar:horizontal .track{
+    -fx-background-color :#37383f;
+    -fx-border-color :#37383f;
+    -fx-background-radius : 0.0em;
+    -fx-border-radius :1px;
+}
+
+
+.scroll-bar:horizontal .increment-button ,
+.scroll-bar:horizontal .decrement-button {
+     -fx-shape : " ";   
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0px;
+    -fx-region-background:#37383f;
+    -fx-padding :0.0 0.0 1.0 0.0;
+
+}
+
+ .scroll-bar .increment-button .increment-arrow,
+ .scroll-bar .decrement-button .decrement-arrow{
+     -fx-background-radius : 0.0px;
+   -fx-background-color :transparent;
+
+}
+
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color :#202324;
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 8px;
+}
+
+ImageView.photoUser{
+    -fx-background-size:24px 24px;
+    -fx-image:url(../img/User.png);
+}
+
+Label{
+    -fx-font-weight: 400;
+    -fx-font-size: 16px;
+    -fx-font-family: "Pontano Sans";
+    -fx-text-fill:#fff9f9;
+}
+
+Label.date{
+      -fx-text-fill:#b9b4b4;
+}
+
+ImageView.imagePost{
+    -fx-background-radius: 8px;
+    -fx-image:url(../img/settings.png);
+    
+}
+
+Button.btnEdit{
+    -fx-pref-width: 16px;
+    -fx-pref-height: 16px;
+    -fx-background-image:url("../img/edit.png");
+    -fx-background-color: transparent;
+    -fx-background-size:16px 16px;
+    -fx-background-repeat:no-repeat;
+    -fx-background-position:center;
+}

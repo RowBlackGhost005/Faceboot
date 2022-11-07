@@ -17,7 +17,6 @@ public class SQLConnection implements IConnection{
     public SQLConnection() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:database.db");
-//            connection = DriverManager.getConnection("jdbc:sqlite:///C:/Users/luisg/Desktop/Faceboot/Persistency/database.db");
         } catch (SQLException ex) {
             Logger.getLogger(SQLConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -26,14 +25,13 @@ public class SQLConnection implements IConnection{
     @Override
     public java.sql.Connection getConnection() {
 
-        if (connection == null) {
+//        if (connection == null) {
             try {
                 connection = DriverManager.getConnection("jdbc:sqlite:database.db");
-//                connection = DriverManager.getConnection("jdbc:sqlite:///C:/Users/luisg/Desktop/Faceboot/Persistency/database.db");
             } catch (SQLException ex) {
                 Logger.getLogger(SQLConnection.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+//        }
 
         return connection;
 
@@ -41,6 +39,7 @@ public class SQLConnection implements IConnection{
 
     @Override
     public Connection connectionDB() {
+        getConnection();
         return connection;
     }
 

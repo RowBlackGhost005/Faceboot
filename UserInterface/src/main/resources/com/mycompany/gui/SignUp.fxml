@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" styleClass="mainFxmlClass" stylesheets="@../../../css/signUp.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.SignUpController">
+   <children>
+      <TextField fx:id="txtName" layoutX="235.0" layoutY="127.0" promptText="Name" />
+      <TextField fx:id="txtEmail" layoutX="234.0" layoutY="188.0" promptText="Email" />
+      <TextField fx:id="txtPhoneNumber" layoutX="235.0" layoutY="252.0" promptText="Phone number" />
+      <Label layoutX="353.0" layoutY="32.0" styleClass="title" text="Create an account" />
+      <Button fx:id="btnSignUp" layoutX="236.0" layoutY="445.0" mnemonicParsing="false" onMouseClicked="#clickBtnSignUp" styleClass="register" text="Sign Up" />
+      <Button layoutX="575.0" layoutY="445.0" mnemonicParsing="false" onMouseClicked="#clickBtnCancel" styleClass="cancel" text="Cancel" />
+      <Button fx:id="btnBack" ellipsisString="" layoutX="30.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#clickBtnBack" prefHeight="46.0" prefWidth="36.0" styleClass="back" />
+      <ComboBox fx:id="cmbGender" layoutX="235.0" layoutY="312.0" onMouseClicked="#clickCmbGender" prefWidth="150.0" promptText="Gender" />
+      <DatePicker fx:id="datePicker" layoutX="405.0" layoutY="312.0" prefWidth="181.0" />
+      <PasswordField fx:id="txtPassword" layoutX="235.0" layoutY="371.0" promptText="Password" />
+   </children>
+</AnchorPane>

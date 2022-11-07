@@ -1,6 +1,5 @@
 package com.masa.businesslogic;
 
-import com.masa.communication.CommHandler;
 import com.masa.communication.Communication;
 import com.masa.domain.User;
 import domain.Request;
@@ -21,19 +20,21 @@ public class BusinessLogic implements IBusinessLogic{
     }
     
     @Override
-    public User registerUser(User user) {
+    public User registerUser(User user, boolean broadcast) {
         
         System.out.println("HEY");
+
         user = userLogic.registerUser(user);
-        
-        
-        Request request = new Request("registeruser" , "RegisterUser");
-        
-        request.append(user, "registeruser");
-        
-        communication.sendToAllPeers(request);
-        
+
+        if (broadcast) {
+            Request request = new Request("registeruser", "RegisterUser");
+
+            request.append(user, "user");
+
+            communication.sendToAllPeers(request);
+        }
+
         return user;
     }
-    
+
 }

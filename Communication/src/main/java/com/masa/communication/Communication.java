@@ -21,22 +21,19 @@ import java.util.logging.Logger;
  */
 public class Communication {
 
-    private boolean isOn;
-
-    //Must be the same in the Peer subsystem.
-    //It represents the port where this communication is listening.
-    private int serverPort;
-    
+    //Port where DirectoryPeer is.
     private int directoryPeerPort = 4444;
 
-    private ServerSocketHandler serverSocket;
+    //--Information about this Communication Component--//
     
-//    private ServerSocket serverSocket;
-    private Socket clientSocket;
+    //Port of where this Communication is Listening.
+    private int serverPort;
     
     private String name;
-
+    
     private Peer peer;
+    //--Information about this Communication Component--//
+    private ServerSocketHandler serverHandler;
     
     //Holds all current connections.
     private static ArrayList<ClientSocket> peers = new ArrayList<>();
@@ -49,28 +46,23 @@ public class Communication {
 
     /**
      * Creates a Communication object with the given name and starts the
-     * sockets. The port at which this component will listen its 4444 by
+     * sockets.The port at which this component will listen its 4444 by
      * default.
      *
      * @param name Name of this communication component.
+     * @param businessLogic BusinessLogic to use to communicate.
      */
     public Communication(String name, IBusinessLogic businessLogic) {
 
-
+        this.serializer = new Serializer();
+        this.commHandler = new CommHandler(this, businessLogic);
+        
         Socket socket = null;
         ClientSocket firstConnection = null;
-
-        this.isOn = false;
-
+        
         //Connects into Directory Peer to register.
         try {
-//            socket = new Socket("localhost", directoryPeerPort);
-//
-//            PrintWriter socketSend = new PrintWriter(socket.getOutputStream(), true);
-//            BufferedReader socketReceived = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//
-//            firstConnection = new ClientSocket(socket, socketSend, socketReceived, this);
-//            
+            
             firstConnection = createConnectionSocket(directoryPeerPort);
             
             Thread newSocketThread = new Thread(firstConnection, name);
@@ -79,21 +71,13 @@ public class Communication {
 
             Request request = new Request("netregister", "Peersito");
 
-            this.serializer = new Serializer();
-            this.commHandler = new CommHandler(this, businessLogic);
-
             firstConnection.send(serializer.Serialize(request));
             
             try {
                 newSocketThread.join();
-
-                
-                
             } catch (InterruptedException ex) {
                 Logger.getLogger(Communication.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-
         } catch (IOException ex) {
             System.out.println("Error trying to connect to directory peer");
         } finally {
@@ -104,20 +88,17 @@ public class Communication {
 
         //TODO connection into Redudancy Peer to fetch all new information in the BDs.
         //END TODO.
-        //Starts the server socket and starts to listen in the given port.
         
+        //Starts the server socket and starts to listen in the given port.
         startListen();
 
     }
 
     /**
-     * Starts to listen with the server socket in the selected port, all new
-     * connections will be handled by this object only serverSocket.
+     * Starts a Server Socket Handler to accept connection in the given port
+     * by the directory Peer.
      */
     public void startListen() {
-
-        ServerSocketHandler serverHandler;
-        
         System.out.println("Start listening");
         
         try {
@@ -129,7 +110,6 @@ public class Communication {
             
             System.out.println("Estoy listo!");
             
-            this.isOn = true;
         } catch (IOException ex) {
             Logger.getLogger(Communication.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -156,7 +136,7 @@ public class Communication {
 
         peers.add(newClientSocket);
         
-        Thread newSocketThread = new Thread(newClientSocket, name);
+        Thread newSocketThread = new Thread(newClientSocket);
         
         newSocketThread.start();
     }
@@ -208,92 +188,70 @@ public class Communication {
 
         this.removePeer(peerToSend);
     }
-    
+
     /**
-     * Sends the given request to the given Peer.
-     *
-     * @param request Request to send.
-     * @param peer Peer to receive the request.
+     * Sends the given request to all connected Peers registered in the Directory
+     * Peer
+     * @param request Request to send. 
      */
-    public void sendToDirectory(Request request, ClientSocket peer) {
-
-        try {
-            ClientSocket directoryPeer = createConnectionSocket(directoryPeerPort);
-            
-            directoryPeer.send(serializer.Serialize(request));
-            
-//        String requestSerialized = serializer.Serialize(request);
-//
-//        ClientSocket peerToSend = null;
-//
-//        for (ClientSocket socket : peers) {
-//            if (socket.equals(peer)) {
-//                peerToSend = socket;
-//                break;
-//            }
-//        }
-//
-//        peerToSend.send(requestSerialized);
-        } catch (IOException ex) {
-            Logger.getLogger(Communication.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public void sendToAllPeers(Request request){
         
+        ClientSocket firstConnection = null;
+        
         try {
-            
-            
             Request requestAllPeers = new Request("getactivepeers", "Send peers");
-            
-            ClientSocket directoryPeer = createConnectionSocket(directoryPeerPort);
-
-            Thread newSocketThread = new Thread(directoryPeer, name);
-
+            firstConnection = createConnectionSocket(directoryPeerPort);
+            Thread newSocketThread = new Thread(firstConnection, name);
             newSocketThread.start();
-
-            sendToDirectory(requestAllPeers, directoryPeer);
-            
-            System.out.println("Waiting the thread to finish");
-            newSocketThread.join();
-            
-            
-        } catch (IOException ex) {
-            System.out.println("Error while sending operation to all peers");
-        } 
-        catch (InterruptedException ex) {
-            Logger.getLogger(Communication.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        System.out.println("Sending to all peers");
-        
-        for(Peer peer : activePeers){
-            
+            firstConnection.send(serializer.Serialize(requestAllPeers));
             try {
-                ClientSocket peerClient = createConnectionSocket(peer.getPort());
-                
-                Thread newSocketThread = new Thread(peerClient , name);
-                
-                newSocketThread.start();
-                
-                send(request, peerClient);
-                
                 newSocketThread.join();
-                
-                System.out.println("Sended to a peer");
-                
-            } catch (IOException ex) {
-                Logger.getLogger(Communication.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Communication.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+        } catch (IOException ex) {
+            System.out.println("Error trying to connect to directory peer");
+        } finally {
+            firstConnection.shutdown();
         }
+
+        System.out.println("Sending to all peers. . . " + activePeers.size());
         
+        for (Peer peerToConnnect : activePeers) {
+
+            System.out.println("Connecting to: " + peerToConnnect.getPort());
+            if (peerToConnnect.getPort() != serverPort) {
+
+                try {
+                    ClientSocket peerClient = createConnectionSocket(peerToConnnect.getPort());
+
+                    Thread newSocketThread = new Thread(peerClient, name);
+
+                    newSocketThread.start();
+
+                    send(request, peerClient);
+
+                    newSocketThread.join();
+
+                    System.out.println("Sended to a peer");
+
+                } catch (IOException ex) {
+                    Logger.getLogger(Communication.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Communication.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
         activePeers = null;
     }
-    
-    
+
+    /**
+     * Creates a ClientSocket to connect at the given port.
+     * @param port Port to connect.
+     * @return ClientSocket connected.
+     * @throws IOException Exception if thers an error while creating Socket.
+     */
     public ClientSocket createConnectionSocket(int port) throws IOException{
         
         //Creates a new socket to connect
