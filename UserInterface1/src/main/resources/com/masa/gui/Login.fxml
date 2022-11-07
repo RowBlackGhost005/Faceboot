@@ -12,7 +12,7 @@
 <AnchorPane id="anchorPane" prefHeight="540.0" prefWidth="960.0" styleClass="mainFxmlClass" stylesheets="@../../../css/login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masa.gui.LoginController">
    <children>
       <Button fx:id="btnLoggin" layoutX="234.0" layoutY="310.0" mnemonicParsing="false" onAction="#clickBtnLogin" prefHeight="33.0" prefWidth="226.0" styleClass="Login" text="Log in" />
-      <TextField fx:id="txtusuario" layoutX="234.0" layoutY="184.0" prefHeight="44.0" prefWidth="178.0" promptText="User" />
+      <TextField fx:id="txtLogin" layoutX="234.0" layoutY="184.0" prefHeight="44.0" prefWidth="178.0" promptText="User" />
       <Label layoutX="234.0" layoutY="154.0" prefWidth="88.0" text="EMAIL" />
       <Label layoutX="234.0" layoutY="361.0" prefWidth="114.0" text="Need an acount?" />
       <Hyperlink layoutX="348.0" layoutY="359.0" onMouseClicked="#clickBtnRegister" text="Register" />
@@ -33,6 +33,6 @@
  
       </Pane>
       <Label layoutX="234.0" layoutY="227.0" prefWidth="88.0" text="PASSWORD" />
-      <PasswordField fx:id="txtcontraseña" layoutX="234.0" layoutY="258.0" promptText="Password" />
+      <PasswordField fx:id="txtPassword" layoutX="234.0" layoutY="258.0" promptText="Password" />
    </children>
 </AnchorPane>

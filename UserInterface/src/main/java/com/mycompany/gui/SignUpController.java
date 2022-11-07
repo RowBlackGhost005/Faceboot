@@ -1,7 +1,11 @@
 package com.mycompany.gui;
 
+<<<<<<< HEAD
 import logic.GUILogic;
 import com.masa.domain.User;
+=======
+import entities.User;
+>>>>>>> origin/develop
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -37,7 +41,7 @@ public class SignUpController {
     @FXML
     private void clickCmbGender(MouseEvent event) {
         cmbGender.setItems(FXCollections.observableArrayList(
-        "Man","Woman","Other"));
+                "Male", "Female", "Other"));
     }
 
     @FXML
@@ -65,6 +69,7 @@ public class SignUpController {
     }
 
     private void SignUp() throws IOException {
+<<<<<<< HEAD
         String phone = txtPhoneNumber.getText();
         String name = txtName.getText();
         String email = txtEmail.getText();
@@ -79,7 +84,25 @@ public class SignUpController {
         GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
         
         GUIController.show("Faceboot");
+=======
+        User user = new User();
+        user.setName(txtName.getText());
+        user.setEmail(txtEmail.getText());
+        user.setPhone(txtPhoneNumber.getText());
+        user.setGender(cmbGender.getSelectionModel().getSelectedItem());
+        user.setBirthDate(String.valueOf(datePicker.getValue()));
+        user.setPassword(txtPassword.getText());
+
+        try {
+            User registeredUser = GUIController.registerUser(user);
+            if (registeredUser != null) {
+                GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
+            }
+        } catch (Exception ex) {
+            GUIController.showDialog("Error", ex.getMessage(), 0);
+        }
+
+>>>>>>> origin/develop
     }
-    
-    
+
 }
