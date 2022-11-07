@@ -2,6 +2,7 @@ com\mycompany\gui\GUIBuilder.class
 com\mycompany\gui\LoginController.class
 com\mycompany\gui\SignUpController.class
 <<<<<<< HEAD
+<<<<<<< HEAD
 logic\GUILogic.class
 com\mycompany\gui\FacebootController.class
 com\mycompany\gui\GUIController.class
@@ -11,4 +12,8 @@ com\mycompany\gui\Main.class
 com\mycompany\gui\FacebootController.class
 com\mycompany\gui\GUIController.class
 >>>>>>> origin/develop
+=======
+com\mycompany\gui\FacebootController.class
+com\mycompany\gui\GUIController.class
+>>>>>>> origin/feature
 com\mycompany\gui\DialogController.class

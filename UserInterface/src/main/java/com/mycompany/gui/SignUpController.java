@@ -70,6 +70,7 @@ public class SignUpController {
 
     private void SignUp() throws IOException {
 <<<<<<< HEAD
+<<<<<<< HEAD
         String phone = txtPhoneNumber.getText();
         String name = txtName.getText();
         String email = txtEmail.getText();
@@ -85,6 +86,8 @@ public class SignUpController {
         
         GUIController.show("Faceboot");
 =======
+=======
+>>>>>>> origin/feature
         User user = new User();
         user.setName(txtName.getText());
         user.setEmail(txtEmail.getText());
