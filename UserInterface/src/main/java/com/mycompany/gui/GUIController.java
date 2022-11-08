@@ -51,7 +51,6 @@ public class GUIController extends Application {
     }
 
     public static void main(String[] args) {
-        GUILogic.createBusinessLogic();
         launch();
 
     }
@@ -61,7 +60,7 @@ public class GUIController extends Application {
     }
     
     public static User logIn(User user) throws Exception {
-            return businessLogic.login(user);
+        return businessLogic.login(user);
     }
 
 }

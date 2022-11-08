@@ -3,6 +3,8 @@ package com.mycompany.gui;
 import logic.GUILogic;
 import com.masa.domain.User;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -72,7 +74,13 @@ public class SignUpController {
 
         User user = new User(name, email, phone, gender, date, pssword);
 
-        GUILogic.registerUser(user);
+//        GUILogic.registerUser(user);
+        
+        try {
+            GUIController.registerUser(user);
+        } catch (Exception ex) {
+            Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
 
