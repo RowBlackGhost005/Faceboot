@@ -1,6 +1,7 @@
 package com.masa.domain;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Class that holds the information about an user.
@@ -8,44 +9,47 @@ import java.util.Date;
  * @author Luis Angel Marin
  */
 public class User {
-    
-    private int id;
+
+    private String id;
     private String name;
     private String email;
     private String phone;
     private String gender;
     private String birthDate;
-    private int age;
+    private String password;
 
     public User() {
     }
 
-    public User(String name, String email, String phone, String gender, String birthDate, int age) {
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String name, String email, String phone, String gender, String birthDate, String password) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.gender = gender;
         this.birthDate = birthDate;
-        this.age = age;
+        this.password = password;
     }
 
-    
-    
-    public User(int id, String name, String email, String phone, String gender, String birthDate, int age) {
+    public User(String id, String name, String email, String phone, String gender, String birthDate, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.gender = gender;
         this.birthDate = birthDate;
-        this.age = age;
+        this.password = password;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -89,18 +93,18 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public int getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 19 * hash + this.id;
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.email);
         return hash;
     }
 
@@ -116,8 +120,11 @@ public class User {
             return false;
         }
         final User other = (User) obj;
-        return this.id == other.id;
+        return Objects.equals(this.email, other.email);
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", gender=" + gender + ", birthDate=" + birthDate + ", password=" + password + '}';
+    }
 }

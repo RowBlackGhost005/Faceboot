@@ -1,11 +1,7 @@
 package com.mycompany.gui;
 
-<<<<<<< HEAD
-
+import com.masa.domain.User;
 import java.awt.Desktop;
-=======
-import entities.User;
->>>>>>> origin/develop
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -33,23 +29,18 @@ public class LoginController {
 
     @FXML
     private void clickBtnLogin(ActionEvent event) throws IOException {
-        Login();
+        login();
     }
 
     @FXML
     private void clickBtnRegister(MouseEvent event) throws IOException {
         GUIController.show("SignUp");
     }
-<<<<<<< HEAD
-    
       @FXML
     private void clickBtnLoginWithGoogle(MouseEvent event) throws IOException, URISyntaxException {
+    }
 
-
-
-=======
-
-    private void Login() throws IOException {
+    private void login() throws IOException {
         User user = new User(txtLogin.getText(), txtPassword.getText());
 
         try {
@@ -62,6 +53,6 @@ public class LoginController {
         } catch (Exception ex) {
             GUIController.showDialog("Error", ex.getMessage(), 0);
         }
->>>>>>> origin/develop
     }
 }
+

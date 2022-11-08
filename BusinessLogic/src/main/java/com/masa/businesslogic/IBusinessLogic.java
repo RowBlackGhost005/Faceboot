@@ -10,4 +10,8 @@ import com.masa.domain.User;
 public interface IBusinessLogic {
     
     public User registerUser(User user, boolean broadcast);
+  
+    public User login(User user) throws Exception;
+    
+
 }

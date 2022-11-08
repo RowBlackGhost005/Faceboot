@@ -3,6 +3,8 @@ package com.masa.businesslogic;
 import com.masa.communication.Communication;
 import com.masa.domain.User;
 import domain.Request;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,9 +24,11 @@ public class BusinessLogic implements IBusinessLogic{
     @Override
     public User registerUser(User user, boolean broadcast) {
         
-        System.out.println("HEY");
-
-        user = userLogic.registerUser(user);
+        try {
+            user = userLogic.registerUser(user);
+        } catch (Exception ex) {
+            Logger.getLogger(BusinessLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (broadcast) {
             Request request = new Request("registeruser", "RegisterUser");
@@ -36,5 +40,11 @@ public class BusinessLogic implements IBusinessLogic{
 
         return user;
     }
+    
+    @Override
+    public User login(User user) throws Exception {
+        return userLogic.login(user);
+    }
+
 
 }

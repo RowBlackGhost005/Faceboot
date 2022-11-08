@@ -1,11 +1,7 @@
 package com.mycompany.gui;
 
-<<<<<<< HEAD
 import logic.GUILogic;
 import com.masa.domain.User;
-=======
-import entities.User;
->>>>>>> origin/develop
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -15,7 +11,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
 
 public class SignUpController {
 
@@ -37,7 +32,6 @@ public class SignUpController {
     @FXML
     private Button btnSignUp;
 
-   
     @FXML
     private void clickCmbGender(MouseEvent event) {
         cmbGender.setItems(FXCollections.observableArrayList(
@@ -69,8 +63,6 @@ public class SignUpController {
     }
 
     private void SignUp() throws IOException {
-<<<<<<< HEAD
-<<<<<<< HEAD
         String phone = txtPhoneNumber.getText();
         String name = txtName.getText();
         String email = txtEmail.getText();
@@ -78,34 +70,13 @@ public class SignUpController {
         String date = datePicker.getValue().toString();
         String pssword = txtPassword.getText();
 
-        User user = new User(name, email, phone, gender, date, 0);
-        
+        User user = new User(name, email, phone, gender, date, pssword);
+
         GUILogic.registerUser(user);
-        
+
         GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
-        
+
         GUIController.show("Faceboot");
-=======
-=======
->>>>>>> origin/feature
-        User user = new User();
-        user.setName(txtName.getText());
-        user.setEmail(txtEmail.getText());
-        user.setPhone(txtPhoneNumber.getText());
-        user.setGender(cmbGender.getSelectionModel().getSelectedItem());
-        user.setBirthDate(String.valueOf(datePicker.getValue()));
-        user.setPassword(txtPassword.getText());
-
-        try {
-            User registeredUser = GUIController.registerUser(user);
-            if (registeredUser != null) {
-                GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
-            }
-        } catch (Exception ex) {
-            GUIController.showDialog("Error", ex.getMessage(), 0);
-        }
-
->>>>>>> origin/develop
     }
 
 }

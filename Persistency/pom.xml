@@ -17,18 +17,11 @@
             <artifactId>Domain</artifactId>
             <version>${project.version}</version>
         </dependency>
-<<<<<<< HEAD
-        
+
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.39.3.0</version>
-=======
-        <dependency>
-      <groupId>org.xerial</groupId>
-      <artifactId>sqlite-jdbc</artifactId>
-      <version>3.39.3.0</version>
->>>>>>> origin/develop
         </dependency>
     </dependencies>
 </project>

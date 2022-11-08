@@ -1,6 +1,4 @@
-package persistency;
-
-import interfaces.IConnection;
+package com.masa.persitency;
 
 public class DAOsFactory {
 

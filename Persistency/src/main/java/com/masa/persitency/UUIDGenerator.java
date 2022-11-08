@@ -1,4 +1,4 @@
-package persistency;
+package com.masa.persitency;
 
 import java.util.UUID;
 

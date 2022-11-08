@@ -8,7 +8,7 @@ import java.sql.Connection;
  */
 public interface IConnection {
     
-    public Object getConnection();
+    public Connection getConnection();
 
     public Connection connectionDB();
 }

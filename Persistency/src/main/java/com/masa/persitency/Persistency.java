@@ -1,23 +1,46 @@
 package com.masa.persitency;
 
 import com.masa.domain.User;
+import java.sql.SQLException;
+import java.util.List;
 
-/**
- *
- * @author Luis Angel Marin
- */
-public class Persistency implements IPersistency{
+public class Persistency implements IPersistency {
 
+    private DAOsFactory daosFactory;
     private DAOUsers users;
-    
-    public Persistency(){
-        this.users = new DAOUsers();
+
+    public Persistency() {
+        daosFactory = new DAOsFactory();
+        users = daosFactory.createDAOUsers();
     }
-    
+
     @Override
-    public User createUser(User user) {
+    public void createUser(User user) {
         users.create(user);
-        return user;
     }
-    
+
+    @Override
+    public User getUser(String userId) {
+        return users.get(userId);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public User getUserLogin(User user) throws SQLException {
+        return users.getByLogin(user);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return users.getByEmail(email);
+    }
+
+    @Override
+    public User getUserByPhone(String phone) {
+        return users.getByPhone(phone);
+    }
 }

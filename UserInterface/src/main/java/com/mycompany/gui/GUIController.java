@@ -1,8 +1,8 @@
 package com.mycompany.gui;
 
-import business.BusinessLogic;
-import interfaces.IBusinessLogic;
-import entities.User;
+import com.masa.businesslogic.BusinessLogic;
+import com.masa.businesslogic.IBusinessLogic;
+import com.masa.domain.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -53,18 +53,15 @@ public class GUIController extends Application {
     public static void main(String[] args) {
         GUILogic.createBusinessLogic();
         launch();
-<<<<<<< HEAD
-=======
 
     }
     
     public static User registerUser(User user) throws Exception {
-        return businessLogic.registerUser(user);
+        return businessLogic.registerUser(user, true);
     }
     
     public static User logIn(User user) throws Exception {
             return businessLogic.login(user);
->>>>>>> origin/develop
     }
 
 }
