@@ -1,0 +1,94 @@
+.mainFxmlClass {
+}
+
+AnchorPane{
+    -fx-font-family: "Pontano Sans";
+    -fx-background-color: #37383f;
+
+}
+
+Label {
+    -fx-pref-height: 20px;
+    -fx-text-fill: #afb0b2;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: center;
+}
+
+Label.message {
+    -fx-pref-width: 74px;
+}
+
+Label.image {
+    -fx-pref-width: 52px;
+}
+
+Label.tags {
+    -fx-pref-width: 43px;
+}
+
+Label.users {
+    -fx-pref-width: 57px;
+}
+
+Button {
+    -fx-pref-width: 205px;
+    -fx-pref-height: 41px;
+    -fx-padding: 0px 10px 0px 10px;
+    -fx-background-color: #5965F3;
+    -fx-text-fill: white;
+    -fx-border-radius: 6px 6px 6px 6px;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: center;
+}
+
+Button.delete {
+    -fx-pref-width: 168px;
+    -fx-background-color: #d83c3c;
+}
+
+Button.back {
+    -fx-pref-width: 160px;
+    -fx-background-color: #50545c;
+}
+
+TextField {
+    -fx-pref-width: 873px;
+    -fx-pref-height: 47px;
+    -fx-padding: 4px 8px 4px 8px;
+    -fx-background-color: #2e3338;
+    -fx-color: #fff9f9;
+    -fx-border-color: #232323;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 3px 3px 3px 3px;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff9f9;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: left;
+}
+
+TextField.message {
+    -fx-pref-width: 628px;
+    -fx-pref-height: 222px;
+    -fx-padding: 4px 8px 4px 8px;
+    -fx-background-color: #2e3338;
+    -fx-color: #fff9f9;
+    -fx-border-color: #232323;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 3px 3px 3px 3px;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff9f9;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: left;
+}
