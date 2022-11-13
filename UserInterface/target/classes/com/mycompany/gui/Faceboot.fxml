@@ -26,7 +26,7 @@
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="814.0">
          <children>
             <TextField fx:id="txtSearch" prefHeight="25.0" prefWidth="350.0" promptText="Search" styleClass="search" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Button fx:id="btnPublish" layoutX="665.0" layoutY="1.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" styleClass="publish" text="Publish" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Button fx:id="btnPublish" layoutX="665.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#clickBtnPublish" prefHeight="25.0" prefWidth="63.0" styleClass="publish" text="Publish" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
             <Button fx:id="btnSearch" ellipsisString="" layoutX="391.0" layoutY="21.0" mnemonicParsing="false" prefHeight="7.0" styleClass="btnSearch" />
          </children>
       </AnchorPane>

@@ -5,6 +5,7 @@ import com.masa.persitency.IPersistency;
 import com.masa.persitency.Persistency;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
  * @author Luis Angel Marin
  */
 public class UserLogic {
-    
+
     private IPersistency persistency;
 
     public UserLogic() {
@@ -28,6 +29,14 @@ public class UserLogic {
         validateRegister(user);
         persistency.createUser(user);
         return user;
+    }
+
+    public User get(String userId) {
+        return persistency.getUser(userId);
+    }
+
+    public List<User> getAll() {
+        return persistency.getAllUsers();
     }
 
     private User validateLogin(User user) throws Exception {

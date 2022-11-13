@@ -1,0 +1,36 @@
+.mainFxmlClass {
+}
+
+AnchorPane{
+    -fx-font-family: "Pontano Sans";
+    -fx-background-color: #37383f;
+}
+
+Label {
+    -fx-pref-height: 20px;
+    -fx-text-fill: #afb0b2;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: center;
+}
+
+Button {
+    -fx-pref-width: 205px;
+    -fx-pref-height: 41px;
+    -fx-padding: 0px 10px 0px 10px;
+    -fx-background-color: #5965F3;
+    -fx-text-fill: white;
+    -fx-border-radius: 6px 6px 6px 6px;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: center;
+}
+
+Button.back {
+    -fx-pref-width: 160px;
+    -fx-background-color: #50545c;
+}

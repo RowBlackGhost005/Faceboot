@@ -4,7 +4,7 @@ import com.masa.businesslogic.BusinessLogic;
 import com.masa.businesslogic.IBusinessLogic;
 import com.masa.domain.User;
 
-public class GUILogic{
+public class GUIControllerLogic{
 
     private static IBusinessLogic logic;
     

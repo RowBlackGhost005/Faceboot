@@ -4,6 +4,7 @@
  */
 package com.mycompany.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 /**
  * FXML Controller class
@@ -21,8 +23,6 @@ import javafx.scene.layout.Pane;
 public class FacebootController implements Initializable {
 
 
-    @FXML
-    private Pane mainBar;
     @FXML
     private TextField txtSearch;
     @FXML
@@ -53,6 +53,13 @@ public class FacebootController implements Initializable {
         addOfflineUser("Diego");
         
     }
+    
+    
+    @FXML
+    private void clickBtnPublish(MouseEvent event) throws IOException {
+        GUIController.show("CreatePost");
+    }
+    
 
     public void addOnlineUser(String user){
         listOnlineUsers.getItems().add(user);
@@ -60,4 +67,5 @@ public class FacebootController implements Initializable {
     public void addOfflineUser(String user){
         listOfflineUsers.getItems().add(user);
     }
+
 }

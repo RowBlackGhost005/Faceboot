@@ -51,7 +51,7 @@ public class DAOUsers {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, name, email, phone, gender, birthDate, password FROM users WHERE id = %s;",
+            String query = String.format("SELECT id, name, email, phone, gender, birthDate, password FROM users WHERE id = '%s';",
                     userId);
             ResultSet result = statement.executeQuery(query);
 

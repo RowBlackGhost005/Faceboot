@@ -2,6 +2,8 @@ package com.mycompany.gui;
 
 import com.masa.businesslogic.BusinessLogic;
 import com.masa.businesslogic.IBusinessLogic;
+import com.masa.domain.Post;
+import com.masa.domain.Tag;
 import com.masa.domain.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +12,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import javafx.scene.layout.StackPane;
-import logic.GUILogic;
+import logic.GUIControllerLogic;
 
 /**
  * JavaFX GUIController
@@ -24,7 +27,7 @@ public class GUIController extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        
+
         businessLogic = new BusinessLogic();
         guiBuilder = new GUIBuilder();
         scene = new Scene(loadFXML("Login"), 960, 540);
@@ -33,7 +36,7 @@ public class GUIController extends Application {
         stage.setScene(scene);
         stage.setTitle("Faceboot");
         stage.show();
-        
+
     }
 
     static void show(String fxml) throws IOException {
@@ -42,6 +45,11 @@ public class GUIController extends Application {
 
     static void showDialog(String titulo, String mensaje, int tipo) throws IOException {
         Stage dialogo = guiBuilder.buildDialog(titulo, mensaje, tipo);
+        dialogo.show();
+    }
+
+    static void showTagUsersDialog(CreatePostController cpc) throws IOException {
+        Stage dialogo = guiBuilder.buildTagUsersDialog(cpc);
         dialogo.show();
     }
 
@@ -54,13 +62,29 @@ public class GUIController extends Application {
         launch();
 
     }
-    
+
     public static User registerUser(User user) throws Exception {
         return businessLogic.registerUser(user, true);
     }
-    
+
     public static User logIn(User user) throws Exception {
         return businessLogic.login(user);
+    }
+
+    public static User getUser(String userId) {
+        return businessLogic.getUser(userId);
+    }
+    
+    public static List<User> getAllUsers() {
+        return businessLogic.getAllUsers();
+    }
+
+    public static void createPost(Post post) {
+        businessLogic.createPost(post);
+    }
+
+    public static void createPost(Post post, Tag tags) {
+        businessLogic.createPost(post, tags);
     }
 
 }

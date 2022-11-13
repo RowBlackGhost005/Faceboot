@@ -22,21 +22,21 @@ import javafx.stage.Stage;
  */
 public class GUIBuilder {
 
-
     public GUIBuilder() {
     }
-    
+
     /**
      * Creates a new Dialog
+     *
      * @param title Dialog title
      * @param message Dialog message
      * @param type Dialog type
      * @return
-     * @throws IOException 
+     * @throws IOException
      */
-    public Stage buildDialog(String title, String message,int type) throws IOException{
+    public Stage buildDialog(String title, String message, int type) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Dialog.fxml"));
-        Parent root = (Parent)fxmlLoader.load();  
+        Parent root = (Parent) fxmlLoader.load();
         DialogController controller = fxmlLoader.<DialogController>getController();
         controller.setTitle(title);
         controller.setMessage(message);
@@ -44,18 +44,31 @@ public class GUIBuilder {
         stage.setTitle(title);
         stage.setResizable(false);
         stage.setScene(new Scene(root, 600, 400));
-            stage.show();
-        switch(type){
-            case 0:{
+        stage.show();
+        switch (type) {
+            case 0: {
                 controller.setImage(new Image(getClass().getResourceAsStream("/img/valid.png")));
                 break;
             }
-            case 1:{
+            case 1: {
                 controller.setImage(new Image(getClass().getResourceAsStream("/img/error.png")));
             }
         }
         return stage;
     }
-    
-    
+
+    public Stage buildTagUsersDialog(CreatePostController cpc) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("TagUser.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        TagUserController controller = fxmlLoader.<TagUserController>getController();
+        controller.setCreatePostController(cpc);
+        controller.fillTableView();
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setScene(new Scene(root, 800, 540));
+        stage.show();
+
+        return stage;
+    }
+
 }

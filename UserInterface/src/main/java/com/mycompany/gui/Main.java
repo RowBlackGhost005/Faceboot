@@ -1,6 +1,6 @@
 package com.mycompany.gui;
 
-import logic.GUILogic;
+import logic.GUIControllerLogic;
 
 public class Main {
     public static void main(String[] args){

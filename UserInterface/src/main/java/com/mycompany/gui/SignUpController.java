@@ -1,6 +1,6 @@
 package com.mycompany.gui;
 
-import logic.GUILogic;
+import logic.GUIControllerLogic;
 import com.masa.domain.User;
 import java.io.IOException;
 import java.util.logging.Level;

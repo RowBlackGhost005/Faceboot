@@ -1,5 +1,8 @@
 package com.masa.persitency;
 
+import com.masa.domain.Post;
+import com.masa.domain.RelPostTag;
+import com.masa.domain.Tag;
 import com.masa.domain.User;
 import java.sql.SQLException;
 import java.util.List;
@@ -8,10 +11,17 @@ public class Persistency implements IPersistency {
 
     private DAOsFactory daosFactory;
     private DAOUsers users;
+    private DAOPosts posts;
+    private DAOTags tags;
+    private DAORelPostTag postTags;
 
     public Persistency() {
         daosFactory = new DAOsFactory();
         users = daosFactory.createDAOUsers();
+        posts = daosFactory.createDAOPosts();
+        tags = daosFactory.createDAOTags();
+        postTags = daosFactory.createDAORelPostTag();
+
     }
 
     @Override
@@ -26,7 +36,7 @@ public class Persistency implements IPersistency {
 
     @Override
     public List<User> getAllUsers() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return users.getAll();
     }
 
     @Override
@@ -43,4 +53,55 @@ public class Persistency implements IPersistency {
     public User getUserByPhone(String phone) {
         return users.getByPhone(phone);
     }
+
+    @Override
+    public Post createPost(Post post) {
+        return posts.create(post);
+    }
+
+    @Override
+    public Post getPost(String postId) {
+        return posts.get(postId);
+    }
+
+    @Override
+    public Tag createTag(Tag tag) {
+        return tags.create(tag);
+    }
+
+    @Override
+    public Tag getTag(String tagId) {
+        return tags.get(tagId);
+    }
+
+    @Override
+    public Tag editTag(Tag tag) {
+        return tags.edit(tag);
+    }
+
+    @Override
+    public List<Tag> getAllTags() {
+        return tags.getAll();
+    }
+
+    @Override
+    public Tag getTagByName(String name) {
+        return tags.getByName(name);
+    }
+
+    @Override
+    public Boolean createRelPostTag(RelPostTag relPostTag) {
+        return postTags.create(relPostTag);
+    }
+
+    @Override
+    public RelPostTag getRelPostTag(String relPostTagId) {
+        return postTags.get(relPostTagId);
+    }
+
+    @Override
+    public RelPostTag getRelPostTag(String postId, String tagId) {
+        return postTags.getPostTag(postId, tagId);
+    }
+
 }
