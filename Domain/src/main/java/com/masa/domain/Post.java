@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 import java.awt.image.BufferedImage;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Post {
 
@@ -11,10 +13,26 @@ public class Post {
     private String message;
     private BufferedImage image;
     private String userId;
-
+    private ArrayList<User> users;
+    private ArrayList<Tag> tags;
+    private ArrayList<Comment> comments;
+    private User user;
+    private LocalDateTime dateTime;
+    
     public Post() {
     }
 
+    public Post(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, LocalDateTime dateTime) {
+        this.message = message;
+        this.image = image;
+        this.users = users;
+        this.tags = tags;
+        this.comments = comments;
+        this.user = user;
+        this.dateTime = dateTime;
+    }
+
+    
     public Post(String id) {
         this.id = id;
     }
@@ -95,4 +113,46 @@ public class Post {
         return "Post{" + "id=" + id + ", message=" + message + '}';
     }
 
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
+    public ArrayList<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    
+    
 }

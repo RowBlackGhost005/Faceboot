@@ -1,4 +1,6 @@
 com\masa\businesslogic\BusinessLogic.class
 com\masa\businesslogic\UserLogic.class
+com\masa\businesslogic\PostLogic.class
+com\masa\businesslogic\TagLogic.class
 run\Run.class
 com\masa\businesslogic\IBusinessLogic.class

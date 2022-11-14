@@ -6,13 +6,13 @@
 
 }
 
-GridPane{
+GridPane.postPane{
     -fx-padding: 8px 8px 10px 8px;
     -fx-background-color: #40444b;
     -fx-background-radius: 14px;
 }
 
-AnchorPane{
+AnchorPane.post{
     -fx-background-color: #40444b;
 }
 .scroll-pane{
@@ -89,4 +89,15 @@ Button.btnEdit{
     -fx-background-size:16px 16px;
     -fx-background-repeat:no-repeat;
     -fx-background-position:center;
+}
+
+Separator:horizontal{
+   -fx-background-color: #606060;
+    -fx-border: none;
+     -fx-pref-width: 1.2px;
+}
+
+Label.tags, Label.taggedUsers{
+    -fx-text-fill:#5965f3;
+    
 }

@@ -1,2 +1,6 @@
+com\masa\domain\RelPostTag.class
+com\masa\domain\Comment.class
+com\masa\domain\Post.class
 com\masa\domain\User.class
 run\Run.class
+com\masa\domain\Tag.class

@@ -47,7 +47,7 @@
       </Pane>
       <ScrollPane prefHeight="500.0" prefWidth="794.0" styleClass="panePost" GridPane.rowIndex="2" GridPane.rowSpan="2">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+          <GridPane fx:id="postPane" minHeight="0.0" minWidth="0.0" vgap="5.0" />
         </content>
       </ScrollPane>
       <Button fx:id="btnNotifications" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="62.0" prefWidth="132.0" styleClass="notifications" GridPane.columnIndex="1" />

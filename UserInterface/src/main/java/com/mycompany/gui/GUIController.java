@@ -30,7 +30,7 @@ public class GUIController extends Application {
 
         businessLogic = new BusinessLogic();
         guiBuilder = new GUIBuilder();
-        scene = new Scene(loadFXML("Login"), 960, 540);
+        scene = new Scene(loadFXML("Faceboot"), 960, 540);
         stage.setMinWidth(700);
         stage.setMinHeight(400);
         stage.setScene(scene);

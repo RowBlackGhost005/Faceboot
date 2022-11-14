@@ -1,2 +1,12 @@
 com\masa\persitency\UUIDGenerator.class
+com\masa\persitency\SQLConnection.class
+com\masa\persitency\Connection.class
+com\masa\persitency\DAOPosts.class
+com\masa\persitency\DAORelPostTag.class
+com\masa\persitency\DAOUsers.class
+com\masa\persitency\DAOTags.class
+com\masa\persitency\IPersistency.class
+com\masa\persitency\Persistency.class
+com\masa\persitency\DAOsFactory.class
+com\masa\persitency\IConnection.class
 run\Run.class
