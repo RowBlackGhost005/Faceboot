@@ -89,7 +89,8 @@ public class FacebootController implements Initializable {
     }
     
     @FXML
-    private void clickBtnPublish(MouseEvent event) {
+    private void clickBtnPublish(MouseEvent event) throws IOException {
+        GUIController.show("CreatePost");
     }
     
       public void addOnlineUser(String user){

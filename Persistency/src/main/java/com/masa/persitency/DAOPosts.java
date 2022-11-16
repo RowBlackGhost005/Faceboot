@@ -26,9 +26,10 @@ public class DAOPosts {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("INSERT INTO posts (id, message) VALUES ('%s', '%s');",
+            String query = String.format("INSERT INTO posts (id, message, image_path) VALUES ('%s', '%s', '%s');",
                     id,
-                    post.getMessage());
+                    post.getMessage(),
+                    post.getImagePath());
 
             statement.executeUpdate(query);
 

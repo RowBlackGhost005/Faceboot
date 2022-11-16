@@ -1,6 +1,5 @@
 package com.masa.domain;
 
-import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 import java.awt.image.BufferedImage;
@@ -12,13 +11,14 @@ public class Post {
     private String id;
     private String message;
     private BufferedImage image;
+    private String imagePath;
     private String userId;
     private ArrayList<User> users;
     private ArrayList<Tag> tags;
     private ArrayList<Comment> comments;
     private User user;
     private LocalDateTime dateTime;
-    
+
     public Post() {
     }
 
@@ -32,7 +32,6 @@ public class Post {
         this.dateTime = dateTime;
     }
 
-    
     public Post(String id) {
         this.id = id;
     }
@@ -153,6 +152,12 @@ public class Post {
         this.dateTime = dateTime;
     }
 
-    
-    
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
 }
