@@ -77,7 +77,6 @@ Label.date{
 
 ImageView.imagePost{
     -fx-background-radius: 8px;
-    -fx-image:url(../img/settings.png);
     
 }
 

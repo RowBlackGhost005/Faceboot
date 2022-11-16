@@ -3,7 +3,6 @@ package com.mycompany.gui;
 import com.masa.businesslogic.BusinessLogic;
 import com.masa.businesslogic.IBusinessLogic;
 import com.masa.domain.Post;
-import com.masa.domain.Tag;
 import com.masa.domain.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -74,17 +73,13 @@ public class GUIController extends Application {
     public static User getUser(String userId) {
         return businessLogic.getUser(userId);
     }
-    
+
     public static List<User> getAllUsers() {
         return businessLogic.getAllUsers();
     }
 
-    public static void createPost(Post post) {
+    public static void createPost(Post post) throws IOException {
         businessLogic.createPost(post);
-    }
-
-    public static void createPost(Post post, Tag tags) {
-        businessLogic.createPost(post, tags);
     }
 
 }

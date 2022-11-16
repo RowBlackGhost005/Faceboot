@@ -4,12 +4,12 @@ import com.masa.domain.Post;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
@@ -82,27 +82,27 @@ public class CreatePostController {
 
     private void post() throws IOException {
         Post post = new Post(null, txtMessage.getText());
+        String savingPath = null;
         if (imgView.getImage() != null) {
             String imagePath = imgView.getImage().getUrl();
-            Image image = new Image(imagePath);
-            BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss");
-            String currentTimeStamp = dateFormat.format(new Date());
-            String savingPath = "./src/main/resources/postImg/" + currentTimeStamp + ".jpg";
-            File outputFile = new File(savingPath);
-            ImageIO.write(bImage, "JPEG", outputFile);
-            post.setImagePath(savingPath);
+            post.setImagePath(imagePath);
         }
         if (taggedUsers != null) {
-            txtTaggedUsers.setText(taggedUsers.toString());
+            ArrayList<User> usersList = new ArrayList<>();
+            for (User user : taggedUsers) {
+                usersList.add(user);
+            }
+            post.setUsers(usersList);
         }
         if (!txtTags.getText().isBlank()) {
-            Tag tags = new Tag(null, txtTags.getText());
-            GUIController.createPost(post, tags);
-        } else {
-            GUIController.createPost(post);
+            String[] tagsNamesList = txtTags.getText().split(" ");
+            ArrayList<Tag> tagsList = new ArrayList<>();
+            for (String tag : tagsNamesList) {
+                tagsList.add(new Tag(null, tag));
+            }
+            post.setTags(tagsList);
         }
+        GUIController.createPost(post);
     }
 
     private void back() throws IOException {

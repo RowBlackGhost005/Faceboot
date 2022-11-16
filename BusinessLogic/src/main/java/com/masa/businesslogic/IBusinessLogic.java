@@ -3,6 +3,7 @@ package com.masa.businesslogic;
 import com.masa.domain.Post;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,9 +21,6 @@ public interface IBusinessLogic {
     
     public List<User> getAllUsers();
     
-    public void createPost(Post post);
-    
-    public void createPost(Post post, Tag tags);
-    
+    public void createPost(Post post) throws IOException;
 
 }

@@ -74,68 +74,69 @@ public class GUIBuilder {
 
         return stage;
     }
-    
-        public AnchorPane builComment(Comment comment) throws IOException{
+
+    public AnchorPane buildComment(Comment comment) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Comment.fxml"));
-        AnchorPane commentTamplate = (AnchorPane)fxmlLoader.load();  
+        AnchorPane commentTamplate = (AnchorPane) fxmlLoader.load();
         CommentController controller = fxmlLoader.<CommentController>getController();
-        
+
         controller.setCommentText(comment.getMessage());
         controller.setUser(comment.getUser().getName());
         controller.setDate(comment.getDateTime().toString());
-        
+
         StringBuffer tags = new StringBuffer();
-        if(comment.getTags()!=null){
-            for(Tag tag:comment.getTags()){
+        if (comment.getTags() != null) {
+            for (Tag tag : comment.getTags()) {
                 tags.append("#").append(tag).append(" ");
             }
         }
-        
+
         StringBuffer users = new StringBuffer();
-        if(comment.getTags()!=null){
-            for(Tag tag:comment.getTags()){
+        if (comment.getTags() != null) {
+            for (Tag tag : comment.getTags()) {
                 tags.append("@").append(tag).append(" ");
             }
         }
         return commentTamplate;
-        
+
     }
-    
-    
-    public Parent builPost(Post post) throws IOException{
+
+    public Parent buildPost(Post post) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Post.fxml"));
-        Parent postTamplate = (Parent)fxmlLoader.load();  
+        Parent postTamplate = (Parent) fxmlLoader.load();
         PostController controller = fxmlLoader.<PostController>getController();
-        
+
         controller.setPostText(post.getMessage());
         controller.setUser(post.getUser().getName());
         controller.setDate(post.getDateTime().toString());
-        
-        if(post.getComments()!=null){
-            for(Comment comment:post.getComments()){
-                controller.addComment(builComment(comment));
-            }
-            
+        if(post.getImagePath() != null) {
+        controller.setPhotoPost(new Image(post.getImagePath()));
         }
-        
+
+        if (post.getComments() != null) {
+            for (Comment comment : post.getComments()) {
+                controller.addComment(buildComment(comment));
+            }
+
+        }
+
         StringBuilder tags = new StringBuilder();
-        if(post.getTags()!=null){
-            for(Tag tag:post.getTags()){
+        if (post.getTags() != null) {
+            for (Tag tag : post.getTags()) {
                 tags.append("#").append(tag.getName()).append(" ");
             }
             controller.setTags(tags.toString());
         }
-        
-        
+
         StringBuilder users = new StringBuilder();
-        if(post.getTags()!=null){
-            for(User user:post.getUsers()){
+        if (post.getTags() != null) {
+            for (User user : post.getUsers()) {
                 users.append("@").append(user.getName()).append(" ");
             }
             controller.setTaggedUsers(users.toString());
         }
         return postTamplate;
-        
+
     }
 
 }

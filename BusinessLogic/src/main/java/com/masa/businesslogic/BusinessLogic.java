@@ -2,9 +2,9 @@ package com.masa.businesslogic;
 
 import com.masa.communication.Communication;
 import com.masa.domain.Post;
-import com.masa.domain.Tag;
 import com.masa.domain.User;
 import domain.Request;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,13 +64,8 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public void createPost(Post post) {
-        postLogic.create(post);
-    }
-
-    @Override
-    public void createPost(Post post, Tag tag) {
-        postLogic.create(post, tag, tagLogic);
+    public void createPost(Post post) throws IOException {
+        postLogic.create(post, tagLogic);
     }
 
 }
