@@ -1,8 +1,8 @@
 package com.masa.communication;
 
-import domain.Request;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import domain.Request;
 
 /**
  * Class that Serialize request into JSON format and De-Serializes JSONs into

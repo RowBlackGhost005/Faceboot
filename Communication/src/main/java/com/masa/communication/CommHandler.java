@@ -1,100 +1,105 @@
 package com.masa.communication;
 
 import domain.Request;
-import Logic.Directory;
-import Logic.IDirectory;
-import com.masa.businesslogic.BusinessLogic;
 import com.masa.businesslogic.IBusinessLogic;
+import com.masa.domain.Post;
+import com.masa.domain.PostTransferObject;
+import com.masa.domain.Tag;
 import com.masa.domain.User;
+import com.masa.utils.IObservable;
+import com.masa.utils.IObserver;
 import domain.Peer;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Class that controls the operations that were send or received into the Communication component.
+ * Class that controls the request received and to be send to redirect them into
+ * their respective method or component.
  *  
  * @author Luis Angel Marin
  */
-public class CommHandler implements ICommHandler{
+public class CommHandler implements ICommHandler, IObservable{
 
-    private IDirectory directoryPeer;
-    
     private Communication communication;
     
     private Serializer serializer;
     
     private IBusinessLogic businessLogic;
     
-    public CommHandler(Communication communication, IBusinessLogic businessLogic){
-        this.directoryPeer = new Directory();
-        this.communication = communication;
+    private ArrayList<IObserver> observers;
+    
+    /**
+     * Creates a new Communication Handler.
+     * 
+     * @param communication Communication object to handle his operations.
+     * @param businessLogic BusinessLogic to communicate the App operations.
+     */
+    public CommHandler(IBusinessLogic businessLogic){
+//        this.communication = communication;
         this.serializer = new Serializer();
         this.businessLogic = businessLogic;
+        this.observers = new ArrayList<IObserver>();
+    }
+
+    /**
+     * Initializes the Communication component of this subsystem.
+     * Should be the first method called once this object is constructed
+     */
+    @Override
+    public void initCommunication(){
+        this.communication = new Communication("Peer", this);
+        communication.startUp();
     }
     
-    @Override
-    public Peer registerPeer(){
-        return directoryPeer.registerPeer();
-    }
-    
-    @Override
-    public void addPeer(Peer peer) {
-        directoryPeer.addPeer(peer);
-    }
-
-    @Override
-    public void removePeer(int port) {
-        directoryPeer.removePeer(port);
-    }
-
-    @Override
-    public Peer getPeer(int port) {
-        return directoryPeer.getPeer(port);
-    }
-
-    @Override
-    public List<Peer> getActivePeers() {
-        return directoryPeer.getActivePeers();
-    }
-
-    @Override
-    public void addPort(int port) {
-        directoryPeer.addPort(port);
-    }
-
-    @Override
-    public void removePort(int port) {
-        directoryPeer.removePort(port);
-    }
-    
+    /**
+     * Prints the given Message in console.
+     * For Debug Purposes.
+     * @param message Message to print.
+     */
     public void print(String message){
-        directoryPeer.print(message);
+        System.out.println(message);
     }
 
+    /**
+     * Handles the Request given as parameter.
+     * 
+     * The operation parameter in the request is read and the asociated methods/operation
+     * are called to handle the request.
+     * 
+     * If neccesariy, this method uses the ClientSocket given as parameter to send
+     * a response that was generated in the handle process.
+     * 
+     * If no response is needed, every operation should remove the ClientSocket
+     * of this communication component to end the Connection.
+     * 
+     * @param request Request to handle.
+     * @param peer Peer who sended the request.
+     */
     @Override
     public void handleOperation(Request request, ClientSocket peer) {
         
         switch (request.getOperation().toLowerCase()) {
+            
+            //Can Send: Peer , Directory Peer.
+            //Can Receive: Peer, Directory Peer.
+            //Response to: N/A.
+            //For Debug Purposes, prints the message of the request in console.
             case "print":
                 print(request.getMessage());
                 break;
+            
+            //Can Send: Peer , Directory Peer.
+            //Can Receive: Peer, Directory Peer.
+            //Response to: N/A.
+            //For Debug Purposes, used to test if a connection is established between two peers.
             case "greetings":
                 print(request.getMessage());
                 sendRequest(request, peer);
                 break;
-            case "netregister":
                 
-                Peer registeredPeer = registerPeer();
-                
-                print("Successfully registed Peer as: " + registeredPeer.getName()+ "in port: " + registeredPeer.getPort());
-                
-                Request response = new Request();
-                response.setOperation("netregistersuccess");
-                response.append(registeredPeer, registeredPeer.getClass().getSimpleName());
-                
-                sendRequest(response, peer);
-                break;
-                
+            //Can Send: Directory Peer.
+            //Can Receive: Peer.
+            //Response to: Netregister.
+            //Register the Credentials given by the Directory Peer.
             case "netregistersuccess":
                 
                 Peer peerCredentials = (Peer) request.getParam("peer");
@@ -102,19 +107,11 @@ public class CommHandler implements ICommHandler{
                 communication.configurePeer(peerCredentials);
                 
                 break;
-                
-            case "getactivepeers":
-                
-                List<Peer> peers = getActivePeers();
-                
-                response = new Request();
-                
-                response.append(peers, "peerlist");
-                
-                System.out.println("Requesting Active Peers to");
-                sendRequest(response, peer);
-                break;
-                
+
+            //Can Send: Peer.
+            //Can Receive: Peer.
+            //Response to: N/A
+            //Pass the information to BusinessLogic to replicate the register of a new User in this Peer DB.
             case "registeruser":
                 
                 User userToAdd = (User) request.getParam("user");
@@ -124,6 +121,10 @@ public class CommHandler implements ICommHandler{
                 communication.removePeer(peer);
                 break;
                 
+            //Can Send: Directory Peer.
+            //Can Receive: Peer.
+            //Response to: GetActivePeers.
+            //Register in this Communication component the list of all Peers Connected into the network.
             case "registeractivepeers":
                 
                 System.out.println(request);
@@ -136,6 +137,38 @@ public class CommHandler implements ICommHandler{
                 
                 communication.removePeer(peer);
                 break;
+                
+            //Can Send: Peer
+            //Can Receive: Peer.
+            //Response to: N/A.
+            //Register into the database the given post inside the request.
+            case "registerpost":
+                
+                System.out.println(request);
+                
+                PostTransferObject postTransferObject = (PostTransferObject) request.getParam("post");
+                
+                Tag tag = (Tag) request.getParam("tag");
+                
+                Post post = postTransferObject.revertPost();
+                
+                if(tag != null){
+                    businessLogic.createPost(post, tag, false);
+                }else{
+                    businessLogic.createPost(post, false);
+                }
+                
+                
+                communication.removePeer(peer);
+                
+                notify(post , "post");
+                
+                break;
+                
+            //Can Send: 
+            //Can Receive: 
+            //Response to: 
+            //
             default:
                 break;
 
@@ -143,6 +176,12 @@ public class CommHandler implements ICommHandler{
 
     }
     
+    /**
+     * Sends a request to the given ClientSocket.
+     * 
+     * @param request Request to send.
+     * @param peer ClientSocket to send the request.
+     */
     @Override
     public void sendRequest(Request request, ClientSocket peer){
         communication.send(request, peer);
@@ -155,6 +194,24 @@ public class CommHandler implements ICommHandler{
 
     @Override
     public void sendRequestAllPeers(Request request) {
+        communication.sendToAllPeers(request);
+    }
+
+    @Override
+    public void addObserver(IObserver observer) {
+        this.observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(IObserver observer) {
+        this.observers.remove(observer);
+    }
+
+    @Override
+    public void notify(Object o, String s) {
         
+        for(IObserver observer : observers){
+            observer.update(o , s);
+        }
     }
 }

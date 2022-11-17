@@ -19,7 +19,7 @@
       <Button fx:id="btnBack" layoutX="590.0" layoutY="459.0" mnemonicParsing="false" onMouseClicked="#clickBtnBack" styleClass="back" stylesheets="@../../../css/tagUsers.css" text="Back" />
    </children>
    <stylesheets>
-      <URL value="@../../../css/tagUser.css" />
+      <URL value="@../../../css/tagUsers.css" />
       <URL value="@../../../css/tagUsers.css" />
    </stylesheets>
 </AnchorPane>

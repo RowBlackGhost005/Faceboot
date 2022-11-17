@@ -40,5 +40,5 @@ public interface IPersistency {
     public RelPostTag getRelPostTag(String relPostTagId);
     
     public RelPostTag getRelPostTag(String postId, String tagId);
-
+    
 }

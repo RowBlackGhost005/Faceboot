@@ -16,11 +16,11 @@ public class PostLogic {
         persistency = new Persistency();
     }
 
-    public void create(Post post) {
-        persistency.createPost(post);
+    public Post create(Post post) {
+        return persistency.createPost(post);
     }
 
-    public void create(Post post, Tag tags, TagLogic tagLogic) {
+    public Post create(Post post, Tag tags, TagLogic tagLogic) {
         String[] tagsNamesList = tags.getName().split(" ");
         List<Tag> tagsList = new ArrayList<>();
 
@@ -45,6 +45,8 @@ public class PostLogic {
             RelPostTag relPostTag = new RelPostTag(newPost.getId(), tag.getId());
             persistency.createRelPostTag(relPostTag);
         }
+        
+        return newPost;
     }
 
 //    public Post get(String postId) {

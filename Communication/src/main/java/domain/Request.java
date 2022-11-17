@@ -1,5 +1,7 @@
 package domain;
 
+import com.masa.domain.PostTransferObject;
+import com.masa.domain.Tag;
 import com.masa.domain.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +28,11 @@ public class Request {
     private Peer peer;
     private List<Peer> peers;
     private User user;
+    private PostTransferObject postTransfer;
+    private Tag tag;
     //End objecs that can be send into a request.
-
+    
+    
     /**
      * Creates an empty request.
      */
@@ -77,11 +82,23 @@ public class Request {
             case "peer":
                 this.peer = (Peer) object;
                 break;
+                
             case "peerlist":
                 this.peers = (ArrayList<Peer>) object;
                 break;
+                
             case "user":
                 this.user = (User) object;
+                break;
+                
+            case "post":
+                this.postTransfer = (PostTransferObject) object;
+//                this.post = (Post) object;
+                break;
+                
+            case "tag":
+                this.tag = (Tag) object;
+                break;
                 
             default:
                 break;
@@ -105,6 +122,10 @@ public class Request {
                 return peers;
             case "user":
                 return user;
+            case "post":
+                return postTransfer;
+            case "tag":
+                return tag;
             default:
                 return null;
         }

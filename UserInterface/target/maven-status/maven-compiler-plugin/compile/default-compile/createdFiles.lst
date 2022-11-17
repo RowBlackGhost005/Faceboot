@@ -1,11 +1,12 @@
 com\mycompany\gui\CommentController.class
 com\mycompany\gui\GUIBuilder.class
+com\mycompany\gui\GUIControllerLogic.class
 com\mycompany\gui\LoginController.class
 com\mycompany\gui\SignUpController.class
 com\mycompany\gui\PostController.class
 logic\TableUser.class
+com\mycompany\gui\GUIUpdates.class
 com\mycompany\gui\FacebootController.class
-logic\GUIControllerLogic.class
 com\mycompany\gui\GUIController.class
 com\mycompany\gui\Main.class
 com\mycompany\gui\CreatePostController.class

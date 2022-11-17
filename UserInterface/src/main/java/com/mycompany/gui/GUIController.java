@@ -5,6 +5,7 @@ import com.masa.businesslogic.IBusinessLogic;
 import com.masa.domain.Post;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
+import com.masa.utils.IObserver;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,8 +14,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
-import javafx.scene.layout.StackPane;
-import logic.GUIControllerLogic;
 
 /**
  * JavaFX GUIController
@@ -28,9 +27,10 @@ public class GUIController extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        businessLogic = new BusinessLogic();
+        businessLogic = BusinessLogic.createBusinessLogic();
         guiBuilder = new GUIBuilder();
-        scene = new Scene(loadFXML("Faceboot"), 960, 540);
+//        scene = new Scene(loadFXML("Faceboot"), 960, 540);
+        scene = new Scene(loadFXML("Login"), 960, 540);
         stage.setMinWidth(700);
         stage.setMinHeight(400);
         stage.setScene(scene);
@@ -80,11 +80,19 @@ public class GUIController extends Application {
     }
 
     public static void createPost(Post post) {
-        businessLogic.createPost(post);
+        businessLogic.createPost(post, true);
     }
 
     public static void createPost(Post post, Tag tags) {
-        businessLogic.createPost(post, tags);
+        businessLogic.createPost(post, tags, true);
+    }
+    
+    public static void subscribeGUIUpdate(IObserver observer){
+        businessLogic.subscribeGUINotifications(observer);
+    }
+    
+    public static void unSubscribeGUIUpdate(IObserver observer){
+        businessLogic.unSubscribeGUINotifications(observer);
     }
 
 }

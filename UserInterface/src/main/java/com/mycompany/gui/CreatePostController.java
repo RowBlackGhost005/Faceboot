@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
@@ -19,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javax.swing.JFileChooser;
-import logic.GUIControllerLogic;
 
 public class CreatePostController {
 
@@ -87,6 +87,7 @@ public class CreatePostController {
             System.out.println(taggedUsers);
         }
         Post post = new Post(null, txtMessage.getText());
+        post.setDateTime(LocalDateTime.now());
         if (!txtTags.getText().isBlank()) {
             Tag tags = new Tag(null, txtTags.getText());
             GUIController.createPost(post, tags);

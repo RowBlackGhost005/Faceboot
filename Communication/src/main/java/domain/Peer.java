@@ -13,7 +13,7 @@ public class Peer {
     /**
      * Creates a new register of a Peer with the given id and port.
      * 
-     * @param id name of the peer.
+     * @param name Name to identify this peer.
      * @param port Port where the peer is.
      */
     public Peer(String name, int port){
@@ -31,7 +31,7 @@ public class Peer {
 
     /**
      * Set the name of this peer.
-     * @param id New ID.
+     * @param id New name.
      */
     public void setName(String id) {
         this.name = id;
@@ -53,6 +53,10 @@ public class Peer {
         this.port = port;
     }
 
+    /**
+     * Creates a hash code that represents this peer.
+     * @return Hashcode.
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -60,6 +64,12 @@ public class Peer {
         return hash;
     }
 
+    /**
+     * Determines if the given Peer is equal to this peer.
+     * Two Peers are equals if the port in both Peers matches.
+     * @param obj Peer to determine if is equal.
+     * @return True if is equal, False otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -75,10 +85,12 @@ public class Peer {
         return this.port == other.port;
     }
 
+    /**
+     * Returns a String that represents this peer.
+     * @return String representation of this Peer.
+     */
     @Override
     public String toString() {
         return "Peer" + " name: " + name + "| port" + port;
     }
-    
-    
 }

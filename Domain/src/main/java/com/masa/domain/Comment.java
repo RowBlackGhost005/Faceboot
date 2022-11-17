@@ -7,6 +7,7 @@ package com.masa.domain;
 import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import javax.swing.Icon;
 
 /**
  *

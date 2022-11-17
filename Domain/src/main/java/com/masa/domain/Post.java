@@ -1,11 +1,11 @@
 package com.masa.domain;
 
-import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import javax.swing.Icon;
 
 public class Post {
 
@@ -20,6 +20,7 @@ public class Post {
     private LocalDateTime dateTime;
     
     public Post() {
+        
     }
 
     public Post(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, LocalDateTime dateTime) {

@@ -1,0 +1,29 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+AnchorPane.comment{
+    -fx-background-color: #2e3338;
+    -fx-padding: 8px;
+    -fx-background-radius: 20px;
+}
+
+ImageView.photoUser{
+    -fx-background-size:24px 24px;
+    -fx-image:url(../img/User.png);
+}
+
+Label{
+    -fx-font-weight: 400;
+    -fx-font-size: 16px;
+    -fx-font-family: "Pontano Sans";
+    -fx-text-fill:#fff9f9;
+}
+
+Label.date{
+      -fx-text-fill:#b9b4b4;
+}

@@ -25,27 +25,6 @@
             <artifactId>BusinessLogic</artifactId>
             <version>0.0.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.masa</groupId>
-            <artifactId>Communication</artifactId>
-            <version>0.0.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.xerial</groupId>
-                    <artifactId>sqlite-jdbc</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.masa</groupId>
-            <artifactId>Domain</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.masa</groupId>
-            <artifactId>Persistency</artifactId>
-            <version>0.0.1</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

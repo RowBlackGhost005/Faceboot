@@ -2,7 +2,6 @@ package com.masa.communication;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -39,22 +38,6 @@ public class ClientSocket implements Runnable{
         this.socketSend = socketSend;
         this.socketReceived = socketReceived;
         this.server = server;
-        runThreads();
-    }
-    
-    /**
-     * Creates and run the threads for the input and output.
-     */
-    public void runThreads() {
-        //SendLoop sendThread = new SendLoop(this);
-        //ReceivedLoop recievedThread = new ReceivedLoop(this);
-
-        //Thread send = new Thread(sendThread, "Send");
-        //Thread received = new Thread(recievedThread, "Received");
-
-        //send.start();
-        //received.start();
-        
     }
     
     /**
@@ -74,14 +57,25 @@ public class ClientSocket implements Runnable{
         return socketReceived.readLine();
     }
     
+    /**
+     * Returns the Communication (Server) where this Client Socket is attached to.
+     * @return Communication object where this socket was created.
+     */
     public Communication getServer(){
         return this.server;
     }
     
+    /**
+     * Returns wether this Socket is On or Off in its input stream. 
+     * @return True if is on, False otherwise.
+     */
     public boolean isOn(){
         return this.isOn;
     }
     
+    /**
+     * Closes the Socket, the I/O Streams and stops this Thread.
+     */
     public void shutdown(){
         try {
             clientSocket.close();
@@ -95,6 +89,9 @@ public class ClientSocket implements Runnable{
         }
     }
 
+    /**
+     * Starts to listen to the inputs at this ClientSocket.
+     */
     @Override
     public void run() {
         while (isOn()) {
@@ -112,64 +109,5 @@ public class ClientSocket implements Runnable{
                 shutdown();
             }
         }
-    }
-}
-
-
-
-
-class SendLoop implements Runnable{
-
-    private ClientSocket socket;
-    
-    public SendLoop(ClientSocket socket){
-        this.socket = socket;
-    }
-    
-    @Override
-    public void run() {
-        while (socket.isOn()) {
-            String ownMessage = null;
-            
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//            
-//            try {
-//                ownMessage = reader.readLine();
-//            } catch (IOException ex) {
-//                Logger.getLogger(SendLoop.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-            System.out.println("Im on");
-            if (ownMessage != null) {
-                socket.send(ownMessage);
-                System.out.println("YO: " + ownMessage);
-            }
-        }
-    }
-}
-
-class ReceivedLoop implements Runnable{
-
-    private ClientSocket socket;
-    
-    public ReceivedLoop(ClientSocket socket){
-        this.socket = socket;
-    }
-    
-    @Override
-    public void run() {
-        while (socket.isOn()) {
-            try {
-                String clientMessage = socket.recieved();
-                if (clientMessage != null) {
-                    //System.out.println("Peer: " + clientMessage);
-                    socket.getServer().handleOperation(clientMessage, socket);
-                }
-            } catch (IOException ex) {
-                System.out.println("Error Hilo Received");
-            } finally{
-                socket.shutdown();
-            }
-        }
-        
     }
 }

@@ -1,9 +1,13 @@
 package com.masa.businesslogic;
 
-import com.masa.communication.Communication;
+import com.masa.communication.CommHandler;
+import com.masa.communication.ICommHandler;
 import com.masa.domain.Post;
+import com.masa.domain.PostTransferObject;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
+import com.masa.utils.IObservable;
+import com.masa.utils.IObserver;
 import domain.Request;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,13 +23,25 @@ public class BusinessLogic implements IBusinessLogic {
     private PostLogic postLogic;
     private TagLogic tagLogic;
 
-    private Communication communication;
+    private ICommHandler communication;
 
-    public BusinessLogic() {
+    private BusinessLogic() {
         this.userLogic = new UserLogic();
         this.postLogic = new PostLogic();
         this.tagLogic = new TagLogic();
-        this.communication = new Communication("Peer", this);
+    }
+    
+    public static IBusinessLogic createBusinessLogic(){
+        BusinessLogic business = new BusinessLogic();
+        
+        business.initCommunication(business);
+        
+        return business;
+    }
+    
+    private void initCommunication(IBusinessLogic businessLogic){
+        this.communication = new CommHandler(businessLogic);
+        communication.initCommunication();
     }
 
     @Override
@@ -42,7 +58,12 @@ public class BusinessLogic implements IBusinessLogic {
 
             request.append(user, "user");
 
-            communication.sendToAllPeers(request);
+            CommunicationThread requestThread = new CommunicationThread(request, communication);
+            
+            Thread thread = new Thread(requestThread);
+
+            thread.start();
+            
         }
 
         return user;
@@ -64,13 +85,40 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public void createPost(Post post) {
+    public void createPost(Post post, boolean broadcast) {
         postLogic.create(post);
     }
 
     @Override
-    public void createPost(Post post, Tag tag) {
-        postLogic.create(post, tag, tagLogic);
+    public void createPost(Post post, Tag tag, boolean broadcast) {
+        
+        Post createdPost = postLogic.create(post, tag, tagLogic);
+        
+        if(broadcast){
+            Request request = new Request("registerpost", "RegisterPost");
+            
+            PostTransferObject postTransferObject = new PostTransferObject();
+            postTransferObject.convertPost(createdPost);
+            
+            request.append(postTransferObject, "post");
+            request.append(tag, "tag");
+            
+            CommunicationThread requestThread = new CommunicationThread(request, communication);
+            
+            Thread thread = new Thread(requestThread);
+
+            thread.start();
+        }
+    }
+
+    @Override
+    public void subscribeGUINotifications(IObserver observer) {
+        ((IObservable) communication).addObserver(observer);
+    }
+    
+    @Override
+    public void unSubscribeGUINotifications(IObserver observer){
+        ((IObservable) communication).removeObserver(observer);
     }
 
 }

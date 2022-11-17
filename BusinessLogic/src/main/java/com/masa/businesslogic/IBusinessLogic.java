@@ -3,6 +3,7 @@ package com.masa.businesslogic;
 import com.masa.domain.Post;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
+import com.masa.utils.IObserver;
 import java.util.List;
 
 /**
@@ -20,9 +21,11 @@ public interface IBusinessLogic {
     
     public List<User> getAllUsers();
     
-    public void createPost(Post post);
+    public void createPost(Post post, boolean broadcast);
     
-    public void createPost(Post post, Tag tags);
+    public void createPost(Post post, Tag tags, boolean broadcast);
     
+    public void subscribeGUINotifications(IObserver observer);
 
+    public void unSubscribeGUINotifications(IObserver observer);
 }
