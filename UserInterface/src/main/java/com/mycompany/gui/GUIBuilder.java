@@ -75,7 +75,11 @@ public class GUIBuilder {
         return stage;
     }
 
+<<<<<<< HEAD
     public AnchorPane builComment(Comment comment) throws IOException {
+=======
+    public AnchorPane buildComment(Comment comment) throws IOException {
+>>>>>>> origin/feature
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Comment.fxml"));
         AnchorPane commentTamplate = (AnchorPane) fxmlLoader.load();
         CommentController controller = fxmlLoader.<CommentController>getController();
@@ -101,7 +105,11 @@ public class GUIBuilder {
 
     }
 
+<<<<<<< HEAD
     public Parent builPost(Post post) throws IOException {
+=======
+    public Parent buildPost(Post post) throws IOException {
+>>>>>>> origin/feature
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Post.fxml"));
         Parent postTamplate = (Parent) fxmlLoader.load();
         PostController controller = fxmlLoader.<PostController>getController();
@@ -111,6 +119,7 @@ public class GUIBuilder {
         controller.setUser(post.getUser().getName());
 
         controller.setDate(post.getDateTime().toString());
+<<<<<<< HEAD
 
         if (post.getComments() != null) {
             for (Comment comment : post.getComments()) {
@@ -119,6 +128,19 @@ public class GUIBuilder {
 
         }
 
+=======
+        if(post.getImagePath() != null) {
+        controller.setPhotoPost(new Image(post.getImagePath()));
+        }
+
+        if (post.getComments() != null) {
+            for (Comment comment : post.getComments()) {
+                controller.addComment(buildComment(comment));
+            }
+
+        }
+
+>>>>>>> origin/feature
         StringBuilder tags = new StringBuilder();
         if (post.getTags() != null) {
             for (Tag tag : post.getTags()) {

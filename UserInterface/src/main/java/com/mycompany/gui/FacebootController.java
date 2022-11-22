@@ -71,15 +71,23 @@ public class FacebootController implements Initializable {
         Post post2 = new Post("This is a test", null, users, tags, null, new User("jose"), LocalDateTime.now());
 
         try {
+<<<<<<< HEAD
             addPost(builder.builPost(post));
             addPost(builder.builPost(post2));
+=======
+            addPost(builder.buildPost(post));
+            addPost(builder.buildPost(post2));
+>>>>>>> origin/feature
 
         } catch (IOException ex) {
             Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
         }
+<<<<<<< HEAD
         
         updatesNotifier = new GUIUpdates(this);
         GUIController.subscribeGUIUpdate(updatesNotifier);
+=======
+>>>>>>> origin/feature
 
     }
 
@@ -88,12 +96,17 @@ public class FacebootController implements Initializable {
     }
 
     @FXML
+<<<<<<< HEAD
     private void clickBtnPublish(MouseEvent event) {
         try {
             GUIController.show("CreatePost");
         } catch (IOException ex) {
             Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
         }
+=======
+    private void clickBtnPublish(MouseEvent event) throws IOException {
+        GUIController.show("CreatePost");
+>>>>>>> origin/feature
     }
 
     public void addOnlineUser(String user) {
@@ -103,4 +116,8 @@ public class FacebootController implements Initializable {
     public void addOfflineUser(String user) {
         listOfflineUsers.getItems().add(user);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/feature
 }

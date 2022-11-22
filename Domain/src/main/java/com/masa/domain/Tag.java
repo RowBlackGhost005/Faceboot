@@ -9,16 +9,18 @@ public class Tag {
     private Long usesCount;
 
     public Tag() {
-        this.usesCount = 0L;
+        this.usesCount = 1L;
     }
 
     public Tag(String id) {
         this.id = id;
+        this.usesCount = 1L;
     }
 
     public Tag(String id, String name) {
         this.id = id;
         this.name = name;
+        this.usesCount = 1L;
     }
 
     public Tag(String id, String name, Long usesCount) {

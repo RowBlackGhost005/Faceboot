@@ -3,13 +3,18 @@ package com.mycompany.gui;
 import com.masa.domain.Post;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
-import java.awt.Graphics2D;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.time.LocalDateTime;
+=======
+import java.text.SimpleDateFormat;
+>>>>>>> origin/feature
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,6 +24,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.embed.swing.SwingFXUtils;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
 public class CreatePostController {
@@ -77,23 +84,37 @@ public class CreatePostController {
     }
 
     private void post() throws IOException {
-//        if (imgView.getImage() != null) {
-//            String imagePath = imgView.getImage().getUrl();
-//            Image image = new Image(imagePath);
-//            BufferedImage bimage = SwingFXUtils.fromFXImage(image, null);
-//            System.out.println(bimage);
-//        }
-        if (taggedUsers != null) {
-            System.out.println(taggedUsers);
-        }
         Post post = new Post(null, txtMessage.getText());
+<<<<<<< HEAD
         post.setDateTime(LocalDateTime.now());
         if (!txtTags.getText().isBlank()) {
             Tag tags = new Tag(null, txtTags.getText());
             GUIController.createPost(post, tags);
         } else {
             GUIController.createPost(post);
+=======
+        String savingPath = null;
+        if (imgView.getImage() != null) {
+            String imagePath = imgView.getImage().getUrl();
+            post.setImagePath(imagePath);
+>>>>>>> origin/feature
         }
+        if (taggedUsers != null) {
+            ArrayList<User> usersList = new ArrayList<>();
+            for (User user : taggedUsers) {
+                usersList.add(user);
+            }
+            post.setUsers(usersList);
+        }
+        if (!txtTags.getText().isBlank()) {
+            String[] tagsNamesList = txtTags.getText().split(" ");
+            ArrayList<Tag> tagsList = new ArrayList<>();
+            for (String tag : tagsNamesList) {
+                tagsList.add(new Tag(null, tag));
+            }
+            post.setTags(tagsList);
+        }
+        GUIController.createPost(post);
     }
 
     private void back() throws IOException {
@@ -121,6 +142,7 @@ public class CreatePostController {
 
     public void setTaggedUsers(List<User> taggedUsers) {
         this.taggedUsers = taggedUsers;
+        txtTaggedUsers.setText(taggedUsers.toString());
     }
 
 }
