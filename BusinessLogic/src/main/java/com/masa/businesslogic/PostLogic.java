@@ -49,6 +49,9 @@ public class PostLogic {
             ImageIO.write(bImage, extension, outputFile);
             post.setImagePath(savingPath);
         }
+=======
+        ArrayList<Tag> tagsList = new ArrayList<>();
+>>>>>>> 6b1f863cc29ee34f6a19c02a9c17355284dfd993
 
         //Notificaciones
         if (post.getUsers() != null) {
@@ -81,7 +84,7 @@ public class PostLogic {
             RelPostTag relPostTag = new RelPostTag(newPost.getId(), tag.getId());
             persistency.createRelPostTag(relPostTag);
         }
-        
+       // newPost.setTags(tagsList);
         return newPost;
     }
 

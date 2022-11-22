@@ -1,4 +1,5 @@
 com\masa\businesslogic\BusinessLogic.class
+com\masa\businesslogic\CommunicationThread.class
 com\masa\businesslogic\TagLogic.class
 com\masa\businesslogic\UserLogic.class
 com\masa\businesslogic\PostLogic.class

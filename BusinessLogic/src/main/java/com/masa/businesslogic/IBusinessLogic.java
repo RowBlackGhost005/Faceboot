@@ -18,8 +18,12 @@ import java.util.List;
 public interface IBusinessLogic {
     
     public User registerUser(User user, boolean broadcast);
+    
+    public User registerExternalUser(User user, boolean broadcast);
   
     public User login(User user) throws Exception;
+    
+    public User loginWith(String method) throws Exception;
     
     public User getUser(String userId);
     

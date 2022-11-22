@@ -1,5 +1,6 @@
 package com.masa.businesslogic;
 
+import com.masa.authentication.Google;
 import com.masa.communication.CommHandler;
 import com.masa.communication.ICommHandler;
 import com.masa.domain.Post;
@@ -72,10 +73,44 @@ public class BusinessLogic implements IBusinessLogic {
 
         return user;
     }
+    
+    @Override
+     public User registerExternalUser(User user, boolean broadcast) {
+
+        try {
+            user = userLogic.registerUser(user);
+        } catch (Exception ex) {
+            Logger.getLogger(BusinessLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (broadcast) {
+            Request request = new Request("registerexternaluser", "RegisterExternalUser");
+
+            request.append(user, "user");
+
+            CommunicationThread requestThread = new CommunicationThread(request, communication);
+            
+            Thread thread = new Thread(requestThread);
+
+            thread.start();
+            
+        }
+
+        return user;
+    }
+    
 
     @Override
     public User login(User user) throws Exception {
         return userLogic.login(user);
+    }
+    
+    @Override
+    public User loginWith(String method) throws Exception{
+        switch(method){
+            case "GOOGLE":return userLogic.loginUser(new Google());
+        }
+        return null;
     }
 
     @Override

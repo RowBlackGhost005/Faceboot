@@ -4,6 +4,7 @@ com\mycompany\gui\GUIControllerLogic.class
 com\mycompany\gui\LoginController.class
 com\mycompany\gui\SignUpController.class
 com\mycompany\gui\PostController.class
+com\mycompany\gui\RegisterPhoneController.class
 logic\TableUser.class
 com\mycompany\gui\GUIUpdates.class
 com\mycompany\gui\FacebootController.class

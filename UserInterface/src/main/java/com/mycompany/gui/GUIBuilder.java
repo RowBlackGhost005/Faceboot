@@ -11,6 +11,7 @@ import com.masa.domain.User;
 import java.io.File;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -94,7 +95,7 @@ public class GUIBuilder {
                 tags.append("#").append(tag).append(" ");
             }
         }
-
+        
         StringBuffer users = new StringBuffer();
         if (comment.getTags() != null) {
             for (Tag tag : comment.getTags()) {
@@ -104,6 +105,24 @@ public class GUIBuilder {
         return commentTamplate;
 
     }
+    
+    public void buildRegisterPhone(User user) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("RegisterPhone.fxml"));
+        Parent registerPhone = (Parent) fxmlLoader.load();
+        RegisterPhoneController controller = fxmlLoader.<RegisterPhoneController>getController();
+        controller.setUser(user);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setScene(new Scene(registerPhone));
+        stage.show();
+
+    }
+    
+//    public Initializable buildController(String fxmlName, Initializable controllerName ) throws IOException{
+//        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource(fxmlName));
+//        Parent postTamplate = (Parent) fxmlLoader.load();
+//        Initializable controller = fxmlLoader.<>getController();
+//    }
 
 <<<<<<< HEAD
     public Parent builPost(Post post) throws IOException {

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane id="AnchorPane" prefHeight="500.0" prefWidth="781.0" styleClass="postPane" stylesheets="@../../../css/post.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.PostController">
+<GridPane id="AnchorPane" alignment="CENTER" prefHeight="500.0" prefWidth="781.0" styleClass="postPane" stylesheets="@../../../css/post.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.PostController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -25,7 +25,7 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <AnchorPane fx:id="PostPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="313.0" prefWidth="766.0" styleClass="post" stylesheets="@../../../css/post.css" GridPane.columnIndex="3" GridPane.rowIndex="3">
+      <AnchorPane fx:id="PostPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="294.0" prefWidth="765.0" styleClass="post" stylesheets="@../../../css/post.css" GridPane.columnIndex="3" GridPane.rowIndex="3">
          <children>
             <ImageView fx:id="userPhoto" fitHeight="33.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" styleClass="photoUser" />
             <Label fx:id="lblUser" layoutX="45.0" layoutY="3.0" text="Usuario" />
@@ -35,20 +35,21 @@
             <Button fx:id="btnEdit" layoutX="743.0" layoutY="3.0" mnemonicParsing="false" styleClass="btnEdit" visible="false" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
             <Label fx:id="lblTags" layoutX="15.0" layoutY="245.0" styleClass="tags" text="#tags" />
             <Label fx:id="lblTaggedUsers" layoutX="15.0" layoutY="271.0" styleClass="taggedUsers" text="\@users" />
-            <Separator layoutX="6.0" layoutY="296.0" prefWidth="200.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+            <Separator layoutX="6.0" layoutY="297.0" prefHeight="5.0" prefWidth="756.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
          </children>
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </AnchorPane>
-      <GridPane fx:id="commentsPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+      <GridPane fx:id="commentsPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="178.0" prefWidth="765.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
          <children>
-            <Button fx:id="btnAddComment" layoutX="706.0" layoutY="14.0" mnemonicParsing="false" styleClass="comment" text="+ Comment" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+            <Button fx:id="btnAddComment" layoutX="706.0" layoutY="14.0" mnemonicParsing="false" styleClass="comment" text="+ Comment" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" GridPane.columnIndex="1" />
          </children>
          <columnConstraints>
+            <ColumnConstraints />
             <ColumnConstraints />
          </columnConstraints>
          <rowConstraints>
