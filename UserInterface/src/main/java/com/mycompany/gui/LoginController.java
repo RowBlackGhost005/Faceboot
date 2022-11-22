@@ -5,6 +5,8 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,9 +38,6 @@ public class LoginController {
     private void clickBtnRegister(MouseEvent event) throws IOException {
         GUIController.show("SignUp");
     }
-      @FXML
-    private void clickBtnLoginWithGoogle(MouseEvent event) throws IOException, URISyntaxException {
-    }
 
     private void login() throws IOException {
         User user = new User(txtLogin.getText(), txtPassword.getText());
@@ -51,6 +50,16 @@ public class LoginController {
             }
         } catch (Exception ex) {
             GUIController.showDialog("Error", ex.getMessage(), 0);
+        }
+    }
+
+    @FXML
+    private void clickBtnLoginWithGoogle(MouseEvent event) {
+         try {
+            GUIController.loginWith("GOOGLE");
+           
+        } catch (Exception ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -3,6 +3,8 @@ package com.mycompany.gui;
 import com.masa.businesslogic.BusinessLogic;
 import com.masa.businesslogic.IBusinessLogic;
 import com.masa.domain.User;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,5 +25,7 @@ public class GUIControllerLogic {
         
         businessLogic.registerUser(user , true);
     }
+    
+   
     
 }

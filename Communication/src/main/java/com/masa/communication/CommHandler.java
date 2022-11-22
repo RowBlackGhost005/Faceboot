@@ -161,6 +161,7 @@ public class CommHandler implements ICommHandler, IObservable{
                 
                 communication.removePeer(peer);
                 
+                
                 notify(post , "post");
                 
                 break;

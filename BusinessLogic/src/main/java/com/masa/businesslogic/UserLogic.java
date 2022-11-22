@@ -1,5 +1,7 @@
 package com.masa.businesslogic;
 
+import com.masa.authentication.IAuthenticationMethod;
+import com.masa.authentication.Profile;
 import com.masa.domain.User;
 import com.masa.persitency.IPersistency;
 import com.masa.persitency.Persistency;
@@ -29,6 +31,23 @@ public class UserLogic {
         validateRegister(user);
         persistency.createUser(user);
         return user;
+    }
+    
+     public User registerExternalUser(User user) throws Exception {
+        validatePhone(user.getPhone());
+        persistency.createUser(user);
+        return user;
+    }
+    
+    public User loginUser(IAuthenticationMethod authenticationMethod) throws Exception{
+        Profile profile = authenticationMethod.Login();
+        User user;
+        if(persistency.getUserByEmail(profile.getEmail())==null){
+            user = new User(profile.getName(), profile.getEmail(), null);
+            return user;
+        }
+        
+        return persistency.getUserByEmail(profile.getEmail());
     }
 
     public User get(String userId) {

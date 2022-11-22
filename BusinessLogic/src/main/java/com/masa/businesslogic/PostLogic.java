@@ -22,7 +22,7 @@ public class PostLogic {
 
     public Post create(Post post, Tag tags, TagLogic tagLogic) {
         String[] tagsNamesList = tags.getName().split(" ");
-        List<Tag> tagsList = new ArrayList<>();
+        ArrayList<Tag> tagsList = new ArrayList<>();
 
         for (String tag : tagsNamesList) {
             Tag existingTag = tagLogic.getByName(tag);
@@ -45,7 +45,7 @@ public class PostLogic {
             RelPostTag relPostTag = new RelPostTag(newPost.getId(), tag.getId());
             persistency.createRelPostTag(relPostTag);
         }
-        
+       // newPost.setTags(tagsList);
         return newPost;
     }
 

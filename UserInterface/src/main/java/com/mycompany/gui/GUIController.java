@@ -24,6 +24,8 @@ public class GUIController extends Application {
     private static GUIBuilder guiBuilder;
     private static Scene scene;
 
+   
+
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -66,9 +68,26 @@ public class GUIController extends Application {
     public static User registerUser(User user) throws Exception {
         return businessLogic.registerUser(user, true);
     }
+    
+    public static User registerExternalUser(User user) {
+        return businessLogic.registerExternalUser(user, true);
+    }
 
     public static User logIn(User user) throws Exception {
         return businessLogic.login(user);
+    }
+    
+    public static void loginWith(String method) throws Exception{
+
+        User user = businessLogic.loginWith(method);
+        if(user.getPhone()==null){
+            guiBuilder.buildRegisterPhone(user);
+        }
+        else{
+            show("Faceboot");
+        }
+   
+  
     }
 
     public static User getUser(String userId) {

@@ -27,7 +27,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogginWithGoogle" layoutX="234.0" layoutY="419.0" mnemonicParsing="false" onAction="#clickBtnLoginWithGoogle" styleClass="btnGoogle" />
+      <Button fx:id="btnLogginWithGoogle" layoutX="234.0" layoutY="419.0" mnemonicParsing="false" onMouseClicked="#clickBtnLoginWithGoogle" styleClass="btnGoogle" />
       <Button fx:id="btnLogginWithTwitter" layoutX="513.0" layoutY="419.0" mnemonicParsing="false" styleClass="btnTwitter" />
       <Pane fx:id="mainBar" prefHeight="24.0" prefWidth="960.0">
  
