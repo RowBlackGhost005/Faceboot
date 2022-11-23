@@ -33,7 +33,9 @@ public class PostLogic {
         
         return null;
     }
-    
+     public List<Post> getAllPost() {
+        return persistency.getAllPost();
+    }
 
     public Post create(Post post, TagLogic tagLogic) throws IOException {
         String savingPath = null;

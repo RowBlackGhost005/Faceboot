@@ -38,9 +38,10 @@ public class Post {
         this.id = id;
     }
 
-    public Post(String id, String message) {
+    public Post(String id, String message,User user) {
         this.id = id;
         this.message = message;
+        this.user=user;
     }
 
     public Post(String id, String message, BufferedImage image) {

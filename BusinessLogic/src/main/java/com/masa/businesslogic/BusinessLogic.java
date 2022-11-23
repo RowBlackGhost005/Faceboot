@@ -25,6 +25,7 @@ public class BusinessLogic implements IBusinessLogic {
     private PostLogic postLogic;
     private TagLogic tagLogic;
 
+    private User userLogged;
     private ICommHandler communication;
 
     private BusinessLogic() {
@@ -120,15 +121,36 @@ public class BusinessLogic implements IBusinessLogic {
         return userLogic.getAll();
     }
 
+     @Override
+    public List<Post> getAllPost() {
+        return postLogic.getAllPost();
+    }
     @Override
-    public void createPost(Post post, boolean broadcast) {
-        postLogic.create(post);
+    public void createPost(Post post, boolean broadcast) throws IOException{
+          
+        Post createdPost = postLogic.create(post, tagLogic);
+        
+             
+        if(broadcast){
+            Request request = new Request("registerpost", "RegisterPost");
+            
+            PostTransferObject postTransferObject = new PostTransferObject();
+            postTransferObject.convertPost(createdPost);
+            
+            request.append(postTransferObject, "post");
+            
+            CommunicationThread requestThread = new CommunicationThread(request, communication);
+            
+            Thread thread = new Thread(requestThread);
+
+            thread.start();
+        }
     }
 
     @Override
-    public void createPost(Post post, Tag tag, boolean broadcast) {
+    public void createPost(Post post, Tag tag, boolean broadcast) throws IOException{
         
-        Post createdPost = postLogic.create(post, tag, tagLogic);
+        Post createdPost = postLogic.create(post, tagLogic);
         
         if(broadcast){
             Request request = new Request("registerpost", "RegisterPost");
@@ -162,4 +184,13 @@ public class BusinessLogic implements IBusinessLogic {
         postLogic.create(post, tagLogic);
     }
 
+    @Override
+    public void setUserLogged(User user){
+        this.userLogged=user;
+    }
+    
+    @Override
+    public User getUserLogged(){
+        return this.userLogged;
+    }
 }

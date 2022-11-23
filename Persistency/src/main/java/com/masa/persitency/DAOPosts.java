@@ -26,10 +26,11 @@ public class DAOPosts {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("INSERT INTO posts (id, message, image_path) VALUES ('%s', '%s', '%s');",
+            String query = String.format("INSERT INTO posts (id, message, image_path,user) VALUES ('%s', '%s', '%s','%s');",
                     id,
                     post.getMessage(),
-                    post.getImagePath());
+                    post.getImagePath(),
+                    post.getUser().getName());
 
             statement.executeUpdate(query);
 
@@ -49,14 +50,15 @@ public class DAOPosts {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, message FROM posts WHERE id = '%s';",
+            String query = String.format("SELECT id, message,user FROM posts WHERE id = '%s';",
                     postId);
             ResultSet result = statement.executeQuery(query);
 
             if (result.next()) {
                 String id = result.getString("id");
                 String message = result.getString("message");
-                post = new Post(id, message);
+                String user = result.getString("user");
+                post = new Post(id, message,new User(user));
             }
 
             connection.close();
@@ -118,13 +120,14 @@ public class DAOPosts {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, message FROM posts;");
+            String query = String.format("SELECT id, message,user FROM posts;");
             ResultSet result = statement.executeQuery(query);
 
             while (result.next()) {
                 String id = result.getString("id");
                 String message = result.getString("message");
-                Post post = new Post(id, message);
+                String user = result.getString("user");
+                Post post = new Post(id, message,new User(user));
                 postsList.add(post);
             }
 

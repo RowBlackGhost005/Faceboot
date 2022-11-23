@@ -81,15 +81,9 @@ public class CreatePostController {
     }
 
     private void post() throws IOException {
-        Post post = new Post(null, txtMessage.getText());
-
+        Post post = new Post(null, txtMessage.getText(),new User(GUIController.getLoggedUser().getName()));
+        
         post.setDateTime(LocalDateTime.now());
-        if (!txtTags.getText().isBlank()) {
-            Tag tags = new Tag(null, txtTags.getText());
-            GUIController.createPost(post, tags);
-        } else {
-            GUIController.createPost(post);
-
             String savingPath = null;
             if (imgView.getImage() != null) {
                 String imagePath = imgView.getImage().getUrl();
@@ -111,7 +105,7 @@ public class CreatePostController {
                 post.setTags(tagsList);
             }
             GUIController.createPost(post);
-        }
+
     }
 
     private void back() throws IOException {

@@ -9,7 +9,10 @@ import com.masa.domain.User;
 import com.masa.utils.IObservable;
 import com.masa.utils.IObserver;
 import domain.Peer;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class that controls the request received and to be send to redirect them into
@@ -149,13 +152,18 @@ public class CommHandler implements ICommHandler, IObservable{
                 PostTransferObject postTransferObject = (PostTransferObject) request.getParam("post");
                 
                 Tag tag = (Tag) request.getParam("tag");
-                
+          
                 Post post = postTransferObject.revertPost();
-                
-                if(tag != null){
-                    businessLogic.createPost(post, tag, false);
-                }else{
-                    businessLogic.createPost(post, false);
+
+                if (tag != null) {
+                    try {
+                        businessLogic.createPost(post, tag, false);
+                        businessLogic.createPost(post, false);
+                    } catch (IOException ex) {
+                        Logger.getLogger(CommHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+
                 }
                 
                 

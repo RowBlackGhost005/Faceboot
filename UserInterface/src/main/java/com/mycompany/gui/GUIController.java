@@ -74,12 +74,19 @@ public class GUIController extends Application {
     }
 
     public static User logIn(User user) throws Exception {
-        return businessLogic.login(user);
+        User userLogged= businessLogic.login(user);
+        businessLogic.setUserLogged(user);
+        return userLogged;
+    }
+    
+    public static User getLoggedUser(){
+        return businessLogic.getUserLogged();
     }
     
     public static void loginWith(String method) throws Exception{
 
         User user = businessLogic.loginWith(method);
+        businessLogic.setUserLogged(user);
         if(user.getPhone()==null){
             guiBuilder.buildRegisterPhone(user);
         }
@@ -102,9 +109,9 @@ public class GUIController extends Application {
 //        businessLogic.createPost(post, true);
 //    }
 
-    public static void createPost(Post post, Tag tags) {
-        businessLogic.createPost(post, tags, true);
-    }
+//    public static void createPost(Post post, Tag tags) {
+//        businessLogic.createPost(post, tags, true);
+//    }
     
     public static void subscribeGUIUpdate(IObserver observer){
         businessLogic.subscribeGUINotifications(observer);
@@ -114,7 +121,10 @@ public class GUIController extends Application {
         businessLogic.unSubscribeGUINotifications(observer);
     }
 
+    public static  List<Post> getAllPosts(){
+        return businessLogic.getAllPost();
+    }
     public static void createPost(Post post) throws IOException {
-        businessLogic.createPost(post);
+        businessLogic.createPost(post,true);
     }
 }

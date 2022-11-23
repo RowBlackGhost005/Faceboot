@@ -81,7 +81,7 @@ public class PostTransferObject {
     public Post revertPost(){
         Post post = new Post();
         
-        post.setUser(new User("Some User"));
+        post.setUser(user);
         post.setComments(null);
         post.setDateTime(LocalDateTime.now());
         post.setTags(null);

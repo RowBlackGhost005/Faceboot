@@ -104,4 +104,9 @@ public class Persistency implements IPersistency {
         return postTags.getPostTag(postId, tagId);
     }
 
+    @Override
+    public List<Post> getAllPost() {
+        return posts.getAll();
+    }
+
 }

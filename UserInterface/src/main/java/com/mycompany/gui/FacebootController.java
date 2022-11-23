@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -51,48 +53,36 @@ public class FacebootController implements Initializable {
     private GridPane postPane;
 
     private GUIUpdates updatesNotifier;
+    @FXML
+    private Label lblUser;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        lblUser.setText(GUIController.getLoggedUser().getName());
         addOnlineUser("Andrea");
         addOnlineUser("Luis");
         addOfflineUser("Diego");
 
-        GUIBuilder builder = new GUIBuilder();
-
-        ArrayList<Tag> tags = new ArrayList<>();
-        tags.add(new Tag(null, "HopeThisWorks"));
-        tags.add(new Tag(null, "Why?"));
-        tags.add(new Tag(null, "Why?"));
-
-        ArrayList<User> users = new ArrayList<>();
-        users.add(new User("jose"));
-        users.add(new User("andrea"));
-
-        Post post = new Post("This is a test", null, users, tags, null, new User("andrea"), LocalDateTime.now());
-        Post post2 = new Post("This is a test", null, users, tags, null, new User("jose"), LocalDateTime.now());
-        Post pos3 = new Post("This is a test", null, users, tags, null, new User("jose"), LocalDateTime.now());
-
         try {
-
-            addPost(builder.buildPost(post));
-            addPost(builder.buildPost(post2));
-
-            addPost(builder.buildPost(post));
-            addPost(builder.buildPost(post2));
-            addPost(builder.buildPost(pos3));
-
+            updatePosts();
         } catch (IOException ex) {
             Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+ 
         updatesNotifier = new GUIUpdates(this);
         GUIController.subscribeGUIUpdate(updatesNotifier);
 
     }
 
+    public void updatePosts() throws IOException{
+        List<Post> posts = GUIController.getAllPosts();
+        GUIBuilder builder = new GUIBuilder();
+        for(Post post:posts){
+            addPost(builder.buildPost(post));
+        }
+        
+    }
     public void addPost(Parent post) {
         for (Node child : postPane.getChildren()) {//moves the posts one row down
             Integer rowIndex = GridPane.getRowIndex(child);

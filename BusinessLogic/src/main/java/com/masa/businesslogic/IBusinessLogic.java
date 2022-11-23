@@ -26,13 +26,19 @@ public interface IBusinessLogic {
     
     public List<User> getAllUsers();
     
-    public void createPost(Post post, boolean broadcast);
+    public void createPost(Post post, boolean broadcast) throws IOException;
     
-    public void createPost(Post post, Tag tags, boolean broadcast);
+    public void createPost(Post post, Tag tags, boolean broadcast) throws IOException;
     
     public void subscribeGUINotifications(IObserver observer);
     
     public void createPost(Post post) throws IOException;
 
     public void unSubscribeGUINotifications(IObserver observer);
+    
+    public List<Post> getAllPost();
+    
+    public void setUserLogged(User user);
+    
+    public User getUserLogged();
 }

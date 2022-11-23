@@ -128,8 +128,9 @@ public class GUIBuilder {
 
         controller.setUser(post.getUser().getName());
 
-        controller.setDate(post.getDateTime().toString());
-
+        if(post.getDateTime()!=null){
+             controller.setDate(post.getDateTime().toString());
+        }
 
         if (post.getComments() != null) {
             for (Comment comment : post.getComments()) {
