@@ -83,7 +83,7 @@ public class CreatePostController {
     private void post() throws IOException {
         Post post = new Post(null, txtMessage.getText(),new User(GUIController.getLoggedUser().getName()));
         
-        post.setDateTime(LocalDateTime.now());
+        post.setDateTime(new Date());
             String savingPath = null;
             if (imgView.getImage() != null) {
                 String imagePath = imgView.getImage().getUrl();

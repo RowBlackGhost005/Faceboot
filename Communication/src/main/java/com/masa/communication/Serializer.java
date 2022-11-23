@@ -19,7 +19,7 @@ public class Serializer {
      * Creates a new Serializer.
      */
     public Serializer() {
-        this.gson = new GsonBuilder().setDateFormat("MM-dd-yyyy").create();
+        this.gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss.SSS").create();
     }
 
     /**

@@ -120,14 +120,16 @@ public class DAOPosts {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, message,user FROM posts;");
+            String query = String.format("SELECT id, message, image_path, user FROM posts;");
             ResultSet result = statement.executeQuery(query);
 
             while (result.next()) {
                 String id = result.getString("id");
+                String imagePath = result.getString("image_path");
                 String message = result.getString("message");
                 String user = result.getString("user");
-                Post post = new Post(id, message,new User(user));
+                Post post = new Post(id, message, new User(user));
+                post.setImagePath(imagePath);
                 postsList.add(post);
             }
 

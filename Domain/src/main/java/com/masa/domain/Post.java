@@ -5,28 +5,27 @@ import java.util.Objects;
 import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import javax.swing.Icon;
+import java.util.Date;
 
 public class Post {
 
     private String id;
     private String message;
-    private BufferedImage image;
     private String imagePath;
     private String userId;
     private ArrayList<User> users;
     private ArrayList<Tag> tags;
     private ArrayList<Comment> comments;
     private User user;
-    private LocalDateTime dateTime;
+    private Date dateTime;
 
     public Post() {
         
     }
 
-    public Post(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, LocalDateTime dateTime) {
+    public Post(String message , ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, Date dateTime) {
         this.message = message;
-        this.image = image;
+
         this.users = users;
         this.tags = tags;
         this.comments = comments;
@@ -44,16 +43,14 @@ public class Post {
         this.user=user;
     }
 
-    public Post(String id, String message, BufferedImage image) {
+    public Post(String id, String message) {
         this.id = id;
         this.message = message;
-        this.image = image;
     }
 
-    public Post(String id, String message, BufferedImage image, String userId) {
+    public Post(String id, String message, String userId) {
         this.id = id;
         this.message = message;
-        this.image = image;
         this.userId = userId;
     }
 
@@ -71,14 +68,6 @@ public class Post {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
     }
 
     public String getUserId() {
@@ -147,11 +136,11 @@ public class Post {
         this.comments = comments;
     }
 
-    public LocalDateTime getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 

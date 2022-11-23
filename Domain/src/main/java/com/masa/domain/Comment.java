@@ -7,6 +7,7 @@ package com.masa.domain;
 import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.Icon;
 
 /**
@@ -15,8 +16,8 @@ import javax.swing.Icon;
  */
 public class Comment extends Post{
 
-    public Comment(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, LocalDateTime dateTime) {
-        super(message, image, users, tags, comments, user, dateTime);
+    public Comment(String message, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, Date dateTime) {
+        super(message, users, tags, comments, user, dateTime);
     }
 
 

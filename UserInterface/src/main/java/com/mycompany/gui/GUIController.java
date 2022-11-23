@@ -38,7 +38,6 @@ public class GUIController extends Application {
         stage.setScene(scene);
         stage.setTitle("Faceboot");
         stage.show();
-
     }
 
     static void show(String fxml) throws IOException {
@@ -74,7 +73,7 @@ public class GUIController extends Application {
     }
 
     public static User logIn(User user) throws Exception {
-        User userLogged= businessLogic.login(user);
+        User userLogged = businessLogic.login(user);
         businessLogic.setUserLogged(user);
         return userLogged;
     }

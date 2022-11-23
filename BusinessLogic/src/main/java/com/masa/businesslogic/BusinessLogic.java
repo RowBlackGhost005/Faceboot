@@ -76,13 +76,13 @@ public class BusinessLogic implements IBusinessLogic {
      public User registerExternalUser(User user, boolean broadcast) {
 
         try {
-            user = userLogic.registerUser(user);
+            user = userLogic.registerExternalUser(user);
         } catch (Exception ex) {
             Logger.getLogger(BusinessLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (broadcast) {
-            Request request = new Request("registerexternaluser", "RegisterExternalUser");
+            Request request = new Request("registerexternalusers", "RegisterExternalUser");
 
             request.append(user, "user");
 
@@ -128,14 +128,15 @@ public class BusinessLogic implements IBusinessLogic {
     @Override
     public void createPost(Post post, boolean broadcast) throws IOException{
           
+        String imagePathToCopy = post.getImagePath();
+        
         Post createdPost = postLogic.create(post, tagLogic);
         
-             
+        
         if(broadcast){
             Request request = new Request("registerpost", "RegisterPost");
             
-            PostTransferObject postTransferObject = new PostTransferObject();
-            postTransferObject.convertPost(createdPost);
+            PostTransferObject postTransferObject = new PostTransferObject(createdPost , imagePathToCopy);
             
             request.append(postTransferObject, "post");
             
@@ -150,13 +151,14 @@ public class BusinessLogic implements IBusinessLogic {
     @Override
     public void createPost(Post post, Tag tag, boolean broadcast) throws IOException{
         
+        String imagePathToCopy = post.getImagePath();
+        
         Post createdPost = postLogic.create(post, tagLogic);
         
         if(broadcast){
             Request request = new Request("registerpost", "RegisterPost");
             
-            PostTransferObject postTransferObject = new PostTransferObject();
-            postTransferObject.convertPost(createdPost);
+            PostTransferObject postTransferObject = new PostTransferObject(createdPost, imagePathToCopy);
             
             request.append(postTransferObject, "post");
             request.append(tag, "tag");

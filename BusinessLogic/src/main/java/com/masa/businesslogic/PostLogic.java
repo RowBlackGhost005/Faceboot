@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,40 +24,49 @@ public class PostLogic {
         persistency = new Persistency();
     }
 
-
     public Post create(Post post) {
         return persistency.createPost(post);
     }
 
     public Post create(Post post, Tag tags, TagLogic tagLogic) {
         String[] tagsNamesList = tags.getName().split(" ");
-        
+
         return null;
     }
-     public List<Post> getAllPost() {
+
+    public List<Post> getAllPost() {
         return persistency.getAllPost();
     }
 
     public Post create(Post post, TagLogic tagLogic) throws IOException {
+
         String savingPath = null;
-        if (post.getImagePath() != null) {
+
+        if (!post.getImagePath().contains("postImg")) {
             String imagePath = post.getImagePath();
             String extension = imagePath.substring(imagePath.length() - 3);
             File image = new File(imagePath);
             BufferedImage bImage = ImageIO.read(image);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss");
             String currentTimeStamp = dateFormat.format(new Date());
+
             if (extension.equalsIgnoreCase("jpg")) {
                 savingPath = "./src/main/resources/postImg/" + currentTimeStamp + ".jpg";
             } else if (extension.equalsIgnoreCase("png")) {
                 savingPath = "./src/main/resources/postImg/" + currentTimeStamp + ".png";
             }
+
             File outputFile = new File(savingPath);
+
+            System.out.println(outputFile.getCanonicalFile());
+
+            outputFile.createNewFile();
+
             ImageIO.write(bImage, extension, outputFile);
+
             post.setImagePath(savingPath);
         }
         ArrayList<Tag> tagsList = new ArrayList<>();
-
 
         //Notificaciones
         if (post.getUsers() != null) {
@@ -88,8 +98,36 @@ public class PostLogic {
             RelPostTag relPostTag = new RelPostTag(newPost.getId(), tag.getId());
             persistency.createRelPostTag(relPostTag);
         }
-       // newPost.setTags(tagsList);
+        // newPost.setTags(tagsList);
         return newPost;
+    }
+
+    public String copyPostImage(Post post) throws IOException {
+
+        String savingPath = "";
+
+        String imagePath = post.getImagePath();
+        String extension = imagePath.substring(imagePath.length() - 3);
+        File image = new File(imagePath);
+        BufferedImage bImage = ImageIO.read(image);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss");
+        String currentTimeStamp = dateFormat.format(new Date());
+
+        if (extension.equalsIgnoreCase("jpg")) {
+            savingPath = "./src/main/resources/postImg/" + currentTimeStamp + ".jpg";
+        } else if (extension.equalsIgnoreCase("png")) {
+            savingPath = "./src/main/resources/postImg/" + currentTimeStamp + ".png";
+        }
+
+        File outputFile = new File(savingPath);
+
+        System.out.println(outputFile.getCanonicalFile());
+
+        outputFile.createNewFile();
+
+        ImageIO.write(bImage, extension, outputFile);
+        
+        return savingPath;
     }
 
 //    public Post get(String postId) {

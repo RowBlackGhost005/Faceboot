@@ -50,6 +50,7 @@ public class LoginController {
             }
         } catch (Exception ex) {
             GUIController.showDialog("Error", ex.getMessage(), 0);
+            ex.printStackTrace();
         }
     }
 

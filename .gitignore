@@ -1,1 +1,7 @@
 /Authentication/target/
+/UserInterface/target/
+/Communication/target/
+/BusinessLogic/target/
+/Domain/target/
+/Notifications/target/
+/Persistency/target/
