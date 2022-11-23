@@ -32,7 +32,7 @@ public class GUIUpdates implements IObserver {
                 Platform.runLater(
                         () -> {
                             try {
-                                controller.addPost(builder.builPost((Post) o));
+                                controller.addPost(builder.buildPost((Post) o));
                             } catch (IOException ex) {
                                 Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
                             }

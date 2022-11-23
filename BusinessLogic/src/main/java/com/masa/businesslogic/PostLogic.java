@@ -23,15 +23,19 @@ public class PostLogic {
         persistency = new Persistency();
     }
 
-<<<<<<< HEAD
+
     public Post create(Post post) {
         return persistency.createPost(post);
     }
 
     public Post create(Post post, Tag tags, TagLogic tagLogic) {
         String[] tagsNamesList = tags.getName().split(" ");
-=======
-    public void create(Post post, TagLogic tagLogic) throws IOException {
+        
+        return null;
+    }
+    
+
+    public Post create(Post post, TagLogic tagLogic) throws IOException {
         String savingPath = null;
         if (post.getImagePath() != null) {
             String imagePath = post.getImagePath();
@@ -49,17 +53,15 @@ public class PostLogic {
             ImageIO.write(bImage, extension, outputFile);
             post.setImagePath(savingPath);
         }
-=======
         ArrayList<Tag> tagsList = new ArrayList<>();
->>>>>>> 6b1f863cc29ee34f6a19c02a9c17355284dfd993
+
 
         //Notificaciones
         if (post.getUsers() != null) {
 
         }
 
->>>>>>> origin/feature
-        List<Tag> tagsList = new ArrayList<>();
+        tagsList = new ArrayList<>();
         if (post.getTags() != null) {
             for (Tag tag : post.getTags()) {
                 Tag existingTag = tagLogic.getByName(tag.getName());

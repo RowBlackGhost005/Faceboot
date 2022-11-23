@@ -49,24 +49,23 @@ public class FacebootController implements Initializable {
     private Button btnNotifications;
     @FXML
     private GridPane postPane;
-    
+
     private GUIUpdates updatesNotifier;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-   
+
         addOnlineUser("Andrea");
         addOnlineUser("Luis");
         addOfflineUser("Diego");
 
         GUIBuilder builder = new GUIBuilder();
 
-
         ArrayList<Tag> tags = new ArrayList<>();
-        tags.add(new Tag(null,"HopeThisWorks"));
-        tags.add(new Tag(null,"Why?"));
-        tags.add(new Tag(null,"Why?"));
+        tags.add(new Tag(null, "HopeThisWorks"));
+        tags.add(new Tag(null, "Why?"));
+        tags.add(new Tag(null, "Why?"));
 
         ArrayList<User> users = new ArrayList<>();
         users.add(new User("jose"));
@@ -77,27 +76,20 @@ public class FacebootController implements Initializable {
         Post pos3 = new Post("This is a test", null, users, tags, null, new User("jose"), LocalDateTime.now());
 
         try {
-<<<<<<< HEAD
-            addPost(builder.builPost(post));
-            addPost(builder.builPost(post2));
-<<<<<<< HEAD
-=======
+
             addPost(builder.buildPost(post));
             addPost(builder.buildPost(post2));
->>>>>>> origin/feature
-=======
-             addPost(builder.builPost(pos3));
->>>>>>> 6b1f863cc29ee34f6a19c02a9c17355284dfd993
+
+            addPost(builder.buildPost(post));
+            addPost(builder.buildPost(post2));
+            addPost(builder.buildPost(pos3));
 
         } catch (IOException ex) {
             Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
         }
-<<<<<<< HEAD
-        
+
         updatesNotifier = new GUIUpdates(this);
         GUIController.subscribeGUIUpdate(updatesNotifier);
-=======
->>>>>>> origin/feature
 
     }
 
@@ -108,22 +100,19 @@ public class FacebootController implements Initializable {
                 GridPane.setRowIndex(child, rowIndex + 1);
             }
         }
-        
+
         postPane.add(post, 0, 0);
     }
 
     @FXML
-<<<<<<< HEAD
+
     private void clickBtnPublish(MouseEvent event) {
         try {
             GUIController.show("CreatePost");
         } catch (IOException ex) {
             Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
         }
-=======
-    private void clickBtnPublish(MouseEvent event) throws IOException {
-        GUIController.show("CreatePost");
->>>>>>> origin/feature
+
     }
 
     public void addOnlineUser(String user) {
@@ -133,8 +122,4 @@ public class FacebootController implements Initializable {
     public void addOfflineUser(String user) {
         listOfflineUsers.getItems().add(user);
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/feature
 }

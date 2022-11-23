@@ -52,6 +52,11 @@
             <version>19</version>
             <classifier>win</classifier>
         </dependency>
+        <dependency>
+            <groupId>com.masa</groupId>
+            <artifactId>Authentication</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

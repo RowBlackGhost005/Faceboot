@@ -8,11 +8,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.time.LocalDateTime;
-=======
 import java.text.SimpleDateFormat;
->>>>>>> origin/feature
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,36 +82,36 @@ public class CreatePostController {
 
     private void post() throws IOException {
         Post post = new Post(null, txtMessage.getText());
-<<<<<<< HEAD
+
         post.setDateTime(LocalDateTime.now());
         if (!txtTags.getText().isBlank()) {
             Tag tags = new Tag(null, txtTags.getText());
             GUIController.createPost(post, tags);
         } else {
             GUIController.createPost(post);
-=======
-        String savingPath = null;
-        if (imgView.getImage() != null) {
-            String imagePath = imgView.getImage().getUrl();
-            post.setImagePath(imagePath);
->>>>>>> origin/feature
-        }
-        if (taggedUsers != null) {
-            ArrayList<User> usersList = new ArrayList<>();
-            for (User user : taggedUsers) {
-                usersList.add(user);
+
+            String savingPath = null;
+            if (imgView.getImage() != null) {
+                String imagePath = imgView.getImage().getUrl();
+                post.setImagePath(imagePath);
             }
-            post.setUsers(usersList);
-        }
-        if (!txtTags.getText().isBlank()) {
-            String[] tagsNamesList = txtTags.getText().split(" ");
-            ArrayList<Tag> tagsList = new ArrayList<>();
-            for (String tag : tagsNamesList) {
-                tagsList.add(new Tag(null, tag));
+            if (taggedUsers != null) {
+                ArrayList<User> usersList = new ArrayList<>();
+                for (User user : taggedUsers) {
+                    usersList.add(user);
+                }
+                post.setUsers(usersList);
             }
-            post.setTags(tagsList);
+            if (!txtTags.getText().isBlank()) {
+                String[] tagsNamesList = txtTags.getText().split(" ");
+                ArrayList<Tag> tagsList = new ArrayList<>();
+                for (String tag : tagsNamesList) {
+                    tagsList.add(new Tag(null, tag));
+                }
+                post.setTags(tagsList);
+            }
+            GUIController.createPost(post);
         }
-        GUIController.createPost(post);
     }
 
     private void back() throws IOException {

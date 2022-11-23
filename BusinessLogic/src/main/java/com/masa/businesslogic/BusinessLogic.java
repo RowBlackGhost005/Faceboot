@@ -4,11 +4,8 @@ import com.masa.authentication.Google;
 import com.masa.communication.CommHandler;
 import com.masa.communication.ICommHandler;
 import com.masa.domain.Post;
-<<<<<<< HEAD
 import com.masa.domain.PostTransferObject;
 import com.masa.domain.Tag;
-=======
->>>>>>> origin/feature
 import com.masa.domain.User;
 import com.masa.utils.IObservable;
 import com.masa.utils.IObserver;
@@ -124,7 +121,6 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-<<<<<<< HEAD
     public void createPost(Post post, boolean broadcast) {
         postLogic.create(post);
     }
@@ -159,10 +155,11 @@ public class BusinessLogic implements IBusinessLogic {
     @Override
     public void unSubscribeGUINotifications(IObserver observer){
         ((IObservable) communication).removeObserver(observer);
-=======
+    }
+    
+    @Override
     public void createPost(Post post) throws IOException {
         postLogic.create(post, tagLogic);
->>>>>>> origin/feature
     }
 
 }

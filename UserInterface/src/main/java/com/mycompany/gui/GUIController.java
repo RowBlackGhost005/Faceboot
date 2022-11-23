@@ -3,6 +3,7 @@ package com.mycompany.gui;
 import com.masa.businesslogic.BusinessLogic;
 import com.masa.businesslogic.IBusinessLogic;
 import com.masa.domain.Post;
+import com.masa.domain.Tag;
 import com.masa.domain.User;
 import com.masa.utils.IObserver;
 import javafx.application.Application;
@@ -97,10 +98,9 @@ public class GUIController extends Application {
         return businessLogic.getAllUsers();
     }
 
-<<<<<<< HEAD
-    public static void createPost(Post post) {
-        businessLogic.createPost(post, true);
-    }
+//    public static void createPost(Post post) {
+//        businessLogic.createPost(post, true);
+//    }
 
     public static void createPost(Post post, Tag tags) {
         businessLogic.createPost(post, tags, true);
@@ -114,10 +114,7 @@ public class GUIController extends Application {
         businessLogic.unSubscribeGUINotifications(observer);
     }
 
-=======
     public static void createPost(Post post) throws IOException {
         businessLogic.createPost(post);
     }
-
->>>>>>> origin/feature
 }
