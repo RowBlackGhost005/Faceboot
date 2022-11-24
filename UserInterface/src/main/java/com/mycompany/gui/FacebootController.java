@@ -103,4 +103,13 @@ public class FacebootController implements Initializable {
     public void addOfflineUser(String user) {
         listOfflineUsers.getItems().add(user);
     }
+    
+    @FXML
+    private void clickBtnSendNotification(MouseEvent event) {
+        try {
+            GUIController.show("SendNotification");
+        } catch (IOException ex) {
+            Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

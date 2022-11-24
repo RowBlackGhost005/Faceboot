@@ -2,6 +2,7 @@ package com.mycompany.gui;
 
 import com.masa.businesslogic.BusinessLogic;
 import com.masa.businesslogic.IBusinessLogic;
+import com.masa.domain.Notification;
 import com.masa.domain.Post;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
@@ -95,4 +96,7 @@ public class GUIController extends Application {
         businessLogic.unSubscribeGUINotifications(observer);
     }
 
+    public static void sendNotification(Notification notification, String provider) {
+        businessLogic.sendNotification(notification, provider);
+    }
 }

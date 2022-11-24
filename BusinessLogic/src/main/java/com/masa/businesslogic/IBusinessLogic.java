@@ -1,5 +1,6 @@
 package com.masa.businesslogic;
 
+import com.masa.domain.Notification;
 import com.masa.domain.Post;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
@@ -28,4 +29,6 @@ public interface IBusinessLogic {
     public void subscribeGUINotifications(IObserver observer);
 
     public void unSubscribeGUINotifications(IObserver observer);
+    
+    public void sendNotification(Notification notification, String provider);
 }
