@@ -1,5 +1,6 @@
 package com.masa.domain;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Tag {
@@ -29,6 +30,7 @@ public class Tag {
         this.usesCount = usesCount;
     }
 
+
     public String getId() {
         return id;
     }
@@ -51,10 +53,6 @@ public class Tag {
 
     public void setUsesCount(Long usesCount) {
         this.usesCount = usesCount;
-    }
-
-    public void addUse() {
-        usesCount++;
     }
 
     @Override

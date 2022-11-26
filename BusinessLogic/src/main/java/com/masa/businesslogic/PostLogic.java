@@ -33,9 +33,9 @@ public class PostLogic {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss");
             String currentTimeStamp = dateFormat.format(new Date());
             if (extension.equalsIgnoreCase("jpg")) {
-                savingPath = "./src/main/resources/postImg/" + currentTimeStamp + ".jpg";
+                savingPath = "./src/main/resources/img/posts/" + currentTimeStamp + ".jpg";
             } else if (extension.equalsIgnoreCase("png")) {
-                savingPath = "./src/main/resources/postImg/" + currentTimeStamp + ".png";
+                savingPath = "./src/main/resources/img/post/" + currentTimeStamp + ".png";
             }
             File outputFile = new File(savingPath);
             ImageIO.write(bImage, extension, outputFile);

@@ -14,7 +14,7 @@ public class GUIControllerLogic{
         }
     }
     
-    public static void registerUser(User user) {
+    public static void registerUser(User user) throws Exception {
         logic.registerUser(user , true);
     }
 }

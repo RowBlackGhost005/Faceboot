@@ -81,28 +81,31 @@ public class CreatePostController {
     }
 
     private void post() throws IOException {
-        Post post = new Post(null, txtMessage.getText());
-        String savingPath = null;
-        if (imgView.getImage() != null) {
-            String imagePath = imgView.getImage().getUrl();
-            post.setImagePath(imagePath);
-        }
-        if (taggedUsers != null) {
-            ArrayList<User> usersList = new ArrayList<>();
-            for (User user : taggedUsers) {
-                usersList.add(user);
+        if (!txtMessage.getText().isBlank()) {
+            Post post = new Post(null, txtMessage.getText());
+            if (imgView.getImage() != null) {
+                String imagePath = imgView.getImage().getUrl();
+                post.setImagePath(imagePath);
             }
-            post.setUsers(usersList);
-        }
-        if (!txtTags.getText().isBlank()) {
-            String[] tagsNamesList = txtTags.getText().split(" ");
-            ArrayList<Tag> tagsList = new ArrayList<>();
-            for (String tag : tagsNamesList) {
-                tagsList.add(new Tag(null, tag));
+            if (taggedUsers != null) {
+                ArrayList<User> usersList = new ArrayList<>();
+                for (User user : taggedUsers) {
+                    usersList.add(user);
+                }
+                post.setUsers(usersList);
             }
-            post.setTags(tagsList);
+            if (!txtTags.getText().isBlank()) {
+                String[] tagsNamesList = txtTags.getText().split(" ");
+                ArrayList<Tag> tagsList = new ArrayList<>();
+                for (String tag : tagsNamesList) {
+                    tagsList.add(new Tag(null, tag));
+                }
+                post.setTags(tagsList);
+            }
+            GUIController.createPost(post);
+        } else {
+            GUIController.showDialog("Error", "The introduced data is not valid", 1);
         }
-        GUIController.createPost(post);
     }
 
     private void back() throws IOException {

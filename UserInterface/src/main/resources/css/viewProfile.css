@@ -1,0 +1,57 @@
+.mainFxmlClass {
+}
+
+AnchorPane{
+    -fx-font-family: "Pontano Sans";
+    -fx-background-color: #37383f;
+
+}
+
+Label{
+    -fx-pref-width: 960px;
+    -fx-pref-height: 20px;
+    -fx-text-fill: #afb0b2;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: center;
+}
+
+Label.account{
+    -fx-pref-height: 36px;
+    -fx-text-fill: #fafbfb;
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+}
+
+Label.bold{
+    -fx-pref-height: 22px;
+    -fx-text-fill: #fafbfb;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+Button{
+    -fx-pref-width: 160px;
+    -fx-pref-height: 41px;
+    -fx-padding: 0px 10px 0px 10px;
+    -fx-background-color: #50545c;
+    -fx-text-fill: white;
+    -fx-border-radius: 6px 6px 6px 6px;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: center;
+    -fx-cursor:hand;
+}
+
+Label.profileIon{
+    -fx-pref-width: 64px;
+    -fx-pref-height: 64px;
+    -fx-background-image:url("../img/user.png");
+    -fx-background-color: transparent;
+    -fx-background-size:64px 64px;
+    -fx-background-repeat: no-repeat;
+}

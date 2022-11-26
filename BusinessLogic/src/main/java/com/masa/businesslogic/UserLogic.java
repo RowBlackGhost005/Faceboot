@@ -31,6 +31,12 @@ public class UserLogic {
         return user;
     }
 
+    public User editUser(User user) throws Exception {
+        validateEdit(user);
+        persistency.editUser(user);
+        return user;
+    }
+
     public User get(String userId) {
         return persistency.getUser(userId);
     }
@@ -75,6 +81,13 @@ public class UserLogic {
         validateName(user.getName());
         validateEmail(user.getEmail());
         validatePhone(user.getPhone());
+        validateGender(user.getGender());
+        validateBirthDate(user.getBirthDate());
+        validatePassword(user.getPassword());
+    }
+
+    private void validateEdit(User user) throws Exception {
+        validateName(user.getName());
         validateGender(user.getGender());
         validateBirthDate(user.getBirthDate());
         validatePassword(user.getPassword());

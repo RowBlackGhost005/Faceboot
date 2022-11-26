@@ -1,5 +1,6 @@
 package com.masa.domain;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class RelPostTag {
@@ -7,6 +8,7 @@ public class RelPostTag {
     private Long id;
     private String postId;
     private String tagId;
+    private LocalDateTime creationDateTime;
 
     public RelPostTag() {
     }
@@ -20,6 +22,13 @@ public class RelPostTag {
         this.id = id;
         this.postId = postId;
         this.tagId = tagId;
+    }
+
+    public RelPostTag(Long id, String postId, String tagId, LocalDateTime creationDateTime) {
+        this.id = id;
+        this.postId = postId;
+        this.tagId = tagId;
+        this.creationDateTime = creationDateTime;
     }
 
     public Long getId() {
@@ -44,6 +53,14 @@ public class RelPostTag {
 
     public void setTagId(String tagId) {
         this.tagId = tagId;
+    }
+
+    public LocalDateTime getCreationDateTime() {
+        return creationDateTime;
+    }
+
+    public void setCreationDateTime(LocalDateTime creationDateTime) {
+        this.creationDateTime = creationDateTime;
     }
 
     @Override

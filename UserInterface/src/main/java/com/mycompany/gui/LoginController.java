@@ -46,11 +46,12 @@ public class LoginController {
         try {
             User existingUser = GUIController.logIn(user);
             if (existingUser != null) {
-                GUIController.show("Faceboot");
+                GUIController.showFaceboot(existingUser);
+                
                 //LogMessage log = new LogMessage();
             }
         } catch (Exception ex) {
-            GUIController.showDialog("Error", ex.getMessage(), 0);
+            GUIController.showDialog("Error", ex.getMessage(), 1);
         }
     }
 }

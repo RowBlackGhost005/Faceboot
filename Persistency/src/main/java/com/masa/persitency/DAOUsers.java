@@ -4,6 +4,7 @@ import com.masa.domain.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -12,26 +13,27 @@ import java.util.logging.Logger;
 public class DAOUsers {
 
     private IConnection connectionDB;
-    private UUIDGenerator idGenerator;
 
     public DAOUsers(IConnection connection) {
         this.connectionDB = connection;
     }
 
     public boolean create(User user) {
-        idGenerator = new UUIDGenerator();
 
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("INSERT INTO users (id, name, email, phone, gender, birthDate, password) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
-                    idGenerator.getNewId(),
-                    user.getName(),
-                    user.getEmail(),
-                    user.getPhone(),
-                    user.getGender(),
-                    user.getBirthDate(),
-                    user.getPassword());
+            String query
+                    = String.format("INSERT INTO users (id, name, email, phone, "
+                            + "gender, birthDate, password) "
+                            + "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+                            UUIDGenerator.getNewId(),
+                            user.getName(),
+                            user.getEmail(),
+                            user.getPhone(),
+                            user.getGender(),
+                            user.getBirthDate(),
+                            user.getPassword());
 
             int registries = statement.executeUpdate(query);
 
@@ -51,7 +53,9 @@ public class DAOUsers {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, name, email, phone, gender, birthDate, password FROM users WHERE id = '%s';",
+            String query = String.format("SELECT id, name, email, phone, gender, "
+                    + "birthDate, password FROM users "
+                    + "WHERE id = '%s';",
                     userId);
             ResultSet result = statement.executeQuery(query);
 
@@ -79,7 +83,9 @@ public class DAOUsers {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("UPDATE users SET name='%s', email='%s', phone='%s', gender='%s', birthDate='%s', password='%s' WHERE id = %d;",
+            String query = String.format("UPDATE users SET name='%s', email='%s', "
+                    + "phone='%s', gender='%s', birthDate='%s', password='%s' "
+                    + "WHERE id = '%s';",
                     user.getName(),
                     user.getEmail(),
                     user.getPhone(),
@@ -125,7 +131,8 @@ public class DAOUsers {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, name, email, phone, gender, birthDate, password FROM users;");
+            String query = String.format("SELECT id, name, email, phone, gender, "
+                    + "birthDate, password FROM users;");
             ResultSet result = statement.executeQuery(query);
 
             while (result.next()) {
@@ -157,10 +164,14 @@ public class DAOUsers {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
             if (user.getEmail() != null) {
-                query = String.format("SELECT id, name, email, phone, gender, birthDate, password FROM users WHERE email = '%s' AND password = '%s';",
+                query = String.format("SELECT id, name, email, phone, gender, "
+                        + "birthDate, password FROM users "
+                        + "WHERE email = '%s' AND password = '%s';",
                         user.getEmail(), user.getPassword());
             } else if (user.getPhone() != null) {
-                query = String.format("SELECT id, name, email, phone, gender, birthDate, password FROM users WHERE phone = '%s' AND password = '%s';",
+                query = String.format("SELECT id, name, email, phone, gender, "
+                        + "birthDate, password FROM users "
+                        + "WHERE phone = '%s' AND password = '%s';",
                         user.getPhone(), user.getPassword());
             }
             ResultSet result = statement.executeQuery(query);
@@ -172,7 +183,8 @@ public class DAOUsers {
                 String gender = result.getString("gender");
                 String birthDate = result.getString("birthDate");
                 String password = result.getString("password");
-                existingUser = new User(id, name, existingEmail, phone, gender, birthDate, password);
+                existingUser = new User(id, name, existingEmail, phone, gender,
+                        birthDate, password);
             }
 
             connection.close();
@@ -189,7 +201,8 @@ public class DAOUsers {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, name, email, phone, gender, birthDate, password FROM users WHERE email = '%s';",
+            String query = String.format("SELECT id, name, email, phone, gender, "
+                    + "birthDate, password FROM users WHERE email = '%s';",
                     email);
             ResultSet result = statement.executeQuery(query);
 
@@ -201,7 +214,8 @@ public class DAOUsers {
                 String gender = result.getString("gender");
                 String birthDate = result.getString("birthDate");
                 String password = result.getString("password");
-                user = new User(id, name, existingEmail, phone, gender, birthDate, password);
+                user = new User(id, name, existingEmail, phone, gender, birthDate, 
+                        password);
             }
 
             connection.close();
@@ -219,7 +233,8 @@ public class DAOUsers {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, name, email, phone, gender, birthDate, password FROM users WHERE phone = '%s';",
+            String query = String.format("SELECT id, name, email, phone, gender, "
+                    + "birthDate, password FROM users WHERE phone = '%s';",
                     phone);
             ResultSet result = statement.executeQuery(query);
 
@@ -231,7 +246,8 @@ public class DAOUsers {
                 String gender = result.getString("gender");
                 String birthDate = result.getString("birthDate");
                 String password = result.getString("password");
-                user = new User(id, name, email, existingPhone, gender, birthDate, password);
+                user = new User(id, name, email, existingPhone, gender, birthDate, 
+                        password);
             }
 
             connection.close();
@@ -244,7 +260,6 @@ public class DAOUsers {
     }
 
 }
-
 
 ///**
 // *

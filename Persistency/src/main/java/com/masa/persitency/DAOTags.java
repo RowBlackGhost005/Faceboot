@@ -4,6 +4,7 @@ import com.masa.domain.Tag;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,7 +27,8 @@ public class DAOTags {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("INSERT INTO tags (id, name, uses) VALUES ('%s', '%s', '%d');",
+            String query = String.format("INSERT INTO tags (id, name, uses)"
+                    + " VALUES ('%s', '%s', '%d');",
                     id,
                     tag.getName(),
                     tag.getUsesCount());
@@ -50,7 +52,8 @@ public class DAOTags {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, name, uses FROM tags WHERE id = '%s';",
+            String query = String.format("SELECT id, name, uses "
+                    + "FROM tags WHERE id = '%s';",
                     tagId);
             ResultSet result = statement.executeQuery(query);
 
@@ -137,7 +140,7 @@ public class DAOTags {
         }
     }
 
-        public Tag getByName(String name) {
+    public Tag getByName(String name) {
         Tag tag = null;
 
         try {
@@ -162,7 +165,7 @@ public class DAOTags {
             return tag;
         }
     }
-    
+
 }
 
 ///**

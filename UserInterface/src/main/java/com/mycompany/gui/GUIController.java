@@ -29,7 +29,7 @@ public class GUIController extends Application {
 
         businessLogic = new BusinessLogic();
         guiBuilder = new GUIBuilder();
-        scene = new Scene(loadFXML("Faceboot"), 960, 540);
+        scene = new Scene(loadFXML("Login"), 960, 540);
         stage.setMinWidth(700);
         stage.setMinHeight(400);
         stage.setScene(scene);
@@ -43,13 +43,25 @@ public class GUIController extends Application {
     }
 
     static void showDialog(String titulo, String mensaje, int tipo) throws IOException {
-        Stage dialogo = guiBuilder.buildDialog(titulo, mensaje, tipo);
-        dialogo.show();
+        Stage dialog = guiBuilder.buildDialog(titulo, mensaje, tipo);
+        dialog.show();
+    }
+
+    static void showFaceboot(User user) throws IOException {
+        guiBuilder.buildFaceboot(user, scene);
+    }
+
+    static void showProfile(User user) throws IOException {
+        guiBuilder.buildViewProfile(user, scene);
+    }
+
+    static void showEditProfile(User user) throws IOException {
+        guiBuilder.buildEditProfile(user, scene);
     }
 
     static void showTagUsersDialog(CreatePostController cpc) throws IOException {
-        Stage dialogo = guiBuilder.buildTagUsersDialog(cpc);
-        dialogo.show();
+        Stage dialog = guiBuilder.buildTagUsersDialog(cpc);
+        dialog.show();
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
@@ -62,12 +74,16 @@ public class GUIController extends Application {
 
     }
 
+    public static User logIn(User user) throws Exception {
+        return businessLogic.login(user);
+    }
+
     public static User registerUser(User user) throws Exception {
         return businessLogic.registerUser(user, true);
     }
 
-    public static User logIn(User user) throws Exception {
-        return businessLogic.login(user);
+    public static User editUser(User user) throws Exception {
+        return businessLogic.editUser(user, true);
     }
 
     public static User getUser(String userId) {

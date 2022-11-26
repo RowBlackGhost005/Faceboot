@@ -50,6 +50,8 @@ public class FacebootController implements Initializable {
     @FXML
     private GridPane postPane;
 
+    private User user;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -68,8 +70,8 @@ public class FacebootController implements Initializable {
         users.add(new User("jose"));
         users.add(new User("andrea"));
 
-        Post post = new Post("This is a test", null, users, tags, null, new User("andrea"), LocalDateTime.now());
-        Post post2 = new Post("This is a test", null, users, tags, null, new User("jose"), LocalDateTime.now());
+        Post post = new Post("This is a test", null, users, tags, null, new User("andrea"));
+        Post post2 = new Post("This is a test", null, users, tags, null, new User("jose"));
 
         try {
             addPost(builder.buildPost(post));
@@ -90,12 +92,21 @@ public class FacebootController implements Initializable {
         GUIController.show("CreatePost");
     }
 
+    @FXML
+    private void clickBtnViewProfile(MouseEvent event) throws IOException {
+        GUIController.showProfile(user);
+    }
+
     public void addOnlineUser(String user) {
         listOnlineUsers.getItems().add(user);
     }
 
     public void addOfflineUser(String user) {
         listOfflineUsers.getItems().add(user);
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

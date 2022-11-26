@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class Comment extends Post{
 
-    public Comment(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, LocalDateTime dateTime) {
-        super(message, image, users, tags, comments, user, dateTime);
+    public Comment(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user) {
+        super(message, image, users, tags, comments, user);
     }
 
 
