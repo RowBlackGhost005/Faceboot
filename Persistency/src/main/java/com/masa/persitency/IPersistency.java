@@ -11,6 +11,8 @@ public interface IPersistency {
 
     public void createUser(User user);
     
+    public void editUser(User user);
+    
     public User getUser(String userId);
 
     public List<User> getAllUsers();

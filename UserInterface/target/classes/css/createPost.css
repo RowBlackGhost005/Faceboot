@@ -45,6 +45,7 @@ Button {
     -fx-font-size: 16px;
     -fx-letter-spacing: 2px;
     -fx-text-align: center;
+    -fx-cursor:hand;
 }
 
 Button.delete {
@@ -62,7 +63,6 @@ TextField {
     -fx-pref-height: 47px;
     -fx-padding: 4px 8px 4px 8px;
     -fx-background-color: #2e3338;
-    -fx-color: #fff9f9;
     -fx-border-color: #232323;
     -fx-border-width: 1px;
     -fx-border-style: solid;
@@ -78,17 +78,4 @@ TextField {
 TextField.message {
     -fx-pref-width: 628px;
     -fx-pref-height: 222px;
-    -fx-padding: 4px 8px 4px 8px;
-    -fx-background-color: #2e3338;
-    -fx-color: #fff9f9;
-    -fx-border-color: #232323;
-    -fx-border-width: 1px;
-    -fx-border-style: solid;
-    -fx-border-radius: 3px 3px 3px 3px;
-    -fx-font-family: "Pontano Sans";
-    -fx-font-weight: 400;
-    -fx-font-size: 14px;
-    -fx-text-fill: #fff9f9;
-    -fx-letter-spacing: 2px;
-    -fx-text-align: left;
 }

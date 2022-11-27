@@ -1,0 +1,79 @@
+.mainFxmlClass {
+}
+
+AnchorPane{
+    -fx-font-family: "Pontano Sans";
+    -fx-background-color: #37383f;
+
+}
+
+Label{
+    -fx-pref-height: 20px;
+    -fx-text-fill: #afb0b2;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: left;
+}
+
+Label.account{
+    -fx-pref-height: 55px;
+    -fx-text-fill: #fafbfb;
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+    -fx-text-align: center;
+}
+
+Button{
+    -fx-pref-width: 160px;
+    -fx-pref-height: 41px;
+    -fx-padding: 0px 10px 0px 10px;
+    -fx-background-color: #50545c;
+    -fx-text-fill: white;
+    -fx-border-radius: 6px 6px 6px 6px;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: center;
+    -fx-cursor:hand;
+}
+
+Button.edit{
+    -fx-pref-width: 96px;
+    -fx-pref-height: 31px;
+}
+
+TextField, PasswordField {
+    -fx-pref-width: 333px;
+    -fx-pref-height: 32px;
+    -fx-padding: 4px 8px 4px 8px;
+    -fx-background-color: #2e3338;
+    -fx-border-color: #232323;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 3px 3px 3px 3px;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff9f9;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: left;
+}
+
+.combo-box, DatePicker{
+    -fx-pref-height: 32px;
+    -fx-border-color: #232323;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 3px;
+    -fx-background-color:transparent;
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+}
+
+.list-cell, .list-view, .date-picker-display-node, StackPane{
+    -fx-background-color:#2e3338;
+    -fx-text-fill: #fff9f9;
+}

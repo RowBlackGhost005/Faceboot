@@ -48,9 +48,13 @@ public class FacebootController implements Initializable, IObserver {
     @FXML
     private GridPane postPane;
 
+<<<<<<< HEAD
 //    private GUIUpdates updatesNotifier;
     @FXML
     private Label lblUser;
+=======
+    private User user;
+>>>>>>> origin/feature
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,6 +64,22 @@ public class FacebootController implements Initializable, IObserver {
         addOnlineUser("Luis");
         addOfflineUser("Diego");
 
+<<<<<<< HEAD
+=======
+        GUIBuilder builder = new GUIBuilder();
+
+        ArrayList<Tag> tags = new ArrayList<>();
+        tags.add(new Tag("hopeThisWork"));
+        tags.add(new Tag("Why?"));
+
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User("jose"));
+        users.add(new User("andrea"));
+
+        Post post = new Post("This is a test", null, users, tags, null, new User("andrea"));
+        Post post2 = new Post("This is a test", null, users, tags, null, new User("jose"));
+
+>>>>>>> origin/feature
         try {
             updatePosts();
         } catch (IOException ex) {
@@ -101,6 +121,23 @@ public class FacebootController implements Initializable, IObserver {
 
     }
 
+<<<<<<< HEAD
+=======
+    public void addPost(Parent post) {
+        postPane.add(post, 0, postPane.getRowCount() + 1);
+    }
+
+    @FXML
+    private void clickBtnPublish(MouseEvent event) throws IOException {
+        GUIController.show("CreatePost");
+    }
+
+    @FXML
+    private void clickBtnViewProfile(MouseEvent event) throws IOException {
+        GUIController.showProfile(user);
+    }
+
+>>>>>>> origin/feature
     public void addOnlineUser(String user) {
         listOnlineUsers.getItems().add(user);
     }
@@ -109,6 +146,7 @@ public class FacebootController implements Initializable, IObserver {
         listOfflineUsers.getItems().add(user);
     }
 
+<<<<<<< HEAD
     @Override
     public void update(Object post) {
         GUIBuilder builder = new GUIBuilder();
@@ -133,4 +171,10 @@ public class FacebootController implements Initializable, IObserver {
             Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+=======
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+>>>>>>> origin/feature
 }

@@ -43,12 +43,17 @@ public class LoginController {
         try {
             User existingUser = GUILogic.getLogic().login(user , "local");
             if (existingUser != null) {
-                GUIController.show("Faceboot");
+                GUIController.showFaceboot(existingUser);
+                
                 //LogMessage log = new LogMessage();
             }
         } catch (Exception ex) {
+<<<<<<< HEAD
             GUIController.showDialog("Error", ex.getMessage(), 0);
             ex.printStackTrace();
+=======
+            GUIController.showDialog("Error", ex.getMessage(), 1);
+>>>>>>> origin/feature
         }
     }
     

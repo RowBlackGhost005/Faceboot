@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" styleClass="mainFxmlClass" stylesheets="@../../../css/viewProfile.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="com.mycompany.gui.ViewProfileController">
+   <children>
+      <Label alignment="CENTER" layoutY="10.0" styleClass="account" text="My Account" />
+      <Label layoutX="448.0" layoutY="78.0" prefHeight="66.0" prefWidth="65.0" styleClass="profileIon" />
+      <Label fx:id="lblUser" alignment="CENTER" layoutY="142.0" prefWidth="146.0" styleClass="bold" text="User" />
+      <Label alignment="CENTER" layoutY="190.0" text="EMAIL" />
+      <Label fx:id="lblEmail" alignment="CENTER" layoutY="210.0" styleClass="bold" text="email" />
+      <Label alignment="CENTER" layoutY="246.0" text="PASSWORD" />
+      <Label fx:id="lblPassword" alignment="CENTER" layoutY="270.0" styleClass="bold" text="password" />
+      <Label alignment="CENTER" layoutY="299.0" text="GENDER" />
+      <Label fx:id="lblGender" alignment="CENTER" layoutY="319.0" styleClass="bold" text="gender" />
+      <Label alignment="CENTER" layoutY="353.0" text="BIRTH DATE" />
+      <Label fx:id="lblBirthDate" alignment="CENTER" layoutY="373.0" styleClass="bold" text="birthdate" />
+      <Label alignment="CENTER" layoutY="405.0" text="PHONE NUMBER" />
+      <Label fx:id="lblPhone" alignment="CENTER" layoutY="425.0" styleClass="bold" text="phone" />
+      <Button layoutX="400.0" layoutY="483.0" mnemonicParsing="false" onMouseClicked="#clickBtnEdit" text="Edit" />
+      <Button layoutX="783.0" layoutY="483.0" mnemonicParsing="false" onMouseClicked="#clickBtnBack" text="Back" />
+   </children>
+</AnchorPane>

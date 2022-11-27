@@ -17,12 +17,16 @@ public class Post {
     private ArrayList<Tag> tags;
     private ArrayList<Comment> comments;
     private User user;
+<<<<<<< HEAD
     private Date dateTime;
+=======
+>>>>>>> origin/feature
 
     public Post() {
         
     }
 
+<<<<<<< HEAD
     public Post(String message , ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, Date dateTime) {
         this.message = message;
 
@@ -33,6 +37,8 @@ public class Post {
         this.dateTime = dateTime;
     }
 
+=======
+>>>>>>> origin/feature
     public Post(String id) {
         this.id = id;
     }
@@ -51,7 +57,32 @@ public class Post {
     public Post(String id, String message, String userId) {
         this.id = id;
         this.message = message;
+<<<<<<< HEAD
+=======
+        this.image = image;
+    }
+
+    public Post(String id, String message, String imagePath) {
+        this.id = id;
+        this.message = message;
+        this.imagePath = imagePath;
+    }
+
+    public Post(String id, String message, BufferedImage image, String userId) {
+        this.id = id;
+        this.message = message;
+        this.image = image;
+>>>>>>> origin/feature
         this.userId = userId;
+    }
+
+    public Post(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user) {
+        this.message = message;
+        this.image = image;
+        this.users = users;
+        this.tags = tags;
+        this.comments = comments;
+        this.user = user;
     }
 
     public String getId() {
@@ -76,32 +107,6 @@ public class Post {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Post other = (Post) obj;
-        return Objects.equals(this.id, other.id);
-    }
-
-    @Override
-    public String toString() {
-        return "Post{" + "id=" + id + ", message=" + message + '}';
     }
 
     public ArrayList<User> getUsers() {
@@ -136,6 +141,7 @@ public class Post {
         this.comments = comments;
     }
 
+<<<<<<< HEAD
     public Date getDateTime() {
         return dateTime;
     }
@@ -144,12 +150,40 @@ public class Post {
         this.dateTime = dateTime;
     }
 
+=======
+>>>>>>> origin/feature
     public String getImagePath() {
         return imagePath;
     }
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Post other = (Post) obj;
+        return Objects.equals(this.id, other.id);
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" + "id=" + id + ", message=" + message + '}';
     }
 
 }

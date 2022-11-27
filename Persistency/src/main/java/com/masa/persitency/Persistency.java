@@ -9,24 +9,29 @@ import java.util.List;
 
 public class Persistency implements IPersistency {
 
-    private DAOsFactory daosFactory;
+    private DAOFactory daoFactory;
     private DAOUsers users;
     private DAOPosts posts;
     private DAOTags tags;
     private DAORelPostTag postTags;
 
     public Persistency() {
-        daosFactory = new DAOsFactory();
-        users = daosFactory.createDAOUsers();
-        posts = daosFactory.createDAOPosts();
-        tags = daosFactory.createDAOTags();
-        postTags = daosFactory.createDAORelPostTag();
+        daoFactory = new DAOFactory();
+        users = daoFactory.createDAOUsers();
+        posts = daoFactory.createDAOPosts();
+        tags = daoFactory.createDAOTags();
+        postTags = daoFactory.createDAORelPostTag();
 
     }
 
     @Override
     public void createUser(User user) {
         users.create(user);
+    }
+
+    @Override
+    public void editUser(User user) {
+        users.edit(user);
     }
 
     @Override

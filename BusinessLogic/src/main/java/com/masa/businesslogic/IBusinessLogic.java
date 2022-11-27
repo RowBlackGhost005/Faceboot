@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Interface that defines all the operations that the logic layer can do.
- * 
+ *
  * @author Luis Angel Marin
  */
 public interface IBusinessLogic {
@@ -23,8 +23,10 @@ public interface IBusinessLogic {
     
     public User loginWith(String method) throws Exception;
     
+    public User editUser(User user, boolean broadcast) throws Exception;
+
     public User getUser(String userId);
-    
+
     public List<User> getAllUsers();
     
     public void createPost(Post post, boolean broadcast) throws IOException;

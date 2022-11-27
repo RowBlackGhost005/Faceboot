@@ -5,6 +5,7 @@ import com.masa.domain.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -13,7 +14,6 @@ import java.util.logging.Logger;
 public class DAORelPostTag {
 
     private IConnection connectionDB;
-    private UUIDGenerator idGenerator;
 
     public DAORelPostTag(IConnection connection) {
         this.connectionDB = connection;
@@ -24,7 +24,7 @@ public class DAORelPostTag {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("INSERT INTO relPostTag (id_post, id_tag) VALUES ('%s', '%s');",
+            String query = String.format("INSERT INTO relPostTag (idPost, idTag) VALUES ('%s', '%s');",
                     relPostTag.getPostId(),
                     relPostTag.getTagId());
 
@@ -46,14 +46,14 @@ public class DAORelPostTag {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, id_post, id_tag FROM relPostTag WHERE id = '%s';",
+            String query = String.format("SELECT id, idPost, idTag FROM relPostTag WHERE id = '%s';",
                     relPostTagId);
             ResultSet result = statement.executeQuery(query);
 
             if (result.next()) {
                 Long id = result.getLong("id");
-                String postId = result.getString("id_post");
-                String tagId = result.getString("id_tag");
+                String postId = result.getString("idPost");
+                String tagId = result.getString("idTag");
                 relPostTag = new RelPostTag(id, postId, tagId);
             }
 
@@ -90,7 +90,6 @@ public class DAORelPostTag {
 //            return false;
 //        }
 //    }
-
 //    public boolean delete(Integer userId) {
 //        try {
 //            java.sql.Connection connection = this.connectionDB.connectionDB();
@@ -109,7 +108,6 @@ public class DAORelPostTag {
 //            return false;
 //        }
 //    }
-
 //    public List<User> getAll() {
 //        List<User> usersList = new ArrayList<>();
 //
@@ -139,21 +137,20 @@ public class DAORelPostTag {
 //            return usersList;
 //        }
 //    }
-    
-        public RelPostTag getPostTag(String postId, String tagId) {
+    public RelPostTag getPostTag(String postId, String tagId) {
         RelPostTag relPostTag = null;
 
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("SELECT id, id_post, id_tag FROM relPostTag WHERE id_post = '%s' AND id_tag = '%s';",
+            String query = String.format("SELECT id, idPost, idTag FROM relPostTag WHERE idPost = '%s' AND idTag = '%s';",
                     postId, tagId);
             ResultSet result = statement.executeQuery(query);
 
             if (result.next()) {
                 Long id = result.getLong("id");
-                String existingPostId = result.getString("id_post");
-                String existingTagId = result.getString("id_tag");
+                String existingPostId = result.getString("idPost");
+                String existingTagId = result.getString("idTag");
                 relPostTag = new RelPostTag(id, existingPostId, existingTagId);
             }
 

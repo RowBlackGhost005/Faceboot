@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\jjavi\Desktop\Faceboot\Communication\src\main\java\com\masa\communication\Communication.java
 C:\Users\jjavi\Desktop\Faceboot\Communication\src\main\java\com\masa\communication\ICommHandler.java
 C:\Users\jjavi\Desktop\Faceboot\Communication\src\main\java\domain\Request.java
@@ -6,3 +7,15 @@ C:\Users\jjavi\Desktop\Faceboot\Communication\src\main\java\com\masa\communicati
 C:\Users\jjavi\Desktop\Faceboot\Communication\src\main\java\com\masa\communication\ServerSocketHandler.java
 C:\Users\jjavi\Desktop\Faceboot\Communication\src\main\java\com\masa\communication\ClientSocket.java
 C:\Users\jjavi\Desktop\Faceboot\Communication\src\main\java\com\masa\communication\Serializer.java
+=======
+D:\Escritorio\Faceboot-feature\Faceboot\Communication\src\main\java\com\masa\communication\ClientSocket.java
+D:\Escritorio\Faceboot-feature\Faceboot\Communication\src\main\java\domain\Peer.java
+D:\Escritorio\Faceboot-feature\Faceboot\Communication\src\main\java\com\masa\communication\Serializer.java
+D:\Escritorio\Faceboot-feature\Faceboot\Communication\src\main\java\domain\Request.java
+D:\Escritorio\Faceboot-feature\Faceboot\Communication\src\main\java\com\masa\communication\ServerSocketHandler.java
+D:\Escritorio\Faceboot-feature\Faceboot\Communication\src\main\java\Logic\IDirectory.java
+D:\Escritorio\Faceboot-feature\Faceboot\Communication\src\main\java\com\masa\communication\Communication.java
+D:\Escritorio\Faceboot-feature\Faceboot\Communication\src\main\java\Logic\Directory.java
+D:\Escritorio\Faceboot-feature\Faceboot\Communication\src\main\java\com\masa\communication\ICommHandler.java
+D:\Escritorio\Faceboot-feature\Faceboot\Communication\src\main\java\com\masa\communication\CommHandler.java
+>>>>>>> origin/feature

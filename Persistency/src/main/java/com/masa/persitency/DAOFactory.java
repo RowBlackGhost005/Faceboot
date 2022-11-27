@@ -1,10 +1,10 @@
 package com.masa.persitency;
 
-public class DAOsFactory {
+public class DAOFactory {
 
     IConnection bdConnection;
 
-    public DAOsFactory() {
+    public DAOFactory() {
         bdConnection = new Connection();
     }
 

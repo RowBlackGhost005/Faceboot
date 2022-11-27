@@ -67,7 +67,45 @@ public class GUIBuilder {
         
         return stage;
     }
-    
+
+    public Stage buildFaceboot(User user, Scene scene) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Faceboot.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        FacebootController controller = fxmlLoader.<FacebootController>getController();
+        controller.setUser(user);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        scene.setRoot(root);
+
+        return stage;
+    }
+
+    public Stage buildViewProfile(User user, Scene scene) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("ViewProfile.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        ViewProfileController controller = fxmlLoader.<ViewProfileController>getController();
+        controller.setUser(user);
+        controller.fillProfile();
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        scene.setRoot(root);
+
+        return stage;
+    }
+
+    public Stage buildEditProfile(User user, Scene scene) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("EditProfile.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        EditProfileController controller = fxmlLoader.<EditProfileController>getController();
+        controller.setUser(user);
+        controller.fillFields();
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        scene.setRoot(root);
+
+        return stage;
+    }
+
     public AnchorPane buildComment(Comment comment) throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Comment.fxml"));
@@ -125,6 +163,9 @@ public class GUIBuilder {
         if (post.getDateTime() != null) {
 //            controller.setDate(post.getDateTime().toString());
             controller.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(post.getDateTime()));
+
+        if (post.getImagePath() != null) {
+            controller.setPhotoPost(new Image(post.getImagePath()));
         }
         
         if (post.getComments() != null) {

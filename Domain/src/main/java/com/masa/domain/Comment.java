@@ -16,8 +16,13 @@ import javax.swing.Icon;
  */
 public class Comment extends Post{
 
+<<<<<<< HEAD
     public Comment(String message, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, Date dateTime) {
         super(message, users, tags, comments, user, dateTime);
+=======
+    public Comment(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user) {
+        super(message, image, users, tags, comments, user);
+>>>>>>> origin/feature
     }
 
 

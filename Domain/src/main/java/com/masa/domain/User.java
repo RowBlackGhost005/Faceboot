@@ -1,6 +1,6 @@
 package com.masa.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -29,7 +29,11 @@ public class User {
     public User(String name) {
         this.name = name;
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/feature
     public User(String name, String email, String phone) {
         this.name = name;
         this.email = email;

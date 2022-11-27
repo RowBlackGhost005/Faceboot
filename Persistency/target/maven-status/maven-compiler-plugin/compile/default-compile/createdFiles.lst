@@ -1,4 +1,9 @@
 com\masa\persitency\UUIDGenerator.class
+<<<<<<< HEAD
+=======
+com\masa\persitency\DateTimeGenerator.class
+com\masa\persitency\DAOFactory.class
+>>>>>>> origin/feature
 com\masa\persitency\DAOPosts.class
 com\masa\persitency\DAOTags.class
 com\masa\persitency\IPersistency.class
@@ -8,5 +13,8 @@ com\masa\persitency\Connection.class
 com\masa\persitency\DAORelPostTag.class
 com\masa\persitency\DAOUsers.class
 com\masa\persitency\Persistency.class
+<<<<<<< HEAD
 com\masa\persitency\DAOsFactory.class
+=======
+>>>>>>> origin/feature
 run\Run.class

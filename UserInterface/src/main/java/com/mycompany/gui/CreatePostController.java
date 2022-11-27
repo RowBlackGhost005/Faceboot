@@ -81,10 +81,15 @@ public class CreatePostController {
     }
 
     private void post() throws IOException {
+<<<<<<< HEAD
         Post post = new Post(null, txtMessage.getText(),new User(GUILogic.getLogic().getUserLogged().getName()));
         
         post.setDateTime(new Date());
             String savingPath = null;
+=======
+        if (!txtMessage.getText().isBlank()) {
+            Post post = new Post(null, txtMessage.getText());
+>>>>>>> origin/feature
             if (imgView.getImage() != null) {
                 String imagePath = imgView.getImage().getUrl();
                 post.setImagePath(imagePath);
@@ -104,8 +109,15 @@ public class CreatePostController {
                 }
                 post.setTags(tagsList);
             }
+<<<<<<< HEAD
             
             GUILogic.getLogic().createPost(post, true);
+=======
+            GUIController.createPost(post);
+        } else {
+            GUIController.showDialog("Error", "The introduced data is not valid", 1);
+        }
+>>>>>>> origin/feature
     }
 
     private void back() throws IOException {

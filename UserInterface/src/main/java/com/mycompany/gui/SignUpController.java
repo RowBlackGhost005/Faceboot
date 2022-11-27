@@ -75,15 +75,13 @@ public class SignUpController {
         User user = new User(name, email, phone, gender, date, pssword);
 
 //        GUILogic.registerUser(user);
-        
         try {
             GUILogic.getLogic().registerUser(user, true);
         } catch (Exception ex) {
-            Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+            GUIController.showDialog("Error!", ex.getMessage(), 1);
         }
 
         GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
-
         GUIController.show("Faceboot");
     }
 

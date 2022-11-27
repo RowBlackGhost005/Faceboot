@@ -53,13 +53,14 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public User registerUser(User user, boolean broadcast) {
+    public User login(User user) throws Exception {
+        return userLogic.login(user);
+    }
 
-        try {
-            user = userLogic.registerUser(user);
-        } catch (Exception ex) {
-            Logger.getLogger(BusinessLogic.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    @Override
+    public User registerUser(User user, boolean broadcast) throws Exception {
+
+        user = userLogic.registerUser(user);
 
         if (broadcast) {
             Request request = new Request("registeruser", "RegisterUser");
@@ -80,6 +81,7 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
+<<<<<<< HEAD
     public User registerExternalUser(User user, boolean broadcast) {
 
         try {
@@ -117,6 +119,21 @@ public class BusinessLogic implements IBusinessLogic {
                 return userLogic.loginUser(new Google());
         }
         return null;
+=======
+    public User editUser(User user, boolean broadcast) throws Exception {
+
+        user = userLogic.editUser(user);
+
+        if (broadcast) {
+            Request request = new Request("edituser", "editUser");
+
+            request.append(user, "user");
+
+            communication.sendToAllPeers(request);
+        }
+
+        return user;
+>>>>>>> origin/feature
     }
 
     @Override
