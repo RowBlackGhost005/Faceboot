@@ -32,7 +32,7 @@ public class BusinessLogic implements IBusinessLogic {
     private User userLogged;
     private ICommHandler communication;
 
-    private BusinessLogic() {
+    public BusinessLogic() {
         this.userLogic = new UserLogic();
         this.postLogic = new PostLogic();
         this.tagLogic = new TagLogic();
@@ -53,14 +53,13 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public User login(User user) throws Exception {
-        return userLogic.login(user);
-    }
+    public User registerUser(User user, boolean broadcast)  {
 
-    @Override
-    public User registerUser(User user, boolean broadcast) throws Exception {
-
-        user = userLogic.registerUser(user);
+        try {
+            user = userLogic.registerUser(user);
+        } catch (Exception ex) {
+            Logger.getLogger(BusinessLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (broadcast) {
             Request request = new Request("registeruser", "RegisterUser");
@@ -81,7 +80,6 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-<<<<<<< HEAD
     public User registerExternalUser(User user, boolean broadcast) {
 
         try {
@@ -119,7 +117,9 @@ public class BusinessLogic implements IBusinessLogic {
                 return userLogic.loginUser(new Google());
         }
         return null;
-=======
+    }
+    
+    @Override
     public User editUser(User user, boolean broadcast) throws Exception {
 
         user = userLogic.editUser(user);
@@ -129,11 +129,10 @@ public class BusinessLogic implements IBusinessLogic {
 
             request.append(user, "user");
 
-            communication.sendToAllPeers(request);
+            initCommunicationThread(request);
         }
 
         return user;
->>>>>>> origin/feature
     }
 
     @Override
@@ -237,7 +236,8 @@ public class BusinessLogic implements IBusinessLogic {
     public void unsubscribeCommentNotification(IObserver commObserver) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
-
+    }
+    
     @Override
     public void sendNotification(Notification notification, String provider) {
         notificationLogic.sendNotification(notification, provider);

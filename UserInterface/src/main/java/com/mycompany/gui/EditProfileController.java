@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import logic.GUILogic;
 
 public class EditProfileController {
 
@@ -78,7 +79,7 @@ public class EditProfileController {
             }
         }
         try {
-            GUIController.editUser(user);
+            GUILogic.getLogic().editUser(user, true);
             GUIController.showDialog("Success!", "Changes have been saved!", 0);
             //GUIController.showFaceboot(user);
         } catch (Exception ex) {

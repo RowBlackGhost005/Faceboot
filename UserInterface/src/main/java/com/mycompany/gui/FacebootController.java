@@ -1,6 +1,7 @@
 package com.mycompany.gui;
 
 import com.masa.domain.Post;
+import com.masa.domain.User;
 import com.masa.utils.IObserver;
 import java.io.IOException;
 import java.net.URL;
@@ -48,13 +49,11 @@ public class FacebootController implements Initializable, IObserver {
     @FXML
     private GridPane postPane;
 
-<<<<<<< HEAD
 //    private GUIUpdates updatesNotifier;
     @FXML
     private Label lblUser;
-=======
+
     private User user;
->>>>>>> origin/feature
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,38 +63,21 @@ public class FacebootController implements Initializable, IObserver {
         addOnlineUser("Luis");
         addOfflineUser("Diego");
 
-<<<<<<< HEAD
-=======
-        GUIBuilder builder = new GUIBuilder();
-
-        ArrayList<Tag> tags = new ArrayList<>();
-        tags.add(new Tag("hopeThisWork"));
-        tags.add(new Tag("Why?"));
-
-        ArrayList<User> users = new ArrayList<>();
-        users.add(new User("jose"));
-        users.add(new User("andrea"));
-
-        Post post = new Post("This is a test", null, users, tags, null, new User("andrea"));
-        Post post2 = new Post("This is a test", null, users, tags, null, new User("jose"));
-
->>>>>>> origin/feature
-        try {
-            updatePosts();
-        } catch (IOException ex) {
-            Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
-        }
- 
 //        updatesNotifier = new GUIUpdates(this);
         GUILogic.getLogic().subscribePostNotifications(this);
 
+        updatePosts();
     }
 
-    public void updatePosts() throws IOException{
+    public void updatePosts(){
         List<Post> posts = GUILogic.getLogic().getAllPost();
         GUIBuilder builder = new GUIBuilder();
         for(Post post:posts){
-            addPost(builder.buildPost(post));
+            try {
+                addPost(builder.buildPost(post));
+            } catch (IOException ex) {
+                Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }
@@ -121,23 +103,12 @@ public class FacebootController implements Initializable, IObserver {
 
     }
 
-<<<<<<< HEAD
-=======
-    public void addPost(Parent post) {
-        postPane.add(post, 0, postPane.getRowCount() + 1);
-    }
-
-    @FXML
-    private void clickBtnPublish(MouseEvent event) throws IOException {
-        GUIController.show("CreatePost");
-    }
 
     @FXML
     private void clickBtnViewProfile(MouseEvent event) throws IOException {
         GUIController.showProfile(user);
     }
 
->>>>>>> origin/feature
     public void addOnlineUser(String user) {
         listOnlineUsers.getItems().add(user);
     }
@@ -145,8 +116,7 @@ public class FacebootController implements Initializable, IObserver {
     public void addOfflineUser(String user) {
         listOfflineUsers.getItems().add(user);
     }
-
-<<<<<<< HEAD
+    
     @Override
     public void update(Object post) {
         GUIBuilder builder = new GUIBuilder();
@@ -161,7 +131,7 @@ public class FacebootController implements Initializable, IObserver {
                     }
                 }
         );
-
+    }
     
     @FXML
     private void clickBtnSendNotification(MouseEvent event) {
@@ -171,10 +141,8 @@ public class FacebootController implements Initializable, IObserver {
             Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-=======
+
     public void setUser(User user) {
         this.user = user;
     }
-
->>>>>>> origin/feature
 }

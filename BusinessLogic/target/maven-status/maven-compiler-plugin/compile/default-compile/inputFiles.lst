@@ -1,17 +1,8 @@
-<<<<<<< HEAD
-C:\Users\jjavi\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\TagLogic.java
-C:\Users\jjavi\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\IBusinessLogic.java
-C:\Users\jjavi\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\CommunicationThread.java
-C:\Users\jjavi\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\BusinessLogic.java
-C:\Users\jjavi\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\UserLogic.java
-C:\Users\jjavi\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\PostLogic.java
-C:\Users\jjavi\Desktop\Faceboot\BusinessLogic\src\main\java\run\Run.java
-C:\Users\jjavi\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\NotificationLogic.java
-=======
-D:\Escritorio\Faceboot-feature\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\IBusinessLogic.java
-D:\Escritorio\Faceboot-feature\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\BusinessLogic.java
-D:\Escritorio\Faceboot-feature\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\UserLogic.java
-D:\Escritorio\Faceboot-feature\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\TagLogic.java
-D:\Escritorio\Faceboot-feature\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\PostLogic.java
-D:\Escritorio\Faceboot-feature\Faceboot\BusinessLogic\src\main\java\run\Run.java
->>>>>>> origin/feature
+C:\Users\luisg\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\CommunicationThread.java
+C:\Users\luisg\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\UserLogic.java
+C:\Users\luisg\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\NotificationLogic.java
+C:\Users\luisg\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\PostLogic.java
+C:\Users\luisg\Desktop\Faceboot\BusinessLogic\src\main\java\run\Run.java
+C:\Users\luisg\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\IBusinessLogic.java
+C:\Users\luisg\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\TagLogic.java
+C:\Users\luisg\Desktop\Faceboot\BusinessLogic\src\main\java\com\masa\businesslogic\BusinessLogic.java

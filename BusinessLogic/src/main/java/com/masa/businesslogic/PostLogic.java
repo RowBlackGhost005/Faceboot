@@ -45,7 +45,7 @@ public class PostLogic {
 
         String savingPath = null;
 
-        if (!post.getImagePath().contains("postImg")) {
+        if (!post.getImagePath().contains("postsImg")) {
             
             String imagePath = post.getImagePath();
             String extension = imagePath.substring(imagePath.length() - 3);
@@ -55,9 +55,9 @@ public class PostLogic {
             String currentTimeStamp = dateFormat.format(new Date());
 
             if (extension.equalsIgnoreCase("jpg")) {
-                savingPath = "./src/main/resources/img/posts/" + currentTimeStamp + ".jpg";
+                savingPath = "./resources/postsImg/" + currentTimeStamp + ".jpg";
             } else if (extension.equalsIgnoreCase("png")) {
-                savingPath = "./src/main/resources/img/post/" + currentTimeStamp + ".png";
+                savingPath = "./resources/postsImg/" + currentTimeStamp + ".png";
             }
 
             File outputFile = new File(savingPath);

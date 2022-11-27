@@ -41,13 +41,13 @@
       <Pane fx:id="paneUser" prefHeight="57.0" prefWidth="172.0" styleClass="paneUser" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
             <Label layoutX="14.0" layoutY="15.0" prefHeight="17.0" prefWidth="16.0" styleClass="photoUser" />
-<<<<<<< HEAD
+            
             <Label fx:id="lblUser" ellipsisString="" layoutX="55.0" layoutY="19.0" styleClass="nameUser" text="User" />
             <Button layoutX="114.0" layoutY="14.0" mnemonicParsing="false" styleClass="settings" />
-=======
+
             <Label ellipsisString="" layoutX="55.0" layoutY="19.0" styleClass="nameUser" text="User" />
             <Button layoutX="114.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#clickBtnViewProfile" styleClass="settings" />
->>>>>>> origin/feature
+
          </children>
       </Pane>
       <ScrollPane prefHeight="502.0" prefWidth="814.0" styleClass="panePost" GridPane.rowIndex="2" GridPane.rowSpan="2">

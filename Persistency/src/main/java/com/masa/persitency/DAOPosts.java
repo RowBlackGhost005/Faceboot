@@ -1,6 +1,7 @@
 package com.masa.persitency;
 
 import com.masa.domain.Post;
+import com.masa.domain.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,15 +27,7 @@ public class DAOPosts {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-<<<<<<< HEAD
-            String query = String.format("INSERT INTO posts (id, message, image_path,user) VALUES ('%s', '%s', '%s','%s');",
-=======
-            String query = String.format("INSERT INTO posts (id, message, imagePath) VALUES ('%s', '%s', '%s');",
->>>>>>> origin/feature
-                    id,
-                    post.getMessage(),
-                    post.getImagePath(),
-                    post.getUser().getName());
+            String query = String.format("INSERT INTO posts (id, message, image_path , user) VALUES ('%s', '%s', '%s','%s');", id, post.getMessage(), post.getImagePath(), post.getUser().getName());
 
             statement.executeUpdate(query);
 
@@ -54,25 +47,18 @@ public class DAOPosts {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-<<<<<<< HEAD
-            String query = String.format("SELECT id, message,user FROM posts WHERE id = '%s';",
-=======
-            String query = String.format("SELECT id, message, imagePath "
+
+            String query = String.format("SELECT id, message, image_Path, user "
                     + "FROM posts WHERE id = '%s';",
->>>>>>> origin/feature
                     postId);
             ResultSet result = statement.executeQuery(query);
 
             if (result.next()) {
                 String id = result.getString("id");
                 String message = result.getString("message");
-<<<<<<< HEAD
                 String user = result.getString("user");
-                post = new Post(id, message,new User(user));
-=======
-                String imagePath = result.getString("imagePath");
-                post = new Post(id, message, imagePath);
->>>>>>> origin/feature
+                String imagePath = result.getString("image_Path");
+                post = new Post(id, message, imagePath, new User(user));
             }
 
             connection.close();
@@ -133,25 +119,17 @@ public class DAOPosts {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-<<<<<<< HEAD
+            
             String query = String.format("SELECT id, message, image_path, user FROM posts;");
-=======
-            String query = String.format("SELECT id, message, imagePath FROM posts;");
->>>>>>> origin/feature
+
             ResultSet result = statement.executeQuery(query);
 
             while (result.next()) {
                 String id = result.getString("id");
                 String imagePath = result.getString("image_path");
                 String message = result.getString("message");
-<<<<<<< HEAD
                 String user = result.getString("user");
-                Post post = new Post(id, message, new User(user));
-                post.setImagePath(imagePath);
-=======
-                String imagePath = result.getString("imagePath");
-                Post post = new Post(id, message, imagePath);
->>>>>>> origin/feature
+                Post post = new Post(id, message, imagePath, new User(user));
                 postsList.add(post);
             }
 

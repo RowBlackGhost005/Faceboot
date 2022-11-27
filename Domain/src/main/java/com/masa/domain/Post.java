@@ -17,16 +17,12 @@ public class Post {
     private ArrayList<Tag> tags;
     private ArrayList<Comment> comments;
     private User user;
-<<<<<<< HEAD
     private Date dateTime;
-=======
->>>>>>> origin/feature
 
     public Post() {
         
     }
 
-<<<<<<< HEAD
     public Post(String message , ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, Date dateTime) {
         this.message = message;
 
@@ -37,8 +33,6 @@ public class Post {
         this.dateTime = dateTime;
     }
 
-=======
->>>>>>> origin/feature
     public Post(String id) {
         this.id = id;
     }
@@ -57,28 +51,17 @@ public class Post {
     public Post(String id, String message, String userId) {
         this.id = id;
         this.message = message;
-<<<<<<< HEAD
-=======
-        this.image = image;
     }
 
-    public Post(String id, String message, String imagePath) {
+    public Post(String id, String message, String imagePath, User user) {
         this.id = id;
-        this.message = message;
         this.imagePath = imagePath;
-    }
-
-    public Post(String id, String message, BufferedImage image, String userId) {
-        this.id = id;
         this.message = message;
-        this.image = image;
->>>>>>> origin/feature
-        this.userId = userId;
+        this.user = user;
     }
 
     public Post(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user) {
         this.message = message;
-        this.image = image;
         this.users = users;
         this.tags = tags;
         this.comments = comments;
@@ -141,7 +124,6 @@ public class Post {
         this.comments = comments;
     }
 
-<<<<<<< HEAD
     public Date getDateTime() {
         return dateTime;
     }
@@ -150,8 +132,6 @@ public class Post {
         this.dateTime = dateTime;
     }
 
-=======
->>>>>>> origin/feature
     public String getImagePath() {
         return imagePath;
     }

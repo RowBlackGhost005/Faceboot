@@ -29,11 +29,7 @@ public class User {
     public User(String name) {
         this.name = name;
     }
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> origin/feature
     public User(String name, String email, String phone) {
         this.name = name;
         this.email = email;

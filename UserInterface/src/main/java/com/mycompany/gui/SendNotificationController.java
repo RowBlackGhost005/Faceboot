@@ -1,10 +1,5 @@
 package com.mycompany.gui;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
-
 import com.masa.domain.Notification;
 import com.masa.domain.User;
 import java.io.IOException;
@@ -16,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
+import logic.GUILogic;
 
 /**
  * FXML Controller class
@@ -47,7 +43,7 @@ public class SendNotificationController {
         notification.setReceptor(receptor);
         notification.setMessage(txtMessage.getText());
         
-        GUIController.sendNotification(notification, "sms");
+        GUILogic.getLogic().sendNotification(notification, "sms");
         
         txtTo.setText("");
         txtMessage.setText("");

@@ -28,7 +28,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Authentication</artifactId>
             <artifactId>Notifications</artifactId>
             <version>${project.version}</version>
         </dependency>

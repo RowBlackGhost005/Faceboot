@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * @author Andrea
  */
 public class GUIBuilder {
-    
+
     public GUIBuilder() {
     }
 
@@ -53,7 +53,7 @@ public class GUIBuilder {
         }
         return stage;
     }
-    
+
     public Stage buildTagUsersDialog(CreatePostController cpc) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("TagUser.fxml"));
         Parent root = (Parent) fxmlLoader.load();
@@ -64,7 +64,7 @@ public class GUIBuilder {
         stage.setResizable(false);
         stage.setScene(new Scene(root, 800, 540));
         stage.show();
-        
+
         return stage;
     }
 
@@ -107,22 +107,22 @@ public class GUIBuilder {
     }
 
     public AnchorPane buildComment(Comment comment) throws IOException {
-        
+
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Comment.fxml"));
         AnchorPane commentTamplate = (AnchorPane) fxmlLoader.load();
         CommentController controller = fxmlLoader.<CommentController>getController();
-        
+
         controller.setCommentText(comment.getMessage());
         controller.setUser(comment.getUser().getName());
         controller.setDate(comment.getDateTime().toString());
-        
+
         StringBuffer tags = new StringBuffer();
         if (comment.getTags() != null) {
             for (Tag tag : comment.getTags()) {
                 tags.append("#").append(tag).append(" ");
             }
         }
-        
+
         StringBuffer users = new StringBuffer();
         if (comment.getTags() != null) {
             for (Tag tag : comment.getTags()) {
@@ -130,9 +130,9 @@ public class GUIBuilder {
             }
         }
         return commentTamplate;
-        
+
     }
-    
+
     public void buildRegisterPhone(User user) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("RegisterPhone.fxml"));
         Parent registerPhone = (Parent) fxmlLoader.load();
@@ -142,7 +142,7 @@ public class GUIBuilder {
         stage.setResizable(false);
         stage.setScene(new Scene(registerPhone));
         stage.show();
-        
+
     }
 
 //    public Initializable buildController(String fxmlName, Initializable controllerName ) throws IOException{
@@ -151,55 +151,55 @@ public class GUIBuilder {
 //        Initializable controller = fxmlLoader.<>getController();
 //    }
     public Parent buildPost(Post post) throws IOException {
-        
+
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Post.fxml"));
         Parent postTamplate = (Parent) fxmlLoader.load();
         PostController controller = fxmlLoader.<PostController>getController();
-        
+
         controller.setPostText(post.getMessage());
-        
+
         controller.setUser(post.getUser().getName());
-        
+
         if (post.getDateTime() != null) {
 //            controller.setDate(post.getDateTime().toString());
             controller.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(post.getDateTime()));
+//
+//            if (post.getImagePath() != null) {
+//                System.out.println(post.getImagePath());
+//                controller.setPhotoPost(new Image(post.getImagePath()));
+//            }
+//
+//            if (post.getComments() != null) {
+//                for (Comment comment : post.getComments()) {
+//                    controller.addComment(buildComment(comment));
+//                }
+//
+//            }
+        }
 
-        if (post.getImagePath() != null) {
-            controller.setPhotoPost(new Image(post.getImagePath()));
-        }
-        
-        if (post.getComments() != null) {
-            for (Comment comment : post.getComments()) {
-                controller.addComment(buildComment(comment));
-            }
-            
-        }
-        
         if (post.getImagePath() != null && !post.getImagePath().equalsIgnoreCase("null")) {
-            
+
             String imagePath = post.getImagePath();
-            
-            
-            
-            if(post.getImagePath().startsWith(".")){
-                
+
+            if (post.getImagePath().startsWith(".")) {
+
                 imagePath = imagePath.substring(2, imagePath.length());
-                
+
                 imagePath = "file:" + imagePath;
-                
+
                 System.out.println(imagePath);
-                
+
                 controller.setPhotoPost(new Image(imagePath));
             }
         }
-        
+
         if (post.getComments() != null) {
             for (Comment comment : post.getComments()) {
                 controller.addComment(buildComment(comment));
             }
-            
+
         }
-        
+
         StringBuilder tags = new StringBuilder();
         if (post.getTags() != null) {
             for (Tag tag : post.getTags()) {
@@ -207,7 +207,7 @@ public class GUIBuilder {
             }
             controller.setTags(tags.toString());
         }
-        
+
         StringBuilder users = new StringBuilder();
         if (post.getTags() != null) {
             for (User user : post.getUsers()) {
@@ -215,8 +215,8 @@ public class GUIBuilder {
             }
             controller.setTaggedUsers(users.toString());
         }
+
         return postTamplate;
-        
     }
-    
+
 }

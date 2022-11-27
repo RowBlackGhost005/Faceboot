@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.masa.domain;
 
 import java.awt.image.BufferedImage;
@@ -16,13 +12,8 @@ import javax.swing.Icon;
  */
 public class Comment extends Post{
 
-<<<<<<< HEAD
     public Comment(String message, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user, Date dateTime) {
         super(message, users, tags, comments, user, dateTime);
-=======
-    public Comment(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user) {
-        super(message, image, users, tags, comments, user);
->>>>>>> origin/feature
     }
 
 

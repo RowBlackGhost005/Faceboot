@@ -41,32 +41,31 @@ public class LoginController {
         User user = new User(txtLogin.getText(), txtPassword.getText());
 
         try {
-            User existingUser = GUILogic.getLogic().login(user , "local");
+            User existingUser = GUILogic.getLogic().login(user, "local");
             if (existingUser != null) {
+                GUILogic.getLogic().setUserLogged(existingUser);
                 GUIController.showFaceboot(existingUser);
-                
+
                 //LogMessage log = new LogMessage();
             }
         } catch (Exception ex) {
-<<<<<<< HEAD
-            GUIController.showDialog("Error", ex.getMessage(), 0);
             ex.printStackTrace();
-=======
             GUIController.showDialog("Error", ex.getMessage(), 1);
->>>>>>> origin/feature
         }
     }
-    
-    private void loginGoogle(){
+
+    private void loginGoogle() {
+        User existingUser = null;
         
-         try {
-            User existingUser = GUILogic.getLogic().login(new User() , "google");
-           
+        try {
+            existingUser = GUILogic.getLogic().login(new User(), "google");
+
             if (existingUser.getEmail() != null) {
-                GUIController.show("Faceboot");
+                GUILogic.getLogic().setUserLogged(existingUser);
+                GUIController.showFaceboot(existingUser);
                 //LogMessage log = new LogMessage();
             }
-            
+
         } catch (Exception ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,4 +76,3 @@ public class LoginController {
         loginGoogle();
     }
 }
-
