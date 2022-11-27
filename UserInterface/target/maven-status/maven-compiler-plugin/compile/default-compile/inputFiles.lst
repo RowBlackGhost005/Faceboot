@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\luisg\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\LoginController.java
 C:\Users\luisg\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\PostController.java
 C:\Users\luisg\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\CreatePostController.java
@@ -13,3 +14,20 @@ C:\Users\luisg\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\Ta
 C:\Users\luisg\Desktop\Faceboot\UserInterface\src\main\java\com\masa\main\Main.java
 C:\Users\luisg\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\GUIUpdates.java
 C:\Users\luisg\Desktop\Faceboot\UserInterface\src\main\java\logic\TableUser.java
+=======
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\TagUserController.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\SignUpController.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\GUIBuilder.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\CommentController.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\DialogController.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\GUIUpdates.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\GUIController.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\Main.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\GUIControllerLogic.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\CreatePostController.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\SendNotificationController.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\LoginController.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\logic\TableUser.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\FacebootController.java
+C:\Users\jjavi\Desktop\Faceboot\UserInterface\src\main\java\com\mycompany\gui\PostController.java
+>>>>>>> origin/feature2

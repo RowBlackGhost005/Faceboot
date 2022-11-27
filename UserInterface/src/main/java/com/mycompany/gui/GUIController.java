@@ -2,6 +2,14 @@ package com.mycompany.gui;
 
 import com.masa.businesslogic.BusinessLogic;
 import com.masa.businesslogic.IBusinessLogic;
+<<<<<<< HEAD
+=======
+import com.masa.domain.Notification;
+import com.masa.domain.Post;
+import com.masa.domain.Tag;
+import com.masa.domain.User;
+import com.masa.utils.IObserver;
+>>>>>>> origin/feature2
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -97,4 +105,47 @@ public class GUIController extends Application {
         return fxmlLoader.load();
     }
 
+<<<<<<< HEAD
+=======
+    public static void main(String[] args) {
+        launch();
+
+    }
+
+    public static User registerUser(User user) throws Exception {
+        return businessLogic.registerUser(user, true);
+    }
+
+    public static User logIn(User user) throws Exception {
+        return businessLogic.login(user);
+    }
+
+    public static User getUser(String userId) {
+        return businessLogic.getUser(userId);
+    }
+    
+    public static List<User> getAllUsers() {
+        return businessLogic.getAllUsers();
+    }
+
+    public static void createPost(Post post) {
+        businessLogic.createPost(post, true);
+    }
+
+    public static void createPost(Post post, Tag tags) {
+        businessLogic.createPost(post, tags, true);
+    }
+    
+    public static void subscribeGUIUpdate(IObserver observer){
+        businessLogic.subscribeGUINotifications(observer);
+    }
+    
+    public static void unSubscribeGUIUpdate(IObserver observer){
+        businessLogic.unSubscribeGUINotifications(observer);
+    }
+
+    public static void sendNotification(Notification notification, String provider) {
+        businessLogic.sendNotification(notification, provider);
+    }
+>>>>>>> origin/feature2
 }

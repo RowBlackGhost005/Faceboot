@@ -53,6 +53,6 @@
           
           </content>
       </ScrollPane>
-      <Button fx:id="btnNotifications" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="62.0" prefWidth="132.0" styleClass="notifications" GridPane.columnIndex="1" />
+      <Button fx:id="btnNotifications" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#clickBtnSendNotification" prefHeight="62.0" prefWidth="132.0" styleClass="notifications" GridPane.columnIndex="1" />
    </children>
 </GridPane>

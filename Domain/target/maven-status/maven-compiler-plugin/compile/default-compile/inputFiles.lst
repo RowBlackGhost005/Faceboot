@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\luisg\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\User.java
 C:\Users\luisg\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\RelPostTag.java
 C:\Users\luisg\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\Tag.java
@@ -10,3 +11,17 @@ C:\Users\luisg\Desktop\Faceboot\Domain\src\main\java\com\masa\utils\IObserver.ja
 C:\Users\luisg\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\Comment.java
 C:\Users\luisg\Desktop\Faceboot\Domain\src\main\java\com\masa\utils\ICommentNotifier.java
 C:\Users\luisg\Desktop\Faceboot\Domain\src\main\java\com\masa\utils\IPostNotifier.java
+=======
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\Post.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\utils\IObservable.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\CommentTransferObject.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\RelPostTag.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\run\Run.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\Comment.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\Notification.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\Tag.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\User.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\utils\IObserver.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\domain\PostTransferObject.java
+C:\Users\jjavi\Desktop\Faceboot\Domain\src\main\java\com\masa\utils\INotification.java
+>>>>>>> origin/feature2

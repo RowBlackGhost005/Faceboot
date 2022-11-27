@@ -124,5 +124,13 @@ public class FacebootController implements Initializable, IObserver {
                 }
         );
 
+    
+    @FXML
+    private void clickBtnSendNotification(MouseEvent event) {
+        try {
+            GUIController.show("SendNotification");
+        } catch (IOException ex) {
+            Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

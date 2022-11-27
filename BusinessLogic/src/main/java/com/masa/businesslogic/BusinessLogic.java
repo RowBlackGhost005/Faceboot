@@ -3,6 +3,7 @@ package com.masa.businesslogic;
 import com.masa.authentication.Google;
 import com.masa.communication.CommHandler;
 import com.masa.communication.ICommHandler;
+import com.masa.domain.Notification;
 import com.masa.domain.Post;
 import com.masa.domain.PostTransferObject;
 import com.masa.domain.Tag;
@@ -26,6 +27,7 @@ public class BusinessLogic implements IBusinessLogic {
     private UserLogic userLogic;
     private PostLogic postLogic;
     private TagLogic tagLogic;
+    private NotificationLogic notificationLogic;
 
     private User userLogged;
     private ICommHandler communication;
@@ -34,6 +36,7 @@ public class BusinessLogic implements IBusinessLogic {
         this.userLogic = new UserLogic();
         this.postLogic = new PostLogic();
         this.tagLogic = new TagLogic();
+        this.notificationLogic = new NotificationLogic();
     }
 
     public static IBusinessLogic createBusinessLogic() {
@@ -64,6 +67,12 @@ public class BusinessLogic implements IBusinessLogic {
             request.append(user, "user");
 
             initCommunicationThread(request);
+
+            CommunicationThread requestThread = new CommunicationThread(request, communication);
+
+            Thread thread = new Thread(requestThread);
+
+            thread.start();
 
         }
 
@@ -210,5 +219,10 @@ public class BusinessLogic implements IBusinessLogic {
     @Override
     public void unsubscribeCommentNotification(IObserver commObserver) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+
+    @Override
+    public void sendNotification(Notification notification, String provider) {
+        notificationLogic.sendNotification(notification, provider);
     }
 }
