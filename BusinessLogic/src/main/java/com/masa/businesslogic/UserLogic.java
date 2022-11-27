@@ -1,7 +1,8 @@
 package com.masa.businesslogic;
 
+import com.masa.authentication.Authentication;
+import com.masa.authentication.IAuthentication;
 import com.masa.authentication.IAuthenticationMethod;
-import com.masa.authentication.Profile;
 import com.masa.domain.User;
 import com.masa.persitency.IPersistency;
 import com.masa.persitency.Persistency;
@@ -17,14 +18,23 @@ import java.util.regex.Pattern;
 public class UserLogic {
 
     private IPersistency persistency;
+    private IAuthentication authentication;
 
     public UserLogic() {
         persistency = new Persistency();
+        authentication = new Authentication(persistency);
     }
 
-    public User login(User user) throws Exception {
-        User existingUser = validateLogin(user);
-        return existingUser;
+    public User login(User user , String authMetod) throws Exception {
+        
+        User authUser = authentication.authenticate(user, authMetod);
+        
+        if(authMetod != "local"){
+            authUser = persistency.getUserByEmail(authUser.getEmail());
+        }
+        
+//        User existingUser = validateLogin(user);
+        return authUser;
     }
 
     public User registerUser(User user) throws Exception {
@@ -40,14 +50,9 @@ public class UserLogic {
     }
     
     public User loginUser(IAuthenticationMethod authenticationMethod) throws Exception{
-        Profile profile = authenticationMethod.Login();
-        User user;
-        if(persistency.getUserByEmail(profile.getEmail())==null){
-            user = new User(profile.getName(), profile.getEmail(), null);
-            return user;
-        }
+        User user = authenticationMethod.login(new User());
         
-        return persistency.getUserByEmail(profile.getEmail());
+        return persistency.getUserByEmail(user.getEmail());
     }
 
     public User get(String userId) {

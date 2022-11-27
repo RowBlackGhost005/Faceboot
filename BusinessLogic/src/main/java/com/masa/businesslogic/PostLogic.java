@@ -5,17 +5,20 @@ import com.masa.domain.RelPostTag;
 import com.masa.domain.Tag;
 import com.masa.persitency.IPersistency;
 import com.masa.persitency.Persistency;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.imageio.ImageIO;
 
+/**
+ * Class that controls all the logic of a post.
+ * 
+ * @author Diego Ayala
+ */
 public class PostLogic {
 
     private IPersistency persistency;
@@ -43,6 +46,7 @@ public class PostLogic {
         String savingPath = null;
 
         if (!post.getImagePath().contains("postImg")) {
+            
             String imagePath = post.getImagePath();
             String extension = imagePath.substring(imagePath.length() - 3);
             File image = new File(imagePath);
@@ -66,6 +70,7 @@ public class PostLogic {
 
             post.setImagePath(savingPath);
         }
+        
         ArrayList<Tag> tagsList = new ArrayList<>();
 
         //Notificaciones
@@ -102,35 +107,5 @@ public class PostLogic {
         return newPost;
     }
 
-    public String copyPostImage(Post post) throws IOException {
 
-        String savingPath = "";
-
-        String imagePath = post.getImagePath();
-        String extension = imagePath.substring(imagePath.length() - 3);
-        File image = new File(imagePath);
-        BufferedImage bImage = ImageIO.read(image);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss");
-        String currentTimeStamp = dateFormat.format(new Date());
-
-        if (extension.equalsIgnoreCase("jpg")) {
-            savingPath = "./src/main/resources/postImg/" + currentTimeStamp + ".jpg";
-        } else if (extension.equalsIgnoreCase("png")) {
-            savingPath = "./src/main/resources/postImg/" + currentTimeStamp + ".png";
-        }
-
-        File outputFile = new File(savingPath);
-
-        System.out.println(outputFile.getCanonicalFile());
-
-        outputFile.createNewFile();
-
-        ImageIO.write(bImage, extension, outputFile);
-        
-        return savingPath;
-    }
-
-//    public Post get(String postId) {
-//        return persistency.getPost(postId);
-//    }
 }

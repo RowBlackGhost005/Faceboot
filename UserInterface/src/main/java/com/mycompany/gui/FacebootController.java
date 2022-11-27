@@ -1,20 +1,16 @@
 package com.mycompany.gui;
 
 import com.masa.domain.Post;
-import com.masa.domain.Tag;
-import com.masa.domain.User;
 import com.masa.utils.IObserver;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -24,14 +20,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
+import logic.GUILogic;
 
 /**
  * FXML Controller class
  *
  * @author Andrea
  */
-public class FacebootController implements Initializable {
+public class FacebootController implements Initializable, IObserver {
 
     @FXML
     private TextField txtSearch;
@@ -52,14 +48,14 @@ public class FacebootController implements Initializable {
     @FXML
     private GridPane postPane;
 
-    private GUIUpdates updatesNotifier;
+//    private GUIUpdates updatesNotifier;
     @FXML
     private Label lblUser;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        lblUser.setText(GUIController.getLoggedUser().getName());
+        lblUser.setText(GUILogic.getLogic().getUserLogged().getName());
         addOnlineUser("Andrea");
         addOnlineUser("Luis");
         addOfflineUser("Diego");
@@ -70,13 +66,13 @@ public class FacebootController implements Initializable {
             Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
         }
  
-        updatesNotifier = new GUIUpdates(this);
-        GUIController.subscribeGUIUpdate(updatesNotifier);
+//        updatesNotifier = new GUIUpdates(this);
+        GUILogic.getLogic().subscribePostNotifications(this);
 
     }
 
     public void updatePosts() throws IOException{
-        List<Post> posts = GUIController.getAllPosts();
+        List<Post> posts = GUILogic.getLogic().getAllPost();
         GUIBuilder builder = new GUIBuilder();
         for(Post post:posts){
             addPost(builder.buildPost(post));
@@ -111,5 +107,22 @@ public class FacebootController implements Initializable {
 
     public void addOfflineUser(String user) {
         listOfflineUsers.getItems().add(user);
+    }
+
+    @Override
+    public void update(Object post) {
+        GUIBuilder builder = new GUIBuilder();
+        
+        // Avoid throwing IllegalStateException by running from a non-JavaFX thread.
+        Platform.runLater(
+                () -> {
+                    try {
+                        this.addPost(builder.buildPost((Post) post));
+                    } catch (IOException ex) {
+                        Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+        );
+
     }
 }

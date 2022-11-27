@@ -2,36 +2,41 @@ package com.mycompany.gui;
 
 import com.masa.businesslogic.BusinessLogic;
 import com.masa.businesslogic.IBusinessLogic;
-import com.masa.domain.Post;
-import com.masa.domain.Tag;
-import com.masa.domain.User;
-import com.masa.utils.IObserver;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.List;
+import logic.GUILogic;
 
 /**
- * JavaFX GUIController
+ * Controller of the Java FX GUI.
+ * 
+ * This class contains methos to show the multiple windows of the app.
+ * 
+ * @author Andrea Abigail
  */
 public class GUIController extends Application {
 
-    private static IBusinessLogic businessLogic;
     private static GUIBuilder guiBuilder;
     private static Scene scene;
 
    
 
+    
+    /**
+     * Starts the application of JavaFX and shows the main window of faceboot.
+     * 
+     * @param stage Stage to load.
+     * @throws IOException Exception while trying to access FXML files of GUI.
+     */
     @Override
     public void start(Stage stage) throws IOException {
 
-        businessLogic = BusinessLogic.createBusinessLogic();
+        GUILogic.getLogic();
+        
         guiBuilder = new GUIBuilder();
-//        scene = new Scene(loadFXML("Faceboot"), 960, 540);
         scene = new Scene(loadFXML("Login"), 960, 540);
         stage.setMinWidth(700);
         stage.setMinHeight(400);
@@ -40,90 +45,56 @@ public class GUIController extends Application {
         stage.show();
     }
 
+    /**
+     * Launch the application.
+     * 
+     * @param args Java args.
+     */
+    public static void main(String[] args) {
+        launch();
+
+    }
+    
+    /**
+     * Loads the FXML file whose name is the same as given as parameter to display
+     * it to the user.
+     * 
+     * The FXML file should exist in this project.
+     * @param fxml FXML name to load and show.
+     * @throws IOException Exception while trying to find the FXML file.
+     */
     static void show(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
-    static void showDialog(String titulo, String mensaje, int tipo) throws IOException {
-        Stage dialogo = guiBuilder.buildDialog(titulo, mensaje, tipo);
+    /**
+     * Shows a dialog window above the current GUI.
+     * 
+     * @param title Title of the dialog.
+     * @param message Message to show in the dialog.
+     * @param type Type of dialog.
+     * @throws IOException Excepcion while trying to access FXML file of dialog.
+     */
+    static void showDialog(String title, String message, int type) throws IOException {
+        Stage dialogo = guiBuilder.buildDialog(title, message, type);
         dialogo.show();
     }
 
+    /**
+     * Shows a dialog that contains a table with multiple users to tag.
+     * 
+     * @param cpc Controller of Create Post.
+     * @throws IOException Excepcion while trying to access FXML file of dialog.
+     */
     static void showTagUsersDialog(CreatePostController cpc) throws IOException {
         Stage dialogo = guiBuilder.buildTagUsersDialog(cpc);
         dialogo.show();
     }
 
+    //TODO DOCUMENTATION
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIController.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
-        launch();
-
-    }
-
-    public static User registerUser(User user) throws Exception {
-        return businessLogic.registerUser(user, true);
-    }
-    
-    public static User registerExternalUser(User user) {
-        return businessLogic.registerExternalUser(user, true);
-    }
-
-    public static User logIn(User user) throws Exception {
-        User userLogged = businessLogic.login(user);
-        businessLogic.setUserLogged(user);
-        return userLogged;
-    }
-    
-    public static User getLoggedUser(){
-        return businessLogic.getUserLogged();
-    }
-    
-    public static void loginWith(String method) throws Exception{
-
-        User user = businessLogic.loginWith(method);
-        businessLogic.setUserLogged(user);
-        if(user.getPhone()==null){
-            guiBuilder.buildRegisterPhone(user);
-        }
-        else{
-            show("Faceboot");
-        }
-   
-  
-    }
-
-    public static User getUser(String userId) {
-        return businessLogic.getUser(userId);
-    }
-
-    public static List<User> getAllUsers() {
-        return businessLogic.getAllUsers();
-    }
-
-//    public static void createPost(Post post) {
-//        businessLogic.createPost(post, true);
-//    }
-
-//    public static void createPost(Post post, Tag tags) {
-//        businessLogic.createPost(post, tags, true);
-//    }
-    
-    public static void subscribeGUIUpdate(IObserver observer){
-        businessLogic.subscribeGUINotifications(observer);
-    }
-    
-    public static void unSubscribeGUIUpdate(IObserver observer){
-        businessLogic.unSubscribeGUINotifications(observer);
-    }
-
-    public static  List<Post> getAllPosts(){
-        return businessLogic.getAllPost();
-    }
-    public static void createPost(Post post) throws IOException {
-        businessLogic.createPost(post,true);
-    }
 }

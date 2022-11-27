@@ -1,5 +1,3 @@
-com\masa\utils\IObservable.class
-com\masa\utils\INotification.class
 com\masa\domain\CommentTransferObject.class
 com\masa\domain\PostTransferObject.class
 com\masa\domain\User.class

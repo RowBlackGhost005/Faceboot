@@ -12,6 +12,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import logic.GUILogic;
 
 public class SignUpController {
 
@@ -76,7 +77,7 @@ public class SignUpController {
 //        GUILogic.registerUser(user);
         
         try {
-            GUIController.registerUser(user);
+            GUILogic.getLogic().registerUser(user, true);
         } catch (Exception ex) {
             Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }

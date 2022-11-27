@@ -15,11 +15,15 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.client.util.store.DataStoreFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.gson.Gson;
+import com.masa.domain.User;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -70,8 +74,9 @@ public class Google implements IAuthenticationMethod{
             = "https://accounts.google.com/o/oauth2/auth";
 
     @Override
-    public Profile Login() throws Exception{
+    public User login(User user){
     
+        try {
             DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
             final Credential credential = authorize();
 
@@ -82,26 +87,37 @@ public class Google implements IAuthenticationMethod{
                 HttpRequestFactory requestFactory
                         = HTTP_TRANSPORT.createRequestFactory(
                                 new HttpRequestInitializer() {
-                            @Override
-                            public void initialize(HttpRequest request) throws IOException {
-                                credential.initialize(request);
-                                request.setParser(new JsonObjectParser(JSON_FACTORY));
-                            }
-                        });
+                                    @Override
+                                    public void initialize(HttpRequest request) throws IOException {
+                                        credential.initialize(request);
+                                        request.setParser(new JsonObjectParser(JSON_FACTORY));
+                                    }
+                                });
                 GenericUrl url = new GenericUrl("https://www.googleapis.com/oauth2/v1/userinfo?alt=json");
                 HttpRequest request = requestFactory.buildGetRequest(url);
 
                 String userInfo = request.execute().parseAsString();
                 Profile profile = new Gson().fromJson(userInfo, Profile.class);
-                return profile;
+                
+                //Transform the Profile into User maybe later change?
+                user.setName(profile.getName());
+                user.setEmail(profile.getEmail());
+                
+                return user;
                 //Success!
             }
-          
-
+            
+            
+            return null;
+        } catch (IOException ex) {
+            Logger.getLogger(Google.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Google.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return null;
     }
 
-    @Override
     public Credential authorize() throws Exception{
          
     // set up authorization code flow

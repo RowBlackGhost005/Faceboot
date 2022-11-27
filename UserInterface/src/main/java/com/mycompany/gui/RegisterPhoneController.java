@@ -1,9 +1,7 @@
 package com.mycompany.gui;
 
-import com.masa.authentication.Profile;
 import com.masa.domain.User;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import logic.GUILogic;
 
 /**
  * FXML Controller class
@@ -48,7 +47,7 @@ public class RegisterPhoneController implements Initializable {
     private void btnClickSignUp(MouseEvent event) {
         user.setPhone(this.txtPhone.getText());
         try {
-            GUIController.registerExternalUser(user);
+            GUILogic.getLogic().registerExternalUser(user, true);
             GUIController.show("Faceboot");
             
             Stage stage = (Stage) pane.getScene().getWindow();

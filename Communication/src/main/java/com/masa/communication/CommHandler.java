@@ -2,12 +2,14 @@ package com.masa.communication;
 
 import domain.Request;
 import com.masa.businesslogic.IBusinessLogic;
+import com.masa.domain.Comment;
 import com.masa.domain.Post;
 import com.masa.domain.PostTransferObject;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
-import com.masa.utils.IObservable;
+import com.masa.utils.ICommentNotifier;
 import com.masa.utils.IObserver;
+import com.masa.utils.IPostNotifier;
 import domain.Peer;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author Luis Angel Marin
  */
-public class CommHandler implements ICommHandler, IObservable {
+public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifier {
 
     private Communication communication;
 
@@ -28,7 +30,9 @@ public class CommHandler implements ICommHandler, IObservable {
 
     private IBusinessLogic businessLogic;
 
-    private ArrayList<IObserver> observers;
+    private ArrayList<IObserver> postObservers;
+
+    private ArrayList<IObserver> commentObservers;
 
     /**
      * Creates a new Communication Handler.
@@ -40,7 +44,9 @@ public class CommHandler implements ICommHandler, IObservable {
 //        this.communication = communication;
         this.serializer = new Serializer();
         this.businessLogic = businessLogic;
-        this.observers = new ArrayList<IObserver>();
+        this.postObservers = new ArrayList<IObserver>();
+        this.commentObservers = new ArrayList<IObserver>();
+
     }
 
     /**
@@ -171,7 +177,7 @@ public class CommHandler implements ICommHandler, IObservable {
 
                 communication.removePeer(peer);
 
-                notify(post, "post");
+                notifyPost(post);
 
                 break;
 
@@ -222,20 +228,38 @@ public class CommHandler implements ICommHandler, IObservable {
     }
 
     @Override
-    public void addObserver(IObserver observer) {
-        this.observers.add(observer);
+    public void addPostObserver(IObserver postObserver) {
+        postObservers.add(postObserver);
     }
 
     @Override
-    public void removeObserver(IObserver observer) {
-        this.observers.remove(observer);
+    public void removePostObserver(IObserver postObserver) {
+        postObservers.remove(postObserver);
     }
 
     @Override
-    public void notify(Object o, String s) {
+    public void notifyPost(Post post) {
+        
+        for (IObserver postObserver : postObservers) {
+            postObserver.update(post);
+        }
+    }
 
-        for (IObserver observer : observers) {
-            observer.update(o, s);
+    @Override
+    public void addCommentObserver(IObserver commentObserver) {
+        commentObservers.add(commentObserver);
+    }
+
+    @Override
+    public void removeCommentObserver(IObserver commentObserver) {
+        commentObservers.remove(commentObserver);
+    }
+
+    @Override
+    public void notifyComment(Comment comment) {
+        
+        for(IObserver commentObserver : commentObservers){
+            commentObserver.update(comment);
         }
     }
 }

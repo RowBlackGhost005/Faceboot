@@ -1,5 +1,7 @@
 package com.masa.utils;
 
+import com.masa.domain.Post;
+
 /**
  * Interface that represents the activities of a new post notifier.
  * 
@@ -12,4 +14,15 @@ public interface IPostNotifier {
      * @param observer Obserer to subscribe to this notifier.
      */
     public void addPostObserver(IObserver observer);
+    
+    /**
+     * Removes the observer of the notify list.
+     * @param observer Observer to unsubscribe.
+     */
+    public void removePostObserver(IObserver observer);
+    
+    /**
+     * Notifies all subscribers that a new post has been made and sends said post.
+     */
+    public void notifyPost(Post post);
 }

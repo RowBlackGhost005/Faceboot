@@ -5,11 +5,7 @@ import com.masa.domain.Tag;
 import com.masa.domain.User;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,10 +17,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import javafx.embed.swing.SwingFXUtils;
-import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import logic.GUILogic;
 
+/**
+ * FXML Controller of the create post gui component.
+ *
+ * @author Andrea
+ */
 public class CreatePostController {
 
     JFileChooser chooser;
@@ -81,7 +81,7 @@ public class CreatePostController {
     }
 
     private void post() throws IOException {
-        Post post = new Post(null, txtMessage.getText(),new User(GUIController.getLoggedUser().getName()));
+        Post post = new Post(null, txtMessage.getText(),new User(GUILogic.getLogic().getUserLogged().getName()));
         
         post.setDateTime(new Date());
             String savingPath = null;
@@ -104,8 +104,8 @@ public class CreatePostController {
                 }
                 post.setTags(tagsList);
             }
-            GUIController.createPost(post);
-
+            
+            GUILogic.getLogic().createPost(post, true);
     }
 
     private void back() throws IOException {

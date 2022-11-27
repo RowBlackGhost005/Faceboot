@@ -7,9 +7,7 @@ com\mycompany\gui\GUIController.class
 com\mycompany\gui\CreatePostController.class
 com\mycompany\gui\DialogController.class
 com\mycompany\gui\CommentController.class
-com\mycompany\gui\GUIControllerLogic.class
 com\mycompany\gui\LoginController.class
 com\mycompany\gui\SignUpController.class
 logic\TableUser.class
-com\mycompany\gui\Main.class
 com\mycompany\gui\TagUserController.class

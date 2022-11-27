@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import logic.GUILogic;
 
 public class GUIUpdates implements IObserver {
 
@@ -16,31 +17,28 @@ public class GUIUpdates implements IObserver {
     }
 
     public void initObserver() {
-        GUIController.subscribeGUIUpdate(this);
+//        GUILogic.getLogic().subscribeGUINotifications(this);
     }
 
     public void stopObserver() {
-        GUIController.unSubscribeGUIUpdate(this);
+//        GUILogic.getLogic().unSubscribeGUINotifications(this);
     }
 
     @Override
-    public void update(Object o, String type) {
+    public void update(Object o) {
         GUIBuilder builder = new GUIBuilder();
-        switch (type) {
-            case "post":
-                // Avoid throwing IllegalStateException by running from a non-JavaFX thread.
-                Platform.runLater(
-                        () -> {
-                            try {
-                                controller.addPost(builder.buildPost((Post) o));
-                            } catch (IOException ex) {
-                                Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                );
+        
+        // Avoid throwing IllegalStateException by running from a non-JavaFX thread.
+        Platform.runLater(
+                () -> {
+                    try {
+                        controller.addPost(builder.buildPost((Post) o));
+                    } catch (IOException ex) {
+                        Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+        );
 
-                break;
-        }
     }
 
 }

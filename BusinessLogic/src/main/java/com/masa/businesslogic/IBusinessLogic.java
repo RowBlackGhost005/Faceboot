@@ -18,7 +18,7 @@ public interface IBusinessLogic {
     
     public User registerExternalUser(User user, boolean broadcast);
   
-    public User login(User user) throws Exception;
+    public User login(User user, String method) throws Exception;
     
     public User loginWith(String method) throws Exception;
     
@@ -30,15 +30,19 @@ public interface IBusinessLogic {
     
     public void createPost(Post post, Tag tags, boolean broadcast) throws IOException;
     
-    public void subscribeGUINotifications(IObserver observer);
-    
     public void createPost(Post post) throws IOException;
-
-    public void unSubscribeGUINotifications(IObserver observer);
     
     public List<Post> getAllPost();
     
     public void setUserLogged(User user);
     
     public User getUserLogged();
+    
+    public void subscribePostNotifications(IObserver postObserver);
+    
+    public void unsbuscribePostNotifications(IObserver postObserver);
+    
+    public void subscribeCommentNotification(IObserver commObserver);
+    
+    public void unsubscribeCommentNotification(IObserver commObserver);
 }

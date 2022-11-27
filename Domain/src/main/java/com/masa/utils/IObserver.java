@@ -4,7 +4,7 @@ package com.masa.utils;
  *
  * @author Luis Marin
  */
-public interface IObserver {
+public interface IObserver{
     
-    public void update(Object o , String type);
+    public void update(Object o);
 }

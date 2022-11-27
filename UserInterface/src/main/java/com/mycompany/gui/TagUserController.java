@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import logic.GUILogic;
 import logic.TableUser;
 
 public class TagUserController {
@@ -60,7 +61,7 @@ public class TagUserController {
         clEmail = new TableColumn("Email");
         clPhone = new TableColumn("Phone");
         tblUsers.getColumns().addAll(clId, clName, clEmail, clPhone);
-        users = GUIController.getAllUsers();
+        users = GUILogic.getLogic().getAllUsers();
         List<TableUser> tableUsers = new ArrayList<>();
 
         for (User user : users) {
@@ -88,7 +89,7 @@ public class TagUserController {
         List<User> usersList = new ArrayList<>();
 
         for (TableUser user : tableUsersList) {
-            User searchedUser = GUIController.getUser(user.getId());
+            User searchedUser = GUILogic.getLogic().getUser(user.getId());
             usersList.add(searchedUser);
         }
 
