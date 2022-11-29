@@ -112,6 +112,10 @@ public class PostLogic {
         }
 
         Post newPost = persistency.createPost(post);
+        
+        newPost.setTags(tagsList);
+        newPost.setUsers(post.getUsers());
+        newPost.setUser(post.getUser());
 
         for (Tag tag : tagsList) {
             RelPostTag relPostTag = new RelPostTag(newPost.getId(), tag.getId());

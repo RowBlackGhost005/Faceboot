@@ -5,9 +5,11 @@ import com.masa.domain.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
@@ -18,7 +20,7 @@ import logic.GUILogic;
  *
  * @author jjavi
  */
-public class SendNotificationController {
+public class SendNotificationController implements Initializable{
 
     @FXML
     private Button btnSend;
@@ -28,7 +30,16 @@ public class SendNotificationController {
     private TextField txtMessage;
     @FXML
     private TextField txtTo;
+    @FXML
+    private ComboBox<String> cmbNotificationMode;
     
+    private User userReceptor;
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        cmbNotificationMode.setItems(FXCollections.observableArrayList(
+                "Email", "Phone", "All"));
+    }
     @FXML
     private void clickBtnBack(MouseEvent event) throws IOException {
         GUIController.show("Faceboot");
@@ -43,9 +54,17 @@ public class SendNotificationController {
         notification.setReceptor(receptor);
         notification.setMessage(txtMessage.getText());
         
-        GUILogic.getLogic().sendNotification(notification, "sms");
+        switch(cmbNotificationMode.getSelectionModel().getSelectedItem()){
+            case "Phone": GUILogic.getLogic().sendNotification(notification, "sms");
+        }
         
+
         txtTo.setText("");
         txtMessage.setText("");
+    }
+    
+    public void setUser(User user){
+        this.userReceptor=user;
+        txtTo.setText(userReceptor.getName());
     }
 }

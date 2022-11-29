@@ -56,9 +56,11 @@ public class DAOPosts {
             if (result.next()) {
                 String id = result.getString("id");
                 String message = result.getString("message");
-                String user = result.getString("user");
+                String userId = result.getString("user");
                 String imagePath = result.getString("image_Path");
-                post = new Post(id, message, imagePath, new User(user));
+                User user = new User();
+                user.setId(userId);
+                post = new Post(id, message, imagePath, user);
             }
             
             
