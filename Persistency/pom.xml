@@ -23,5 +23,11 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.39.3.0</version>
         </dependency>
+        
+           <dependency>
+            <groupId>org.dizitart</groupId>
+            <artifactId>nitrite</artifactId>
+            <version>3.4.4</version>
+        </dependency>
     </dependencies>
 </project>

@@ -27,10 +27,28 @@
    <children>
       <AnchorPane fx:id="PostPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="294.0" prefWidth="765.0" styleClass="post" stylesheets="@../../../css/post.css" GridPane.columnIndex="3" GridPane.rowIndex="3">
          <children>
-            <ImageView fx:id="userPhoto" fitHeight="33.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" styleClass="photoUser" />
-            <Label fx:id="lblUser" layoutX="45.0" layoutY="3.0" text="Usuario" />
-            <Label fx:id="lblDate" layoutX="118.0" layoutY="3.0" styleClass="date" text="Label" />
-            <Label fx:id="lblPostText" layoutX="45.0" layoutY="41.0" text="This is a test post" />
+            <GridPane prefHeight="33.0" prefWidth="766.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="377.39996337890625" minWidth="45.0" prefWidth="45.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="31.800073242187523" prefWidth="649.1999938964843" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fx:id="userPhoto" fitHeight="33.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" styleClass="photoUser" />
+                  <Label fx:id="lblUser" text="Usuario" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin></Label>
+                  <Label fx:id="lblDate" styleClass="date" text="Date" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin></Label>
+               </children>
+            </GridPane>
+            <Label fx:id="lblPostText" layoutX="55.0" layoutY="40.0" text="This is a test post" />
             <ImageView fx:id="postPhoto" fitHeight="150.0" fitWidth="200.0" layoutX="307.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" styleClass="imagePost" />
             <Button fx:id="btnEdit" layoutX="743.0" layoutY="3.0" mnemonicParsing="false" styleClass="btnEdit" visible="false" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
             <Label fx:id="lblTags" layoutX="15.0" layoutY="245.0" styleClass="tags" text="#tags" />

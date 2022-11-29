@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import logic.GUILogic;
 
 /**
  *
@@ -68,11 +69,11 @@ public class GUIBuilder {
         return stage;
     }
 
-    public Stage buildFaceboot(User user, Scene scene) throws IOException {
+    public Stage buildFaceboot(Scene scene) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Faceboot.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         FacebootController controller = fxmlLoader.<FacebootController>getController();
-        controller.setUser(user);
+        controller.setUser(GUILogic.getLogic().getUserLogged());
         Stage stage = new Stage();
         stage.setResizable(false);
         scene.setRoot(root);
@@ -80,11 +81,11 @@ public class GUIBuilder {
         return stage;
     }
 
-    public Stage buildViewProfile(User user, Scene scene) throws IOException {
+    public Stage buildViewProfile( Scene scene) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("ViewProfile.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         ViewProfileController controller = fxmlLoader.<ViewProfileController>getController();
-        controller.setUser(user);
+        controller.setUser(GUILogic.getLogic().getUserLogged());
         controller.fillProfile();
         Stage stage = new Stage();
         stage.setResizable(false);
@@ -93,11 +94,11 @@ public class GUIBuilder {
         return stage;
     }
 
-    public Stage buildEditProfile(User user, Scene scene) throws IOException {
+    public Stage buildEditProfile(Scene scene) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("EditProfile.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         EditProfileController controller = fxmlLoader.<EditProfileController>getController();
-        controller.setUser(user);
+        controller.setUser(GUILogic.getLogic().getUserLogged());
         controller.fillFields();
         Stage stage = new Stage();
         stage.setResizable(false);
@@ -176,6 +177,10 @@ public class GUIBuilder {
 //
 //            }
         }
+        
+        if(post.getUser().getId().equals(GUILogic.getLogic().getUserLogged().getId())){
+            controller.enableBtnEdit();
+        }
 
         if (post.getImagePath() != null && !post.getImagePath().equalsIgnoreCase("null")) {
 
@@ -209,7 +214,7 @@ public class GUIBuilder {
         }
 
         StringBuilder users = new StringBuilder();
-        if (post.getTags() != null) {
+        if (post.getUsers() != null) {
             for (User user : post.getUsers()) {
                 users.append("@").append(user.getName()).append(" ");
             }

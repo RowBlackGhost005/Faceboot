@@ -1,3 +1,5 @@
+com\masa\domain\RelPostUser.class
+com\masa\utils\IPostObserver.class
 com\masa\domain\CommentTransferObject.class
 com\masa\domain\PostTransferObject.class
 com\masa\domain\User.class
@@ -5,6 +7,9 @@ com\masa\utils\IPostNotifier.class
 com\masa\domain\RelPostTag.class
 com\masa\domain\Tag.class
 com\masa\utils\IObserver.class
+com\masa\domain\Notification.class
 com\masa\domain\Comment.class
+com\masa\domain\Log.class
 com\masa\domain\Post.class
+com\masa\utils\ICommentNotifier.class
 run\Run.class

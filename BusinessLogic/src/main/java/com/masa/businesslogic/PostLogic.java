@@ -2,7 +2,9 @@ package com.masa.businesslogic;
 
 import com.masa.domain.Post;
 import com.masa.domain.RelPostTag;
+import com.masa.domain.RelPostUser;
 import com.masa.domain.Tag;
+import com.masa.domain.User;
 import com.masa.persitency.IPersistency;
 import com.masa.persitency.Persistency;
 import java.awt.image.BufferedImage;
@@ -31,14 +33,31 @@ public class PostLogic {
         return persistency.createPost(post);
     }
 
-    public Post create(Post post, Tag tags, TagLogic tagLogic) {
-        String[] tagsNamesList = tags.getName().split(" ");
-
-        return null;
-    }
 
     public List<Post> getAllPost() {
-        return persistency.getAllPost();
+        List<Post> posts = persistency.getAllPost();
+        
+        
+        for(Post post:posts){
+            List<Tag> tagsIdList = persistency.getTagsByPost(post.getId());
+            ArrayList<Tag> tagsList = new ArrayList<>();
+            for(Tag tag:tagsIdList){
+                Tag newTag = persistency.getTag(tag.getId());
+                tagsList.add(newTag);
+            }
+            post.setTags(tagsList);
+            
+            List<User> usersIdList = persistency.getUsersTagged(post.getId());
+            ArrayList<User> usersList = new ArrayList<>();
+            for(User user:usersIdList){
+                User newUser = new User(user.getId(),persistency.getUser(user.getId()).getName(),null,null);
+                usersList.add(newUser);
+            }
+            post.setUsers(usersList);
+            post.getUser().setName(persistency.getUser(post.getUser().getId()).getName());
+        }
+        
+        return posts;
     }
 
     public Post create(Post post, TagLogic tagLogic) throws IOException {
@@ -73,11 +92,6 @@ public class PostLogic {
         
         ArrayList<Tag> tagsList = new ArrayList<>();
 
-        //Notificaciones
-        if (post.getUsers() != null) {
-
-        }
-
         tagsList = new ArrayList<>();
         if (post.getTags() != null) {
             for (Tag tag : post.getTags()) {
@@ -102,6 +116,14 @@ public class PostLogic {
         for (Tag tag : tagsList) {
             RelPostTag relPostTag = new RelPostTag(newPost.getId(), tag.getId());
             persistency.createRelPostTag(relPostTag);
+        }
+        
+        //TODO notifications
+        if(post.getUsers() != null) {
+            for (User user : post.getUsers()) {
+                RelPostUser relPostUser = new RelPostUser(newPost.getId(), user.getId());
+                persistency.createRelPostUser(relPostUser);
+            }
         }
         // newPost.setTags(tagsList);
         return newPost;

@@ -1,5 +1,6 @@
 package com.masa.businesslogic;
 
+import com.masa.domain.Log;
 import com.masa.domain.Notification;
 import com.masa.domain.Post;
 import com.masa.domain.Tag;
@@ -7,6 +8,7 @@ import com.masa.domain.User;
 import com.masa.utils.IObserver;
 import java.io.IOException;
 import java.util.List;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Interface that defines all the operations that the logic layer can do.
@@ -40,6 +42,11 @@ public interface IBusinessLogic {
     public void setUserLogged(User user);
     
     public User getUserLogged();
+    
+       
+    public Logger getLog();
+    
+    public List<Log> getAllLogs();
     
     public void subscribePostNotifications(IObserver postObserver);
     

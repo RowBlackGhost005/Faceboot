@@ -50,7 +50,7 @@ public class EditProfileController {
 
     @FXML
     private void clickBtnBack(MouseEvent event) throws IOException {
-        GUIController.showEditProfile(user);
+        GUIController.showEditProfile();
     }
 
     @FXML

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Configuration packages="com.masa.businesslogic" status="INFO">
+    <Appenders>
+        <NitriteAppender name="databaseAppender"/>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="databaseAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

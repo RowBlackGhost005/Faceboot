@@ -85,16 +85,16 @@ public class GUIController extends Application {
         dialogo.show();
     }
 
-    static void showFaceboot(User user) throws IOException {
-        guiBuilder.buildFaceboot(user, scene);
+    static void showFaceboot() throws IOException {
+        guiBuilder.buildFaceboot(scene);
     }
 
-    static void showProfile(User user) throws IOException {
-        guiBuilder.buildViewProfile(user, scene);
+    static void showProfile() throws IOException {
+        guiBuilder.buildViewProfile(scene);
     }
 
-    static void showEditProfile(User user) throws IOException {
-        guiBuilder.buildEditProfile(user, scene);
+    static void showEditProfile() throws IOException {
+        guiBuilder.buildEditProfile(scene);
     }
 
     /**

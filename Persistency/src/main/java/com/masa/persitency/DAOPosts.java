@@ -27,7 +27,7 @@ public class DAOPosts {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("INSERT INTO posts (id, message, image_path , user) VALUES ('%s', '%s', '%s','%s');", id, post.getMessage(), post.getImagePath(), post.getUser().getName());
+            String query = String.format("INSERT INTO posts (id, message, image_path , user) VALUES ('%s', '%s', '%s','%s');", id, post.getMessage(), post.getImagePath(), post.getUser().getId());
 
             statement.executeUpdate(query);
 
@@ -60,7 +60,8 @@ public class DAOPosts {
                 String imagePath = result.getString("image_Path");
                 post = new Post(id, message, imagePath, new User(user));
             }
-
+            
+            
             connection.close();
             return post;
 
@@ -128,8 +129,10 @@ public class DAOPosts {
                 String id = result.getString("id");
                 String imagePath = result.getString("image_path");
                 String message = result.getString("message");
-                String user = result.getString("user");
-                Post post = new Post(id, message, imagePath, new User(user));
+                String idUser = result.getString("user");
+                User user = new User();
+                user.setId(idUser);
+                Post post = new Post(id, message, imagePath, user);
                 postsList.add(post);
             }
 

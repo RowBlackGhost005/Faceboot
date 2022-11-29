@@ -23,5 +23,13 @@ public class DAOFactory {
     public DAORelPostTag createDAORelPostTag() {
         return new DAORelPostTag(bdConnection);
     }
+    
+     public DAORelPostUser createDAORelPostUser() {
+        return new DAORelPostUser(bdConnection);
+    }
+    
+    public DAOLogs createDAOLogs(){
+        return new DAOLogs();
+    }
 
 }

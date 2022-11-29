@@ -3,6 +3,7 @@ package com.masa.businesslogic;
 import com.masa.authentication.Google;
 import com.masa.communication.CommHandler;
 import com.masa.communication.ICommHandler;
+import com.masa.domain.Log;
 import com.masa.domain.Notification;
 import com.masa.domain.Post;
 import com.masa.domain.PostTransferObject;
@@ -14,8 +15,10 @@ import com.masa.utils.IPostNotifier;
 import domain.Request;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Class that holds all the functionalities of the application.
@@ -24,19 +27,23 @@ import java.util.logging.Logger;
  */
 public class BusinessLogic implements IBusinessLogic {
 
+    private Logger LOGGER;
     private UserLogic userLogic;
     private PostLogic postLogic;
     private TagLogic tagLogic;
     private NotificationLogic notificationLogic;
+    private LogsLogic logsLogic;
 
     private User userLogged;
     private ICommHandler communication;
 
     public BusinessLogic() {
+        LOGGER = LogManager.getLogger(BusinessLogic.class.getName());
         this.userLogic = new UserLogic();
         this.postLogic = new PostLogic();
         this.tagLogic = new TagLogic();
         this.notificationLogic = new NotificationLogic();
+        this.logsLogic = new LogsLogic();
     }
 
     public static IBusinessLogic createBusinessLogic() {
@@ -58,7 +65,7 @@ public class BusinessLogic implements IBusinessLogic {
         try {
             user = userLogic.registerUser(user);
         } catch (Exception ex) {
-            Logger.getLogger(BusinessLogic.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex.getMessage());
         }
 
         if (broadcast) {
@@ -75,7 +82,7 @@ public class BusinessLogic implements IBusinessLogic {
             thread.start();
 
         }
-
+        LOGGER.info("The user: "+user.getName()+" has succesfuly Signed Up");
         return user;
     }
 
@@ -85,7 +92,7 @@ public class BusinessLogic implements IBusinessLogic {
         try {
             user = userLogic.registerExternalUser(user);
         } catch (Exception ex) {
-            Logger.getLogger(BusinessLogic.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex.getMessage());
         }
 
         if (broadcast) {
@@ -95,7 +102,7 @@ public class BusinessLogic implements IBusinessLogic {
 
             initCommunicationThread(request);
         }
-
+        LOGGER.info("The user: "+user.getName()+" has succesfuly Signed Up with Google");
         return user;
     }
 
@@ -107,15 +114,21 @@ public class BusinessLogic implements IBusinessLogic {
         
         setUserLogged(userLogged);
         
+        LOGGER.info("The user: "+userLogged.getName()+" has Logged in");
         return userLogged;
     }
 
     @Override
     public User loginWith(String method) throws Exception {
+        User user;
         switch (method) {
             case "GOOGLE":
-                return userLogic.loginUser(new Google());
+                
+                user = userLogic.loginUser(new Google());
+                LOGGER.info("The user: "+user.getName()+"has succesfuly Signed Up");
+                return user;
         }
+        
         return null;
     }
     
@@ -132,6 +145,7 @@ public class BusinessLogic implements IBusinessLogic {
             initCommunicationThread(request);
         }
 
+        LOGGER.info("The profile of: "+user.getName()+" has been edited");
         return user;
     }
 
@@ -166,6 +180,8 @@ public class BusinessLogic implements IBusinessLogic {
 
             initCommunicationThread(request);
         }
+        
+        LOGGER.info("The user: "+post.getUser().getName()+" created a new post");
     }
 
     @Override
@@ -241,5 +257,15 @@ public class BusinessLogic implements IBusinessLogic {
     @Override
     public void sendNotification(Notification notification, String provider) {
         notificationLogic.sendNotification(notification, provider);
+    }
+    
+    @Override
+    public List<Log> getAllLogs(){
+        return logsLogic.getlogs();
+    }
+    
+    @Override
+    public Logger getLog(){
+        return LOGGER;
     }
 }

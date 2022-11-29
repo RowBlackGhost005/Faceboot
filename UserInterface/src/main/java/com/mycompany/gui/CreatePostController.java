@@ -82,7 +82,7 @@ public class CreatePostController {
 
     private void post() throws IOException {
 
-        Post post = new Post(null, txtMessage.getText(), new User(GUILogic.getLogic().getUserLogged().getName()));
+        Post post = new Post(null, txtMessage.getText(),GUILogic.getLogic().getUserLogged());
         
         post.setDateTime(new Date());
             String savingPath = null;

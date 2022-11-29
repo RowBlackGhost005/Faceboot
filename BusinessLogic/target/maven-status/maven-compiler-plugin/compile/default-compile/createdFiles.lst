@@ -1,7 +1,11 @@
 com\masa\businesslogic\BusinessLogic.class
+com\masa\businesslogic\NotificationLogic.class
 com\masa\businesslogic\CommunicationThread.class
 com\masa\businesslogic\TagLogic.class
+META-INF\org\apache\logging\log4j\core\config\plugins\Log4j2Plugins.dat
 com\masa\businesslogic\UserLogic.class
+com\masa\businesslogic\NitriteAppender.class
 com\masa\businesslogic\PostLogic.class
 run\Run.class
 com\masa\businesslogic\IBusinessLogic.class
+com\masa\businesslogic\LogsLogic.class

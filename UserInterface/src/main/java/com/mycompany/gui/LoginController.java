@@ -44,7 +44,7 @@ public class LoginController {
             User existingUser = GUILogic.getLogic().login(user, "local");
             if (existingUser != null) {
                 GUILogic.getLogic().setUserLogged(existingUser);
-                GUIController.showFaceboot(existingUser);
+                GUIController.showFaceboot();
 
                 //LogMessage log = new LogMessage();
             }
@@ -62,7 +62,7 @@ public class LoginController {
 
             if (existingUser.getEmail() != null) {
                 GUILogic.getLogic().setUserLogged(existingUser);
-                GUIController.showFaceboot(existingUser);
+                GUIController.showFaceboot();
                 //LogMessage log = new LogMessage();
             }
 

@@ -1,10 +1,12 @@
 package com.mycompany.gui;
 
+import com.masa.domain.Log;
 import com.masa.domain.Post;
 import com.masa.domain.User;
 import com.masa.utils.IObserver;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -106,7 +108,7 @@ public class FacebootController implements Initializable, IObserver {
 
     @FXML
     private void clickBtnViewProfile(MouseEvent event) throws IOException {
-        GUIController.showProfile(user);
+        GUIController.showProfile();
     }
 
     public void addOnlineUser(String user) {
@@ -137,8 +139,12 @@ public class FacebootController implements Initializable, IObserver {
     private void clickBtnSendNotification(MouseEvent event) {
         try {
             GUIController.show("SendNotification");
+            List<Log> logs = GUILogic.getLogic().getAllLogs();
+            for(Log log:logs){
+                System.out.println(log.getDate()+" "+log.getLevel()+" "+log.getMessage()+" ");
+            }
         } catch (IOException ex) {
-            Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

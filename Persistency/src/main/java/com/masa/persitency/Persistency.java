@@ -1,7 +1,9 @@
 package com.masa.persitency;
 
+import com.masa.domain.Log;
 import com.masa.domain.Post;
 import com.masa.domain.RelPostTag;
+import com.masa.domain.RelPostUser;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
 import java.sql.SQLException;
@@ -14,6 +16,8 @@ public class Persistency implements IPersistency {
     private DAOPosts posts;
     private DAOTags tags;
     private DAORelPostTag postTags;
+    private DAORelPostUser postUsers;
+    private DAOLogs logs;
 
     public Persistency() {
         daoFactory = new DAOFactory();
@@ -21,6 +25,8 @@ public class Persistency implements IPersistency {
         posts = daoFactory.createDAOPosts();
         tags = daoFactory.createDAOTags();
         postTags = daoFactory.createDAORelPostTag();
+        postUsers=daoFactory.createDAORelPostUser();
+        logs = daoFactory.createDAOLogs();
 
     }
 
@@ -108,10 +114,31 @@ public class Persistency implements IPersistency {
     public RelPostTag getRelPostTag(String postId, String tagId) {
         return postTags.getPostTag(postId, tagId);
     }
+    
+    @Override
+    public List<Tag> getTagsByPost(String postId){
+        
+         return  postTags.getTagsByPost(postId);
+    }
 
     @Override
     public List<Post> getAllPost() {
         return posts.getAll();
+    }
+
+    @Override
+    public List<Log> getAllLogs() {
+        return logs.getAll();
+    }
+
+    @Override
+    public Boolean createRelPostUser(RelPostUser relPostUser) {
+        return postUsers.create(relPostUser);
+    }
+
+    @Override
+    public List<User> getUsersTagged(String postId) {
+        return postUsers.getUsersTagged(postId);
     }
 
 }

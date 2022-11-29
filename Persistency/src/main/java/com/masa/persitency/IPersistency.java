@@ -1,7 +1,9 @@
 package com.masa.persitency;
 
+import com.masa.domain.Log;
 import com.masa.domain.Post;
 import com.masa.domain.RelPostTag;
+import com.masa.domain.RelPostUser;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
 import java.sql.SQLException;
@@ -37,12 +39,19 @@ public interface IPersistency {
     
     public List<Tag> getAllTags();
     
+    public List<Tag> getTagsByPost(String postId);
+    
     public Tag getTagByName(String name);
     
     public Boolean createRelPostTag(RelPostTag relPostTag);
     
+    public Boolean createRelPostUser(RelPostUser relPostUser);
+    
+    public List<User> getUsersTagged(String postId);
+    
     public RelPostTag getRelPostTag(String relPostTagId);
     
     public RelPostTag getRelPostTag(String postId, String tagId);
+    public  List<Log> getAllLogs();
     
 }

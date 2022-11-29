@@ -26,11 +26,11 @@ public class ViewProfileController {
     
     @FXML
     private void clickBtnEdit(MouseEvent event) throws IOException {
-        GUIController.showEditProfile(user);
+        GUIController.showEditProfile();
     }
     @FXML
     private void clickBtnBack(MouseEvent event) throws IOException {
-        GUIController.showFaceboot(user);
+        GUIController.showFaceboot();
     }
     
     public void fillProfile() {

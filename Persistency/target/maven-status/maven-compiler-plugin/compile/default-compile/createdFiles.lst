@@ -1,6 +1,7 @@
 com\masa\persitency\UUIDGenerator.class
 com\masa\persitency\DateTimeGenerator.class
 com\masa\persitency\DAOFactory.class
+com\masa\persitency\DAORelPostUser.class
 com\masa\persitency\DAOPosts.class
 com\masa\persitency\DAOTags.class
 com\masa\persitency\IPersistency.class
@@ -11,3 +12,4 @@ com\masa\persitency\DAORelPostTag.class
 com\masa\persitency\DAOUsers.class
 com\masa\persitency\Persistency.class
 run\Run.class
+com\masa\persitency\DAOLogs.class
