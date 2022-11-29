@@ -133,6 +133,20 @@ public class GUIBuilder {
         return commentTamplate;
 
     }
+    
+    public void buildSendNotification(User receptor) throws IOException{
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("SendNotification.fxml"));
+        AnchorPane sendNotificationTamplate = (AnchorPane) fxmlLoader.load();
+        SendNotificationController controller = fxmlLoader.<SendNotificationController>getController();
+        controller.setUser(receptor);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(sendNotificationTamplate));
+        stage.setTitle("Send notification");
+        stage.setResizable(false);
+        stage.show();
+        
+    }
 
     public void buildRegisterPhone(User user) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("RegisterPhone.fxml"));

@@ -42,8 +42,10 @@ public class FacebootController implements Initializable, IObserver {
     private Pane paneUsers;
     @FXML
     private ListView<String> listOnlineUsers;
+    private ListView<User> listOnlineUsers;
     @FXML
     private ListView<String> listOfflineUsers;
+    private ListView<User> listOfflineUsers;
     @FXML
     private Pane paneUser;
     @FXML
@@ -60,10 +62,14 @@ public class FacebootController implements Initializable, IObserver {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
         lblUser.setText(GUILogic.getLogic().getUserLogged().getName());
         addOnlineUser("Andrea");
         addOnlineUser("Luis");
         addOfflineUser("Diego");
+        addOnlineUser(new User("andrea","andrea@gmail.com","6441425218"));
+        addOnlineUser(new User("Diego","diego@gmail.com","6441428956"));
+        addOfflineUser(new User("luis","luis@gmail.com","6441424568"));
 
 //        updatesNotifier = new GUIUpdates(this);
         GUILogic.getLogic().subscribePostNotifications(this);
@@ -112,10 +118,12 @@ public class FacebootController implements Initializable, IObserver {
     }
 
     public void addOnlineUser(String user) {
+    public void addOnlineUser(User user) {
         listOnlineUsers.getItems().add(user);
     }
 
     public void addOfflineUser(String user) {
+    public void addOfflineUser(User user) {
         listOfflineUsers.getItems().add(user);
     }
     
@@ -139,16 +147,37 @@ public class FacebootController implements Initializable, IObserver {
     private void clickBtnSendNotification(MouseEvent event) {
         try {
             GUIController.show("SendNotification");
+//        try {
+//            
             List<Log> logs = GUILogic.getLogic().getAllLogs();
             for(Log log:logs){
+            for(Log log:logs){//print the logger in console
                 System.out.println(log.getDate()+" "+log.getLevel()+" "+log.getMessage()+" ");
             }
         } catch (IOException ex) {
              Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        } catch (IOException ex) {
+//             Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @FXML
+    private void clickOnlineUser(MouseEvent event) throws IOException {
+      User userSelected =  listOnlineUsers.getSelectionModel().getSelectedItem();
+      GUIBuilder guiBuilder = new GUIBuilder();
+            guiBuilder.buildSendNotification(userSelected);
+      
+    }
+
+    @FXML
+    private void clickOfflineUser(MouseEvent event) throws IOException {
+      User userSelected =  listOfflineUsers.getSelectionModel().getSelectedItem();
+      GUIBuilder guiBuilder = new GUIBuilder();
+            guiBuilder.buildSendNotification(userSelected);
     }
 }

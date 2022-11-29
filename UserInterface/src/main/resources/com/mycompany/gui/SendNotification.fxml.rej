@@ -1,0 +1,11 @@
+diff a/UserInterface/src/main/resources/com/mycompany/gui/SendNotification.fxml b/UserInterface/src/main/resources/com/mycompany/gui/SendNotification.fxml	(rejected hunks)
+@@ -10,9 +10,6 @@
+      <children>
+       <Label layoutX="31.0" layoutY="117.0" text="MESSAGE" />
+       <Label layoutX="27.0" layoutY="41.0" text="TO" />
+-      <Button fx:id="btnSend" layoutX="511.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#clickBtnSend" text="Send" />
+-      <Button fx:id="btnBack" layoutX="740.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#clickBtnBack" styleClass="back" text="Back" />
+-      <TextField fx:id="txtTo" layoutX="27.0" layoutY="61.0" prefHeight="27.0" prefWidth="628.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="42.0" />
+       <Button fx:id="btnSend" layoutX="694.0" layoutY="397.0" mnemonicParsing="false" onMouseClicked="#clickBtnSend" text="Send" />
+       <TextField fx:id="txtTo" editable="false" layoutX="27.0" layoutY="61.0" prefHeight="27.0" prefWidth="395.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="520.0" />
+       <TextField fx:id="txtMessage" alignment="TOP_LEFT" layoutX="27.0" layoutY="148.0" prefHeight="218.0" prefWidth="873.0" styleClass="message" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="42.0" />

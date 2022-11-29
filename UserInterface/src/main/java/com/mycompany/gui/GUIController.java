@@ -7,12 +7,15 @@ import com.masa.domain.Post;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
 import com.masa.utils.IObserver;
+import com.sun.javafx.application.LauncherImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.time.Duration;
+import javafx.stage.StageStyle;
 import logic.GUILogic;
 
 /**
@@ -38,7 +41,6 @@ public class GUIController extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-
         GUILogic.getLogic();
         
         guiBuilder = new GUIBuilder();
@@ -112,6 +114,15 @@ public class GUIController extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIController.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
+    }
+
+    private void launchSplashScreen(Stage stage) throws IOException {
+       Parent root = FXMLLoader.load(getClass().getResource("splashScreen.fxml"));
+       Scene scene = new Scene(root);
+       stage.initStyle(StageStyle.TRANSPARENT);
+       stage.setScene(scene);
+       stage.show();
+    
     }
 
 }
