@@ -141,7 +141,6 @@ public class FacebootController implements Initializable, IObserver {
         try {
             GUIController.show("SendNotification");
 //        try {
-//            
             List<Log> logs = GUILogic.getLogic().getAllLogs();
             for(Log log:logs){//print the logger in console
                 System.out.println(log.getDate()+" "+log.getLevel()+" "+log.getMessage()+" ");

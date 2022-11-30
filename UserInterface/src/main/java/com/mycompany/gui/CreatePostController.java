@@ -6,11 +6,16 @@ import com.masa.domain.User;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -25,7 +30,7 @@ import logic.GUILogic;
  *
  * @author Andrea
  */
-public class CreatePostController {
+public class CreatePostController implements Initializable{
 
     JFileChooser chooser;
     BufferedImage img;
@@ -33,7 +38,7 @@ public class CreatePostController {
     File file;
     Boolean activeFileChooser = false;
     List<User> taggedUsers;
-
+    private boolean editing=false;
     @FXML
     private Button btnAttach;
     @FXML
@@ -52,7 +57,14 @@ public class CreatePostController {
     private Button btnTag;
     @FXML
     private Label txtTaggedUsers;
+    @FXML
+    private ComboBox<String> cmbNotifyBy;
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        cmbNotifyBy.setItems(FXCollections.observableArrayList(
+                "Email", "Phone", "All"));
+    }
     @FXML
     private void clickBtnPost(MouseEvent event) throws IOException {
         post();
@@ -144,4 +156,25 @@ public class CreatePostController {
         txtTaggedUsers.setText(taggedUsers.toString());
     }
 
+    public void setEditPost(){
+        editing=true;
+        btnDelete.setVisible(true);
+    }
+    
+    public void setMessage(String message){
+        txtMessage.setText(message);
+    }
+    
+    public void setTags(String tags){
+        txtTags.setText(tags);
+    }
+    
+    public void setTaggedUsers(String users){
+        txtTaggedUsers.setText(users);
+    }
+
+    public void enableNotifyBy(){
+        cmbNotifyBy.setVisible(true);
+    }
+ 
 }

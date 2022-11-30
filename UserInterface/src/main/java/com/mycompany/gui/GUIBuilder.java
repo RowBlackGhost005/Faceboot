@@ -160,11 +160,6 @@ public class GUIBuilder {
 
     }
 
-//    public Initializable buildController(String fxmlName, Initializable controllerName ) throws IOException{
-//        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource(fxmlName));
-//        Parent postTamplate = (Parent) fxmlLoader.load();
-//        Initializable controller = fxmlLoader.<>getController();
-//    }
     public Parent buildPost(Post post) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Post.fxml"));
@@ -176,20 +171,7 @@ public class GUIBuilder {
         controller.setUser(post.getUser().getName());
 
         if (post.getDateTime() != null) {
-//            controller.setDate(post.getDateTime().toString());
             controller.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(post.getDateTime()));
-//
-//            if (post.getImagePath() != null) {
-//                System.out.println(post.getImagePath());
-//                controller.setPhotoPost(new Image(post.getImagePath()));
-//            }
-//
-//            if (post.getComments() != null) {
-//                for (Comment comment : post.getComments()) {
-//                    controller.addComment(buildComment(comment));
-//                }
-//
-//            }
         }
         
         if(post.getUser().getId().equals(GUILogic.getLogic().getUserLogged().getId())){
