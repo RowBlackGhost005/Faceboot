@@ -7,6 +7,22 @@ AnchorPane{
 
 }
 
+ComboBox{
+    -fx-text-fill: #afb0b2;
+    -fx-border-color: #232323;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 3px;
+    -fx-background-color:transparent;
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+}
+
+.list-cell,.list-view{
+     -fx-background-color:#2e3338;
+    -fx-text-fill: #fff9f9;
+}
+
 Label {
     -fx-pref-height: 20px;
     -fx-text-fill: #afb0b2;
@@ -59,7 +75,6 @@ Button.back {
 }
 
 TextField {
-    -fx-pref-width: 873px;
     -fx-pref-height: 47px;
     -fx-padding: 4px 8px 4px 8px;
     -fx-background-color: #2e3338;

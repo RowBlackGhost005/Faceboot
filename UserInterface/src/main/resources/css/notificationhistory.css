@@ -1,0 +1,63 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass,.viewport,.scroll-pane{
+    -fx-background-color:#37383f;
+}
+
+Label.title{
+    -fx-text-fill: #fafbfb;
+    -fx-pref-font-family: "Pontano Sans";
+    -fx-font-weight:bold;
+    -fx-font-size: 25px;
+    -fx-pref-letter-spacing: 2px;
+}
+
+Button.back{
+    -fx-background-image:url("../img/arrow.png");
+    -fx-background-color: transparent;
+    -fx-background-size:35px 35px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-radius: 10px;
+    -fx-pref-width: 35px;
+    -fx-pref-height: 35px;
+}
+
+Button.back:hover{
+    -fx-background-color: #40444b;
+    -fx-cursor:hand;
+}
+
+GridPane{    
+    -fx-padding: 8px 8px 10px 8px;
+    -fx-background-color: #40444b;
+    -fx-background-radius: 14px;
+}
+
+
+.scroll-bar:vertical .track{
+    -fx-background-color :#37383f;
+    -fx-border-color:#37383f;
+    -fx-background-radius : 8px;
+    -fx-border-radius :1px;
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0px;
+   -fx-padding :0.0 7.0 0.0 0.0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";
+    -fx-background-color :transparent;
+    -fx-padding : 0.00.0 0.0 .18em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color :#202324;
+    -fx-background-radius : 8px;
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" styleClass="mainFxmlClass" stylesheets="@../../../css/notificationhistory.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.NotificationHistoryController">
+   <children>
+      <Label layoutX="97.0" layoutY="31.0" styleClass="title" text="Sent Notifications" />
+      <ScrollPane layoutX="97.0" layoutY="82.0" prefHeight="371.0" prefWidth="830.0">
+        <content>
+          <GridPane fx:id="notificationPanel" alignment="CENTER" minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="782.0" />
+        </content>
+      </ScrollPane>
+      <Button fx:id="btnBack" layoutX="32.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#clickBtnBack" styleClass="back" />
+   </children>
+</AnchorPane>

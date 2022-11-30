@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="552.0" prefWidth="696.0" stylesheets="@../../../css/createPost.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.CreateCommentController">
+    <children>
+      <Label layoutX="33.0" layoutY="40.0" text="MESSAGE" />
+      <Label layoutX="33.0" layoutY="297.0" prefHeight="0.0" prefWidth="71.0" text="TAGS" />
+      <Label layoutX="33.0" layoutY="387.0" prefWidth="43.0" text="USERS" />
+      <TextField fx:id="txtMessage" layoutX="33.0" layoutY="67.0" prefHeight="143.0" styleClass="message" />
+      <TextField fx:id="txtTags" layoutX="33.0" layoutY="328.0" prefWidth="628.0" />
+      <Button fx:id="btnComment" layoutX="33.0" layoutY="484.0" mnemonicParsing="false" onMouseClicked="#clickBtnComment" text="Comment" />
+      <Button fx:id="btnDelete" layoutX="316.0" layoutY="484.0" mnemonicParsing="false" styleClass="delete" text="Delete" visible="false" />
+      <Button fx:id="btnBack" layoutX="501.0" layoutY="484.0" mnemonicParsing="false" onMouseClicked="#clickBtnBack" styleClass="back" text="Back" />
+      <Button layoutX="33.0" layoutY="417.0" mnemonicParsing="false" onMouseClicked="#clickBtnTag" text="Tag" />
+      <Label fx:id="lblTagUsers" layoutX="265.0" layoutY="429.0" />
+    </children>
+</AnchorPane>
