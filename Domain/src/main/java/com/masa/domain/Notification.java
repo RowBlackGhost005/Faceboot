@@ -13,8 +13,8 @@ import java.util.Objects;
 public class Notification {
     
     private Integer id;
-    private User receptor;
-    private User emisor;
+    private User to;
+    private User from;
     private String message;
 
     public Notification() {
@@ -24,16 +24,16 @@ public class Notification {
         this.id = id;
     }
 
-    public Notification(User receptor, User emisor, String message) {
-        this.receptor = receptor;
-        this.emisor = emisor;
+    public Notification(User to, User from, String message) {
+        this.to = to;
+        this.from = from;
         this.message = message;
     }
 
-    public Notification(Integer id, User receptor, User emisor, String message) {
+    public Notification(Integer id, User to, User from, String message) {
         this.id = id;
-        this.receptor = receptor;
-        this.emisor = emisor;
+        this.to = to;
+        this.from = from;
         this.message = message;
     }
 
@@ -45,20 +45,20 @@ public class Notification {
         this.id = id;
     }
 
-    public User getReceptor() {
-        return receptor;
+    public User getTo() {
+        return to;
     }
 
-    public void setReceptor(User receptor) {
-        this.receptor = receptor;
+    public void setTo(User receptor) {
+        this.to = receptor;
     }
 
-    public User getEmisor() {
-        return emisor;
+    public User getFrom() {
+        return from;
     }
 
-    public void setEmisor(User emisor) {
-        this.emisor = emisor;
+    public void setFrom(User emisor) {
+        this.from = emisor;
     }
 
     public String getMessage() {
@@ -93,6 +93,6 @@ public class Notification {
 
     @Override
     public String toString() {
-        return "Notification{" + "id=" + id + ", receptor=" + receptor + ", emisor=" + emisor + ", message=" + message + '}';
+        return "Notification{" + "id=" + id + ", receptor=" + to + ", emisor=" + from + ", message=" + message + '}';
     }
 }

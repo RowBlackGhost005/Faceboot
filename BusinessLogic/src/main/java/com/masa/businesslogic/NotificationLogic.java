@@ -25,11 +25,11 @@ public class NotificationLogic {
     }
     
     public void sendNotification(Notification notification, String provider) {
-        if (provider.equalsIgnoreCase("sms")) {
+        if (provider.equalsIgnoreCase("SMS")) {
             notifications.sendSMSNotification(notification);
-        } else if (provider.equalsIgnoreCase("email")) {
+        } else if (provider.equalsIgnoreCase("E-MAIL")) {
             notifications.sendEmailNotification(notification);
-        } else if(provider.equalsIgnoreCase("multi")) {
+        } else if(provider.equalsIgnoreCase("BOTH")) {
             notifications.sendMultipleTypes(notification);
         } else {
             throw new UnsupportedOperationException("Provider does not exist.");
