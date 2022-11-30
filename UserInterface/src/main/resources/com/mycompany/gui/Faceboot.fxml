@@ -32,6 +32,8 @@
       </AnchorPane>
       <Pane fx:id="paneUsers" prefHeight="431.0" prefWidth="158.0" styleClass="paneUsers" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
+            <ListView fx:id="listOnlineUsers" layoutX="4.0" layoutY="37.0" maxWidth="1.7976931348623157E308" prefHeight="169.0" />
+            <ListView fx:id="listOfflineUsers" layoutX="5.0" layoutY="246.0" maxWidth="1.7976931348623157E308" prefHeight="169.0" />
             <ListView fx:id="listOnlineUsers" layoutX="4.0" layoutY="37.0" maxWidth="1.7976931348623157E308" onMouseClicked="#clickOnlineUser" prefHeight="169.0" />
             <ListView fx:id="listOfflineUsers" layoutX="5.0" layoutY="246.0" maxWidth="1.7976931348623157E308" onMouseClicked="#clickOfflineUser" prefHeight="169.0" />
             <Label layoutX="5.0" layoutY="12.0" text="ONLINE" />

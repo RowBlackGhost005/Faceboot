@@ -62,6 +62,7 @@ public class FacebootController implements Initializable, IObserver {
         // TODO
         
         lblUser.setText(GUILogic.getLogic().getUserLogged().getName());
+    
         addOnlineUser(new User("andrea","andrea@gmail.com","6441425218"));
         addOnlineUser(new User("Diego","diego@gmail.com","6441428956"));
         addOfflineUser(new User("luis","luis@gmail.com","6441424568"));
@@ -112,9 +113,11 @@ public class FacebootController implements Initializable, IObserver {
         GUIController.showProfile();
     }
 
+
     public void addOnlineUser(User user) {
         listOnlineUsers.getItems().add(user);
     }
+
 
     public void addOfflineUser(User user) {
         listOfflineUsers.getItems().add(user);
@@ -138,12 +141,16 @@ public class FacebootController implements Initializable, IObserver {
     
     @FXML
     private void clickBtnSendNotification(MouseEvent event) {
+        try {
+            GUIController.show("SendNotification");
 //        try {
-//            
             List<Log> logs = GUILogic.getLogic().getAllLogs();
             for(Log log:logs){//print the logger in console
                 System.out.println(log.getDate()+" "+log.getLevel()+" "+log.getMessage()+" ");
             }
+        } catch (IOException ex) {
+             Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
+        }
 //        } catch (IOException ex) {
 //             Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
 //        }

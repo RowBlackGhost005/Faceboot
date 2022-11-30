@@ -160,6 +160,8 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
                 Tag tag = (Tag) request.getParam("tag");
 
                 Post post = postTransferObject.getPostToSave();
+                
+                post.setUser(businessLogic.getUser(post.getUser().getId()));
 
                 if (tag != null) {
                     try {
@@ -177,6 +179,7 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
 
                 communication.removePeer(peer);
 
+                
                 notifyPost(post);
 
                 break;

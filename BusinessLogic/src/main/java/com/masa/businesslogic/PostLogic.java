@@ -110,6 +110,10 @@ public class PostLogic {
                 }
             }
         }
+        
+//        if(post.getUser() == null && post.getUserId() != null){
+//            post.setUser(persistency.getUser(post.getUser().getId()));
+//        }
 
         Post newPost = persistency.createPost(post);
         

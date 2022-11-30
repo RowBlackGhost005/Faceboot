@@ -54,6 +54,7 @@ public class SendNotificationController implements Initializable{
         notification.setReceptor(receptor);
         notification.setMessage(txtMessage.getText());
         
+        GUILogic.getLogic().sendNotification(notification, "sms");
         switch(cmbNotificationMode.getSelectionModel().getSelectedItem()){
             case "Phone": GUILogic.getLogic().sendNotification(notification, "sms");
         }
