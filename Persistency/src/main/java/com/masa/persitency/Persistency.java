@@ -31,8 +31,8 @@ public class Persistency implements IPersistency {
     }
 
     @Override
-    public void createUser(User user) {
-        users.create(user);
+    public User createUser(User user) {
+        return users.create(user);
     }
 
     @Override
@@ -139,6 +139,21 @@ public class Persistency implements IPersistency {
     @Override
     public List<User> getUsersTagged(String postId) {
         return postUsers.getUsersTagged(postId);
+    }
+
+    @Override
+    public Post mirrorPost(Post post) {
+        return posts.mirrorPost(post);
+    }
+
+    @Override
+    public Tag mirrorTag(Tag tag) {
+        return tags.mirrorTag(tag);
+    }
+
+    @Override
+    public User mirrorUser(User user) {
+        return users.mirrorUser(user);
     }
 
 }

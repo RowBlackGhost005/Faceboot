@@ -62,8 +62,10 @@ public class BusinessLogic implements IBusinessLogic {
     @Override
     public User registerUser(User user, boolean broadcast)  {
 
+        User registedUser = null;
+        
         try {
-            user = userLogic.registerUser(user);
+            registedUser = userLogic.registerUser(user);
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage());
         }
@@ -71,19 +73,15 @@ public class BusinessLogic implements IBusinessLogic {
         if (broadcast) {
             Request request = new Request("registeruser", "RegisterUser");
 
-            request.append(user, "user");
+            request.append(registedUser, "user");
 
             initCommunicationThread(request);
 
-            CommunicationThread requestThread = new CommunicationThread(request, communication);
-
-            Thread thread = new Thread(requestThread);
-
-            thread.start();
 
         }
         LOGGER.info("The user: "+user.getName()+" has succesfuly Signed Up");
-        return user;
+        
+        return registedUser;
     }
 
     @Override

@@ -76,7 +76,8 @@ public class SignUpController {
 
 //        GUILogic.registerUser(user);
         try {
-            GUILogic.getLogic().registerUser(user, true);
+            User createdUser = GUILogic.getLogic().registerUser(user, true);
+            GUILogic.getLogic().setUserLogged(createdUser);
         } catch (Exception ex) {
             GUIController.showDialog("Error!", ex.getMessage(), 1);
         }

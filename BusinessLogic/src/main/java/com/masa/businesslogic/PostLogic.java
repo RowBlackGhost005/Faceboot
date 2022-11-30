@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
 
 /**
  * Class that controls all the logic of a post.
- * 
+ *
  * @author Diego Ayala
  */
 public class PostLogic {
@@ -33,30 +33,28 @@ public class PostLogic {
         return persistency.createPost(post);
     }
 
-
     public List<Post> getAllPost() {
         List<Post> posts = persistency.getAllPost();
-        
-        
-        for(Post post:posts){
+
+        for (Post post : posts) {
             List<Tag> tagsIdList = persistency.getTagsByPost(post.getId());
             ArrayList<Tag> tagsList = new ArrayList<>();
-            for(Tag tag:tagsIdList){
+            for (Tag tag : tagsIdList) {
                 Tag newTag = persistency.getTag(tag.getId());
                 tagsList.add(newTag);
             }
             post.setTags(tagsList);
-            
+
             List<User> usersIdList = persistency.getUsersTagged(post.getId());
             ArrayList<User> usersList = new ArrayList<>();
-            for(User user:usersIdList){
-                User newUser = new User(user.getId(),persistency.getUser(user.getId()).getName(),null,null);
+            for (User user : usersIdList) {
+                User newUser = new User(user.getId(), persistency.getUser(user.getId()).getName(), null, null);
                 usersList.add(newUser);
             }
             post.setUsers(usersList);
             post.getUser().setName(persistency.getUser(post.getUser().getId()).getName());
         }
-        
+
         return posts;
     }
 
@@ -65,7 +63,7 @@ public class PostLogic {
         String savingPath = null;
 
         if (!post.getImagePath().contains("postsImg")) {
-            
+
             String imagePath = post.getImagePath();
             String extension = imagePath.substring(imagePath.length() - 3);
             File image = new File(imagePath);
@@ -89,34 +87,62 @@ public class PostLogic {
 
             post.setImagePath(savingPath);
         }
-        
+
         ArrayList<Tag> tagsList = new ArrayList<>();
 
         tagsList = new ArrayList<>();
         if (post.getTags() != null) {
             for (Tag tag : post.getTags()) {
-                Tag existingTag = tagLogic.getByName(tag.getName());
-                if (existingTag != null) {
-                    existingTag.setUsesCount(existingTag.getUsesCount() + 1);
-                    tagLogic.edit(existingTag);
-                    tagsList.add(existingTag);
+
+                if (tag.getId() != null) {
+                    Tag tagCompare = tagLogic.get(tag.getId());
+
+                    if (tagCompare != null) {
+
+                        tagCompare.setUsesCount(tagCompare.getUsesCount() + 1);
+                        tagLogic.edit(tagCompare);
+                        tagsList.add(tagCompare);
+                        
+                    }else{
+                        tag.setUsesCount(1L);
+                        tagLogic.mirrorTag(tag);
+                        tagsList.add(tag);
+                    }
+
                 } else {
-                    tag.setUsesCount(1L);
-                    tagLogic.create(tag);
-                    existingTag = tagLogic.getByName(tag.getName());
+                    Tag existingTag = tagLogic.getByName(tag.getName());
+
                     if (existingTag != null) {
+                        existingTag.setUsesCount(existingTag.getUsesCount() + 1);
+                        tagLogic.edit(existingTag);
                         tagsList.add(existingTag);
+                    } else {
+                        tag.setUsesCount(1L);
+                        tagLogic.create(tag);
+                        existingTag = tagLogic.getByName(tag.getName());
+                        if (existingTag != null) {
+                            tagsList.add(existingTag);
+                        }
                     }
                 }
+
             }
         }
-        
+
 //        if(post.getUser() == null && post.getUserId() != null){
 //            post.setUser(persistency.getUser(post.getUser().getId()));
 //        }
+//        if(post.getId() != "" || post.getId() == null){
+//            Post newPost = persistency.createPost(post);
+//        }
+        Post newPost = null;
 
-        Post newPost = persistency.createPost(post);
-        
+        if (post.getId() != null) {
+            newPost = persistency.mirrorPost(post);
+        } else {
+            newPost = persistency.createPost(post);
+        }
+
         newPost.setTags(tagsList);
         newPost.setUsers(post.getUsers());
         newPost.setUser(post.getUser());
@@ -125,9 +151,9 @@ public class PostLogic {
             RelPostTag relPostTag = new RelPostTag(newPost.getId(), tag.getId());
             persistency.createRelPostTag(relPostTag);
         }
-        
+
         //TODO notifications
-        if(post.getUsers() != null) {
+        if (post.getUsers() != null) {
             for (User user : post.getUsers()) {
                 RelPostUser relPostUser = new RelPostUser(newPost.getId(), user.getId());
                 persistency.createRelPostUser(relPostUser);
@@ -136,6 +162,5 @@ public class PostLogic {
         // newPost.setTags(tagsList);
         return newPost;
     }
-
 
 }

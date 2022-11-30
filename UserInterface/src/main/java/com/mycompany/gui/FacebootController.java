@@ -41,10 +41,8 @@ public class FacebootController implements Initializable, IObserver {
     @FXML
     private Pane paneUsers;
     @FXML
-    private ListView<String> listOnlineUsers;
     private ListView<User> listOnlineUsers;
     @FXML
-    private ListView<String> listOfflineUsers;
     private ListView<User> listOfflineUsers;
     @FXML
     private Pane paneUser;
@@ -64,9 +62,6 @@ public class FacebootController implements Initializable, IObserver {
         // TODO
         
         lblUser.setText(GUILogic.getLogic().getUserLogged().getName());
-        addOnlineUser("Andrea");
-        addOnlineUser("Luis");
-        addOfflineUser("Diego");
         addOnlineUser(new User("andrea","andrea@gmail.com","6441425218"));
         addOnlineUser(new User("Diego","diego@gmail.com","6441428956"));
         addOfflineUser(new User("luis","luis@gmail.com","6441424568"));
@@ -117,12 +112,10 @@ public class FacebootController implements Initializable, IObserver {
         GUIController.showProfile();
     }
 
-    public void addOnlineUser(String user) {
     public void addOnlineUser(User user) {
         listOnlineUsers.getItems().add(user);
     }
 
-    public void addOfflineUser(String user) {
     public void addOfflineUser(User user) {
         listOfflineUsers.getItems().add(user);
     }
@@ -150,7 +143,6 @@ public class FacebootController implements Initializable, IObserver {
 //        try {
 //            
             List<Log> logs = GUILogic.getLogic().getAllLogs();
-            for(Log log:logs){
             for(Log log:logs){//print the logger in console
                 System.out.println(log.getDate()+" "+log.getLevel()+" "+log.getMessage()+" ");
             }

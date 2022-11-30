@@ -20,7 +20,6 @@ import logic.GUILogic;
  *
  * @author jjavi
  */
-public class SendNotificationController {
 public class SendNotificationController implements Initializable{
 
     @FXML

@@ -39,8 +39,16 @@ public class UserLogic {
 
     public User registerUser(User user) throws Exception {
         validateRegister(user);
-        persistency.createUser(user);
-        return user;
+        
+        User craetedUser;
+        
+        if(user.getId() != null){
+            craetedUser = persistency.mirrorUser(user);
+        }else{
+            craetedUser = persistency.createUser(user);
+        }
+        
+        return craetedUser;
     }
     
      public User registerExternalUser(User user) throws Exception {

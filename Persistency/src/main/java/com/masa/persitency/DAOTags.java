@@ -45,6 +45,30 @@ public class DAOTags {
             return newTag;
         }
     }
+    
+    public Tag mirrorTag(Tag tag){
+        
+        try {
+            java.sql.Connection connection = this.connectionDB.connectionDB();
+            Statement statement = connection.createStatement();
+            String query = String.format("INSERT INTO tags (id, name, uses)"
+                    + " VALUES ('%s', '%s', '%d');",
+                    tag.getId(),
+                    tag.getName(),
+                    tag.getUsesCount());
+
+            statement.executeUpdate(query);
+
+            connection.close();
+
+            tag = get(tag.getId());
+            return tag;
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return tag;
+        }
+    }
 
     public Tag get(String tagId) {
         Tag tag = null;

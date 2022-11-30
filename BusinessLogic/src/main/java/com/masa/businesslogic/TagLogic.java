@@ -29,6 +29,10 @@ public class TagLogic {
         }
 
     }
+    
+    public Tag mirrorTag(Tag tag){
+        return persistency.mirrorTag(tag);
+    } 
 
     public Tag get(String tagId) {
         return persistency.getTag(tagId);

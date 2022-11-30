@@ -22,6 +22,7 @@ public class DAOPosts {
 
     public Post create(Post post) {
         Post newPost = null;
+        
         idGenerator = new UUIDGenerator();
         String id = String.valueOf(idGenerator.getNewId());
         try {
@@ -40,6 +41,25 @@ public class DAOPosts {
             return newPost;
         }
     }
+    
+    public Post mirrorPost(Post post){
+        
+        try{
+            
+            java.sql.Connection connection = this.connectionDB.connectionDB();
+            Statement statement = connection.createStatement();
+            String query = String.format("INSERT INTO posts (id, message, image_path , user) VALUES ('%s', '%s', '%s','%s');", post.getId() , post.getMessage(), post.getImagePath(), post.getUser().getId());
+            
+            statement.executeUpdate(query);
+
+            connection.close();
+            
+            return post;
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+            return post;
+        }
+    }
 
     public Post get(String postId) {
         Post post = null;
@@ -56,10 +76,9 @@ public class DAOPosts {
             if (result.next()) {
                 String id = result.getString("id");
                 String message = result.getString("message");
-                String user = result.getString("user");
                 String userId = result.getString("user");
                 String imagePath = result.getString("image_Path");
-                post = new Post(id, message, imagePath, new User(user));
+                post = new Post(id, message, imagePath, new User(userId));
                 User user = new User();
                 user.setId(userId);
                 post = new Post(id, message, imagePath, user);

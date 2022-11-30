@@ -13,13 +13,17 @@ import java.util.logging.Logger;
 public class DAOUsers {
 
     private IConnection connectionDB;
+    private UUIDGenerator idGenerator;
 
     public DAOUsers(IConnection connection) {
         this.connectionDB = connection;
     }
 
-    public boolean create(User user) {
+    public User create(User user) {
 
+        idGenerator = new UUIDGenerator();
+        String id = String.valueOf(idGenerator.getNewId());
+        
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
@@ -27,7 +31,7 @@ public class DAOUsers {
                     = String.format("INSERT INTO users (id, name, email, phone, "
                             + "gender, birthDate, password) "
                             + "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
-                            UUIDGenerator.getNewId(),
+                            id,
                             user.getName(),
                             user.getEmail(),
                             user.getPhone(),
@@ -37,13 +41,46 @@ public class DAOUsers {
 
             int registries = statement.executeUpdate(query);
 
+            User newUser = get(id);
+            
             connection.close();
 
-            return registries == 1;
+            return newUser;
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-            return false;
+            return null;
+        }
+    }
+
+    public User mirrorUser(User user) {
+
+
+        try {
+            java.sql.Connection connection = this.connectionDB.connectionDB();
+            Statement statement = connection.createStatement();
+            String query
+                    = String.format("INSERT INTO users (id, name, email, phone, "
+                            + "gender, birthDate, password) "
+                            + "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+                            user.getId(),
+                            user.getName(),
+                            user.getEmail(),
+                            user.getPhone(),
+                            user.getGender(),
+                            user.getBirthDate(),
+                            user.getPassword());
+
+            int registries = statement.executeUpdate(query);
+
+            User newUser = get(user.getId());
+            
+            connection.close();
+
+            return newUser;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return user;
         }
     }
 
@@ -214,7 +251,7 @@ public class DAOUsers {
                 String gender = result.getString("gender");
                 String birthDate = result.getString("birthDate");
                 String password = result.getString("password");
-                user = new User(id, name, existingEmail, phone, gender, birthDate, 
+                user = new User(id, name, existingEmail, phone, gender, birthDate,
                         password);
             }
 
@@ -246,7 +283,7 @@ public class DAOUsers {
                 String gender = result.getString("gender");
                 String birthDate = result.getString("birthDate");
                 String password = result.getString("password");
-                user = new User(id, name, email, existingPhone, gender, birthDate, 
+                user = new User(id, name, email, existingPhone, gender, birthDate,
                         password);
             }
 
