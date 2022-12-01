@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javax.swing.JFileChooser;
 import logic.GUILogic;
@@ -59,6 +60,8 @@ public class CreatePostController implements Initializable{
     private Label txtTaggedUsers;
     @FXML
     private ComboBox<String> cmbNotifyBy;
+    @FXML
+    private AnchorPane MainPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

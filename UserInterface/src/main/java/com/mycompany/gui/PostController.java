@@ -40,6 +40,8 @@ public class PostController implements Initializable {
     private Label lblTaggedUsers;
     @FXML
     private Button btnAddComment;
+    @FXML
+    private GridPane MainPane;
 
     /**
      * Initializes the controller class.
@@ -86,7 +88,9 @@ public class PostController implements Initializable {
         this.commentsPane.add(comment, 0, commentsPane.getRowCount()+1);
     }
     
-    
+    public GridPane getPost(){
+        return MainPane;
+    }
     public void deleteComment(){
         
     }

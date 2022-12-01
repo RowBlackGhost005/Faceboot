@@ -1,9 +1,12 @@
+com\mycompany\gui\SplashScreenController.class
 com\mycompany\gui\GUIBuilder.class
 com\mycompany\gui\ViewProfileController.class
 com\mycompany\gui\PostController.class
 com\mycompany\gui\RegisterPhoneController.class
+com\mycompany\gui\SplashScreenController$1.class
 com\mycompany\gui\GUIUpdates.class
 com\mycompany\gui\FacebootController.class
+com\mycompany\gui\NotificationHistoryController.class
 com\mycompany\gui\GUIController.class
 com\mycompany\gui\CreatePostController.class
 com\mycompany\gui\DialogController.class

@@ -6,6 +6,18 @@
 
 }
 
+TextField{
+    -fx-padding: 4px 8px 4px 8px;
+    -fx-background-color: #37383f;
+    -fx-border-radius: 3px 3px 3px 3px;
+    -fx-font-family: "Pontano Sans";
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff9f9;
+    -fx-letter-spacing: 2px;
+    -fx-text-align: left;
+}
+
 GridPane.postPane{
    
     -fx-padding: 8px 8px 10px 8px;
@@ -45,9 +57,33 @@ Label.date{
       -fx-text-fill:#b9b4b4;
 }
 
+Button.comment{
+    -fx-background-image:url("../img/send.png");
+    -fx-background-color: #37383f;
+    -fx-background-size:24px 24px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+    -fx-background-radius: 3px;
+    -fx-pref-width: 35px;
+    -fx-pref-height: 35px;
+}
+
+Button.comment:hover{
+    -fx-background-color: #40444b;
+    -fx-cursor:hand;
+}
 ImageView.imagePost{
     -fx-background-radius: 8px;
     
+}
+
+.context-menu,.root{
+    -fx-background-color:#2e3338;
+    -fx-text-fill: #fff9f9;
+}
+
+.menu-item.label{
+     -fx-text-fill: #fff9f9;
 }
 
 Button.btnEdit{
