@@ -33,7 +33,7 @@ public interface IPersistency {
     
     public Post getPost(String postId);
     
-     public List<Post> getAllPost();
+    public List<Post> getAllPost();
     
     public Tag createTag(Tag tag);
     
@@ -58,6 +58,7 @@ public interface IPersistency {
     public RelPostTag getRelPostTag(String relPostTagId);
     
     public RelPostTag getRelPostTag(String postId, String tagId);
+    
     public  List<Log> getAllLogs();
     
 }

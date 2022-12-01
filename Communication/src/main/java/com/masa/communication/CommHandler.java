@@ -197,7 +197,34 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
                 communication.removePeer(peer);
 
                 break;
+                
+            //Can Send: Peer
+            //Can Receive: Peer.
+            //Response to: N/A.
+            //Register a login of an user into faceboot.
+            case "addOnlineUser":
 
+                User onlineUser = (User) request.getParam("user");
+
+                //businessLogic.registerExternalUser(user, false);
+
+                communication.removePeer(peer);
+
+                break;
+                
+            //Can Send: Peer
+            //Can Receive: Peer.
+            //Response to: N/A.
+            //Register the loggoff of an user into faceboot.
+            case "addOfflineUser":
+
+                User offlineUser = (User) request.getParam("user");
+
+                //businessLogic.registerExternalUser(user, false);
+
+                communication.removePeer(peer);
+
+                break;
             //Can Send: 
             //Can Receive: 
             //Response to: 

@@ -84,6 +84,7 @@ public class FacebootController implements Initializable, IObserver {
         }
         
     }
+    
     public void addPost(Parent post) {
         for (Node child : postPane.getChildren()) {//moves the posts one row down
             Integer rowIndex = GridPane.getRowIndex(child);
@@ -96,7 +97,6 @@ public class FacebootController implements Initializable, IObserver {
     }
 
     @FXML
-
     private void clickBtnPublish(MouseEvent event) {
         try {
             GUIController.show("CreatePost");
