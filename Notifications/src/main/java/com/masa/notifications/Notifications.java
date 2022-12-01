@@ -12,24 +12,26 @@ import com.masa.domain.Notification;
  */
 public class Notifications implements INotifications {
 
-    private BaseNotificator notificator;
+    private INotificator notificator;
     
     public Notifications() {
     }
     
     @Override
     public void sendSMSNotification(Notification notification) {
-        notificator = new SMSProvider();
+        notificator = new SMSProvider(notificator);
         notificator.sendNotification(notification);
     }
 
     @Override
     public void sendEmailNotification(Notification notification) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        notificator = new EmailProvider(notificator);
+        notificator.sendNotification(notification);
     }
 
     @Override
     public void sendMultipleTypes(Notification notification) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        sendSMSNotification(notification);
+        sendEmailNotification(notification);
     }  
 }
