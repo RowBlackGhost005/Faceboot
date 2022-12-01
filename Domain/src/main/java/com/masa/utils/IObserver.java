@@ -6,5 +6,5 @@ package com.masa.utils;
  */
 public interface IObserver{
     
-    public void update(Object o);
+    public abstract void update(Object o);
 }

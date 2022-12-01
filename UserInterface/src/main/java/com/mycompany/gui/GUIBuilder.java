@@ -117,19 +117,6 @@ public class GUIBuilder {
         controller.setUser(comment.getUser().getName());
         controller.setDate(comment.getDateTime().toString());
 
-        StringBuffer tags = new StringBuffer();
-        if (comment.getTags() != null) {
-            for (Tag tag : comment.getTags()) {
-                tags.append("#").append(tag).append(" ");
-            }
-        }
-
-        StringBuffer users = new StringBuffer();
-        if (comment.getTags() != null) {
-            for (Tag tag : comment.getTags()) {
-                tags.append("@").append(tag).append(" ");
-            }
-        }
         return commentTamplate;
 
     }
@@ -160,7 +147,7 @@ public class GUIBuilder {
 
     }
 
-    public Parent buildPost(Post post) throws IOException {
+    public PostController buildPost(Post post) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Post.fxml"));
         Parent postTamplate = (Parent) fxmlLoader.load();
@@ -217,7 +204,7 @@ public class GUIBuilder {
             controller.setTaggedUsers(users.toString());
         }
 
-        return postTamplate;
+        return controller;
     }
 
 }

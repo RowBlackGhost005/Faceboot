@@ -38,11 +38,10 @@ public class SendNotificationController implements Initializable {
     @FXML
     private TextField txtTo;
     @FXML
-
     private ComboBox<String> cmbNotificationMode;
     
     private User userReceptor;
-
+    @FXML
     private ComboBox<String> cmbProvider;
     @FXML
     private ComboBox<String> cmbTo;

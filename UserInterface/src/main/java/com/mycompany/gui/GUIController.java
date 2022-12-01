@@ -21,7 +21,7 @@ import logic.GUILogic;
 /**
  * Controller of the Java FX GUI.
  * 
- * This class contains methos to show the multiple windows of the app.
+ * This class contains methods to show the multiple windows of the app.
  * 
  * @author Andrea Abigail
  */

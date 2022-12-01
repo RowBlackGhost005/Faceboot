@@ -9,6 +9,8 @@ import com.masa.domain.Tag;
 import com.masa.domain.User;
 import com.masa.utils.ICommentNotifier;
 import com.masa.utils.IObserver;
+import com.masa.utils.IOnlineUserNotifier;
+import com.masa.utils.IOnlineUserObserver;
 import com.masa.utils.IPostNotifier;
 import domain.Peer;
 import java.io.IOException;
@@ -22,7 +24,7 @@ import java.util.logging.Logger;
  *
  * @author Luis Angel Marin
  */
-public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifier {
+public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifier, IOnlineUserObserver {
 
     private Communication communication;
 
@@ -201,7 +203,7 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
             //Can Send: Peer
             //Can Receive: Peer.
             //Response to: N/A.
-            //Register a login of an user into faceboot.
+            //Updates the Online users adding the new logged user
             case "addOnlineUser":
 
                 User onlineUser = (User) request.getParam("user");
@@ -215,7 +217,7 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
             //Can Send: Peer
             //Can Receive: Peer.
             //Response to: N/A.
-            //Register the loggoff of an user into faceboot.
+            //Updates the Online users removing the logout user
             case "addOfflineUser":
 
                 User offlineUser = (User) request.getParam("user");
@@ -292,4 +294,15 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
             commentObserver.update(comment);
         }
     }
+
+    @Override
+    public void updateOnlineUser(User user, String type) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

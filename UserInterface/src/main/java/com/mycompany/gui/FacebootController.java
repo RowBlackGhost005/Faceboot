@@ -12,13 +12,16 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -56,15 +59,24 @@ public class FacebootController implements Initializable, IObserver {
     private Label lblUser;
 
     private User user;
+    
+    private List<Initializable> postsControllers;
+    
+    PostController postTest;
+    @FXML
+    private ContextMenu configMenu;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+        postsControllers=new ArrayList<>();
         lblUser.setText(GUILogic.getLogic().getUserLogged().getName());
         addOnlineUser(new User("andrea","andrea@gmail.com","6441425218"));
         addOnlineUser(new User("Diego","diego@gmail.com","6441428956"));
         addOfflineUser(new User("luis","luis@gmail.com","6441424568"));
+        
+       configMenuConfigurations();
+        
 
 //        updatesNotifier = new GUIUpdates(this);
         GUILogic.getLogic().subscribePostNotifications(this);
@@ -82,10 +94,15 @@ public class FacebootController implements Initializable, IObserver {
                 Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
+<<<<<<< HEAD
     
     public void addPost(Parent post) {
+=======
+    public void addPost(PostController post) {
+        postsControllers.add(post);
+>>>>>>> origin/develop
         for (Node child : postPane.getChildren()) {//moves the posts one row down
             Integer rowIndex = GridPane.getRowIndex(child);
             if (rowIndex != null) {
@@ -93,7 +110,13 @@ public class FacebootController implements Initializable, IObserver {
             }
         }
 
-        postPane.add(post, 0, 0);
+        postPane.add(post.getPost(), 0, 0);
+    }
+    
+    public void removePost(Initializable post){
+          PostController controller = (PostController) post;
+          postPane.getChildren().remove(controller.getPost());
+          postsControllers.remove(post);
     }
 
     @FXML
@@ -109,7 +132,8 @@ public class FacebootController implements Initializable, IObserver {
 
     @FXML
     private void clickBtnViewProfile(MouseEvent event) throws IOException {
-        GUIController.showProfile();
+      //  GUIController.showProfile();
+      configMenu.show(paneUser, event.getScreenX(), event.getScreenY());
     }
 
     public void addOnlineUser(User user) {
@@ -138,19 +162,12 @@ public class FacebootController implements Initializable, IObserver {
     
     @FXML
     private void clickBtnSendNotification(MouseEvent event) {
-        try {
-            GUIController.show("SendNotification");
-//        try {
+
             List<Log> logs = GUILogic.getLogic().getAllLogs();
             for(Log log:logs){//print the logger in console
                 System.out.println(log.getDate()+" "+log.getLevel()+" "+log.getMessage()+" ");
             }
-        } catch (IOException ex) {
-             Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
-        }
-//        } catch (IOException ex) {
-//             Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
     }
 
     public void setUser(User user) {
@@ -170,5 +187,20 @@ public class FacebootController implements Initializable, IObserver {
       User userSelected =  listOfflineUsers.getSelectionModel().getSelectedItem();
       GUIBuilder guiBuilder = new GUIBuilder();
             guiBuilder.buildSendNotification(userSelected);
+    }
+    
+    private void configMenuConfigurations(){
+         MenuItem item = new MenuItem("Edit Profile");
+
+        item.addEventHandler(EventType.ROOT, event->{
+            try {
+                GUIController.showProfile();
+            } catch (IOException ex) {
+                Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        MenuItem item2 = new MenuItem("Logout");
+        configMenu.getItems().add(item);
+        configMenu.getItems().add(item2);
     }
 }

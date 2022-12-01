@@ -1,6 +1,11 @@
 .mainFxmlClass {
 }
 
+.table-view, .column-header, .table-view .filler {
+    -fx-background-color: #50545c;
+}
+
+
 AnchorPane{
     -fx-font-family: "Pontano Sans";
     -fx-background-color: #37383f;
