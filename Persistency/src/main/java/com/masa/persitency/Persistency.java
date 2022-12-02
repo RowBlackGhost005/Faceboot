@@ -173,4 +173,9 @@ public class Persistency implements IPersistency {
         return comments.getByPost(idPost);
     }
 
+    @Override
+    public List<Post> getPostByTag(Tag tag) {
+        return posts.getByTag(tag);
+    }
+
 }

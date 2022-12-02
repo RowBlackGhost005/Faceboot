@@ -1,6 +1,7 @@
 package com.masa.persitency;
 
 import com.masa.domain.Post;
+import com.masa.domain.Tag;
 import com.masa.domain.User;
 import java.util.Date;
 import java.sql.ResultSet;
@@ -8,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -186,5 +186,44 @@ public class DAOPosts {
             return postsList;
         }
     }
+    
+    public List<Post> getByTag(Tag tag){
+        
+        List<Post> postsList = null;
+        
+       try {
+            java.sql.Connection connection = this.connectionDB.connectionDB();
+            Statement statement = connection.createStatement();
+            
+            String query = String.format("SELECT id, message, image_path, user , date FROM posts;");
 
+            ResultSet result = statement.executeQuery(query);
+
+            while (result.next()) {
+                String id = result.getString("id");
+                String imagePath = result.getString("image_path");
+                String message = result.getString("message");
+                String idUser = result.getString("user");
+                Timestamp date = result.getTimestamp("date");
+                
+                Date postDate = new Date();
+                
+                if(date != null){
+                    postDate = new Date(date.getTime());
+                }
+                
+                User user = new User();
+                user.setId(idUser);
+                Post post = new Post(id, message, imagePath, user, postDate);
+                postsList.add(post);
+            }
+
+            connection.close();
+            return postsList;
+
+        } catch (SQLException e) {
+            Logger.getLogger(DAOPosts.class.getName()).log(Level.SEVERE, null, e);
+            return postsList;
+        }
+    }
 }

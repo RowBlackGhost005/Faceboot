@@ -131,7 +131,13 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
 
                 User userToAdd = (User) request.getParam("user");
 
-                businessLogic.registerUser(userToAdd, false);
+                {
+                    try {
+                        businessLogic.registerUser(userToAdd, false);
+                    } catch (Exception ex) {
+                        Logger.getLogger(CommHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
 
                 communication.removePeer(peer);
                 break;
@@ -193,7 +199,7 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
             //Can Receive: Peer.
             //Response to: N/A.
             //Register into the database the given user who is registered with an 3rd party.
-            case "registerexternaluser":
+            case "registerexternalusers":
 
                 User user = (User) request.getParam("user");
 
@@ -216,7 +222,7 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
                 communication.removePeer(peer);
 
                 break;
-                
+
             //Can Send: Peer
             //Can Receive: Peer.
             //Response to: N/A.
@@ -238,7 +244,6 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
             case "addofflineuser":
 
 //                User offlineUser = (User) request.getParam("user");
-
                 //businessLogic.registerExternalUser(user, false);
                 communication.removePeer(peer);
 
@@ -258,11 +263,29 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
                     System.out.println("Sending: " + currentAuthUser + " to: " + peer.clientSocket.getPort());
 
                     requestOnlineUsr.append(currentAuthUser, "user");
-                    
+
                     communication.send(requestOnlineUsr, request.getFrom());
                 }
 
                 communication.removePeer(peer);
+                break;
+
+            //Can Send: Peer
+            //Can Receive: Peer
+            //Response to: N/A
+            //Sends a request to update the given user in all peers DB.
+            case "edituser":
+
+                User userToUpdate = (User) request.getParam("user");
+
+                try {
+                    businessLogic.editUser(userToUpdate, false);
+                } catch (Exception ex) {
+                    Logger.getLogger(CommHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                communication.removePeer(peer);
+
                 break;
 
             //Can Send: 

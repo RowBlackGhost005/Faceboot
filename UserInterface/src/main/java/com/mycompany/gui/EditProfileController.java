@@ -68,6 +68,7 @@ public class EditProfileController {
         user.setName(txtName.getText());
         user.setGender(cmbGender.getValue());
         user.setBirthDate(datePicker.getValue().toString());
+        
         if (!btnEditPassword.isVisible()) {
             if (txtPassword.getText().isBlank() || !txtNewPassword.getText().isBlank()) {
                 throw new Exception("Password fields can't be empty");

@@ -64,12 +64,13 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public User registerUser(User user, boolean broadcast) {
+    public User registerUser(User user, boolean broadcast) throws Exception {
 
         User registedUser = null;
 
         try {
             registedUser = userLogic.registerUser(user);
+            notificationLogic.registerUser(user.getPhone());
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage());
         }
@@ -90,8 +91,11 @@ public class BusinessLogic implements IBusinessLogic {
     @Override
     public User registerExternalUser(User user, boolean broadcast) {
 
+        User registeredUser = null;
+
         try {
-            user = userLogic.registerExternalUser(user);
+            registeredUser = userLogic.registerExternalUser(user);
+
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage());
         }
@@ -99,12 +103,13 @@ public class BusinessLogic implements IBusinessLogic {
         if (broadcast) {
             Request request = new Request("registerexternalusers", "RegisterExternalUser");
 
-            request.append(user, "user");
+            request.append(registeredUser, "user");
 
             initCommunicationThread(request);
         }
-        LOGGER.info("The user: " + user.getName() + " has succesfuly Signed Up with Google");
-        return user;
+
+        LOGGER.info("The user: " + registeredUser.getName() + " has succesfuly Signed Up with Google");
+        return registeredUser;
     }
 
     @Override
@@ -112,9 +117,13 @@ public class BusinessLogic implements IBusinessLogic {
 
         User userLogged = userLogic.login(user, method);
 
+//        if(method != "local" && userLogged.getId() != null){
         setUserLogged(userLogged);
+//        }
+        if (userLogged != null) {
+            LOGGER.info("The user: " + userLogged.getName() + " has Logged in");
+        }
 
-        LOGGER.info("The user: " + userLogged.getName() + " has Logged in");
         return userLogged;
     }
 
@@ -146,6 +155,7 @@ public class BusinessLogic implements IBusinessLogic {
         }
 
         LOGGER.info("The profile of: " + user.getName() + " has been edited");
+
         return user;
     }
 
@@ -218,7 +228,7 @@ public class BusinessLogic implements IBusinessLogic {
 
         this.userLogged = user;
 
-        if (user != null) {
+        if (user != null && user.getId() != null) {
             Request request = new Request("addOnlineUser", "AddOnlineUser");
 
             request.append(user, "user");
@@ -304,7 +314,7 @@ public class BusinessLogic implements IBusinessLogic {
 
     @Override
     public void logout() {
-        
+
         Request request = new Request("removeOnlineUser", "RemoveOnlineUser");
 
         request.append(userLogged, "user");
@@ -315,8 +325,15 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public Post editPost(Post post) {
+    public Post editPost(Post post) throws IOException{
         return postLogic.editPost(post);
     }
 
+    public List<Post> getPostByTag(String tag) {
+        Tag tagStored = tagLogic.getByName(tag);
+
+        List<Post> postsWithTag = postLogic.getByTag(tagStored);
+        
+        return postsWithTag;
+    }
 }

@@ -25,41 +25,52 @@ public class UserLogic {
         authentication = new Authentication(persistency);
     }
 
-    public User login(User user , String authMetod) throws Exception {
-        
+    public User login(User user, String authMetod) throws Exception {
+
         User authUser = authentication.authenticate(user, authMetod);
-        
-        if(authMetod != "local"){
-            authUser = persistency.getUserByEmail(authUser.getEmail());
+
+        if (authMetod != "local") {
+            User checkExistency = persistency.getUserByEmail(authUser.getEmail());
+
+            if (checkExistency != null) {
+                authUser = checkExistency;
+            }
         }
-        
 //        User existingUser = validateLogin(user);
+
         return authUser;
     }
 
     public User registerUser(User user) throws Exception {
         validateRegister(user);
-        
+
         User craetedUser;
-        
-        if(user.getId() != null){
+
+        if (user.getId() != null) {
             craetedUser = persistency.mirrorUser(user);
-        }else{
+        } else {
             craetedUser = persistency.createUser(user);
         }
-        
+
         return craetedUser;
     }
-    
-     public User registerExternalUser(User user) throws Exception {
+
+    public User registerExternalUser(User user) throws Exception {
         validatePhone(user.getPhone());
-        persistency.createUser(user);
-        return user;
+
+        User createdUser;
+
+        if (user.getId() != null) {
+            createdUser = persistency.mirrorUser(user);
+        } else {
+            createdUser = persistency.createUser(user);
+        }
+        return createdUser;
     }
-    
-    public User loginUser(IAuthenticationMethod authenticationMethod) throws Exception{
+
+    public User loginUser(IAuthenticationMethod authenticationMethod) throws Exception {
         User user = authenticationMethod.login(new User());
-        
+
         return persistency.getUserByEmail(user.getEmail());
     }
 
@@ -174,6 +185,10 @@ public class UserLogic {
 
     private void validateBirthDate(String date) throws Exception {
         LocalDate dt = null;
+
+        if (date == null) {
+            throw new Exception("Select a birth date");
+        }
 
         try {
             dt = LocalDate.parse(date);

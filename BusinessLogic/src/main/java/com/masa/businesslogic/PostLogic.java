@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.imageio.ImageIO;
+import java.util.UUID;
 
 /**
  * Class that controls all the logic of a post.
@@ -106,30 +107,32 @@ public class PostLogic {
 
         String savingPath = null;
 
-        if (!post.getImagePath().contains("postsImg")) {
+        if (post.getImagePath() != null) {
+            if (!post.getImagePath().contains("postsImg")) {
 
-            String imagePath = post.getImagePath();
-            String extension = imagePath.substring(imagePath.length() - 3);
-            File image = new File(imagePath);
-            BufferedImage bImage = ImageIO.read(image);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss");
-            String currentTimeStamp = dateFormat.format(new Date());
+                String imagePath = post.getImagePath();
+                String extension = imagePath.substring(imagePath.length() - 3);
+                File image = new File(imagePath);
+                BufferedImage bImage = ImageIO.read(image);
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss");
+//            String currentTimeStamp = dateFormat.format(new Date());
 
-            if (extension.equalsIgnoreCase("jpg")) {
-                savingPath = "./resources/postsImg/" + currentTimeStamp + ".jpg";
-            } else if (extension.equalsIgnoreCase("png")) {
-                savingPath = "./resources/postsImg/" + currentTimeStamp + ".png";
+                if (extension.equalsIgnoreCase("jpg")) {
+                    savingPath = "./resources/postsImg/" + UUID.randomUUID() + ".jpg";
+                } else if (extension.equalsIgnoreCase("png")) {
+                    savingPath = "./resources/postsImg/" + UUID.randomUUID() + ".png";
+                }
+
+                File outputFile = new File(savingPath);
+
+                System.out.println(outputFile.getCanonicalFile());
+
+                outputFile.createNewFile();
+
+                ImageIO.write(bImage, extension, outputFile);
+
+                post.setImagePath(savingPath);
             }
-
-            File outputFile = new File(savingPath);
-
-            System.out.println(outputFile.getCanonicalFile());
-
-            outputFile.createNewFile();
-
-            ImageIO.write(bImage, extension, outputFile);
-
-            post.setImagePath(savingPath);
         }
 
         ArrayList<Tag> tagsList = new ArrayList<>();
@@ -146,8 +149,8 @@ public class PostLogic {
                         tagCompare.setUsesCount(tagCompare.getUsesCount() + 1);
                         tagLogic.edit(tagCompare);
                         tagsList.add(tagCompare);
-                        
-                    }else{
+
+                    } else {
                         tag.setUsesCount(1L);
                         tagLogic.mirrorTag(tag);
                         tagsList.add(tag);
@@ -207,4 +210,8 @@ public class PostLogic {
         return newPost;
     }
 
+    public List<Post> getByTag(Tag tag){
+        
+        return persistency.getPostByTag(tag);
+    }
 }

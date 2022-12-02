@@ -1,5 +1,8 @@
 com\masa\communication\ServerSocketHandler.class
+<<<<<<< HEAD
 com\masa\communication\CommHandler.class
+=======
+>>>>>>> origin/develop
 com\masa\communication\Communication.class
 com\masa\communication\ICommHandler.class
 com\masa\communication\Serializer.class
