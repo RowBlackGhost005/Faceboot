@@ -185,7 +185,7 @@ public class GUIBuilder {
         controller.setUser(user);
         Stage stage = new Stage();
         stage.setResizable(false);
-        stage.setScene(new Scene(registerPhone));
+        stage.setScene(new Scene(registerPhone,400,600));
         stage.show();
         
     }

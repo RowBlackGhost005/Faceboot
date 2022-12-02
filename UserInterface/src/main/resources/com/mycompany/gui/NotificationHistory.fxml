@@ -11,7 +11,7 @@
       <Label layoutX="97.0" layoutY="31.0" styleClass="title" text="Sent Notifications" />
       <ScrollPane layoutX="97.0" layoutY="82.0" prefHeight="371.0" prefWidth="830.0">
         <content>
-          <GridPane fx:id="notificationPanel" alignment="CENTER" minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="782.0" />
+          <GridPane fx:id="notificationPanel" alignment="CENTER" hgap="5.0" minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="782.0" vgap="5.0" />
         </content>
       </ScrollPane>
       <Button fx:id="btnBack" layoutX="32.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#clickBtnBack" styleClass="back" />

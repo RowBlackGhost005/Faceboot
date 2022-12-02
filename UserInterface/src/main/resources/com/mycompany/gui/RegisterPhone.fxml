@@ -8,8 +8,8 @@
 <AnchorPane id="AnchorPane" fx:id="pane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../../../css/signUp.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.RegisterPhoneController">
    <children>
       <Label layoutX="151.0" layoutY="71.0" text="Introduce your phone to complete your sign up" />
-      <TextField fx:id="txtPhone" layoutX="53.0" layoutY="121.0" />
-      <Button fx:id="btnCancel" layoutX="414.0" layoutY="324.0" mnemonicParsing="false" onMouseClicked="#btncClickCancel" styleClass="cancel" text="Cancel" />
-      <Button fx:id="btnSignUp" layoutX="148.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#btnClickSignUp" styleClass="register" text="Sign up" />
+      <TextField fx:id="txtPhone" layoutX="53.0" layoutY="121.0" AnchorPane.leftAnchor="53.00000000000006" AnchorPane.rightAnchor="55.80000000000001" />
+      <Button fx:id="btnCancel" layoutX="414.0" layoutY="324.0" mnemonicParsing="false" onMouseClicked="#btncClickCancel" styleClass="cancel" text="Cancel" AnchorPane.bottomAnchor="34.4" AnchorPane.rightAnchor="35.599999999999994" />
+      <Button fx:id="btnSignUp" layoutX="150.0" layoutY="224.0" mnemonicParsing="false" onMouseClicked="#btnClickSignUp" styleClass="register" text="Sign up" AnchorPane.bottomAnchor="134.39999999999998" AnchorPane.rightAnchor="150.0" />
    </children>
 </AnchorPane>
