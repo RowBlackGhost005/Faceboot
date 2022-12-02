@@ -1,4 +1,3 @@
-com\masa\communication\ServerSocketHandler.class
 com\masa\communication\CommHandler.class
 com\masa\communication\Communication.class
 com\masa\communication\ICommHandler.class

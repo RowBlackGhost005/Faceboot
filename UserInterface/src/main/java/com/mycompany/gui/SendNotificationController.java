@@ -1,9 +1,5 @@
 package com.mycompany.gui;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 import com.masa.domain.Notification;
 import com.masa.domain.User;
 import java.io.IOException;
@@ -28,7 +24,7 @@ import logic.GUILogic;
  */
 public class SendNotificationController implements Initializable {
 
-  @FXML
+    @FXML
     private Button btnSend;
     @FXML
     private Button btnBack;
@@ -57,25 +53,21 @@ public class SendNotificationController implements Initializable {
     @FXML
     private void clickBtnSend(MouseEvent event) throws IOException {
 
-        String selectedUser = cmbTo.getSelectionModel().getSelectedItem();
-        User to = new User();
-        for (User user : users) {
-            if (user.getName().equalsIgnoreCase(selectedUser)) {
-                to = user;
-            }
-        }
+//        String selectedUser = cmbTo.getSelectionModel().getSelectedItem();
+//        User to = new User();
+//        for (User user : users) {
+//            if (user.getName().equalsIgnoreCase(selectedUser)) {
+//                to = user;
+//            }
+//        }
         
         User from = GUILogic.getLogic().getUserLogged();
         from.setEmail("faceboot.arquitectura@gmail.com");
-
-        User from = new User();
-        from.setEmail("jose.angulo215058@potros.itson.edu.mx");
 
         Notification notification = new Notification();
         notification.setTo(userReceptor);
         notification.setFrom(from);
         notification.setMessage(txtMessage.getText());
-        
 
         txtTo.setText("");
 

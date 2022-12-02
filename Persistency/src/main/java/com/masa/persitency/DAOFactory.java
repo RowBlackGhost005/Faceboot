@@ -36,4 +36,8 @@ public class DAOFactory {
         return new DAONotifications(bdConnection);
     }
 
+    DAOComments createDAOComments() {
+        return new DAOComments(bdConnection);
+    }
+
 }
