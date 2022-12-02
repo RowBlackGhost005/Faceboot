@@ -12,13 +12,13 @@ public interface IOnlineUserNotifier {
      * Adds a new observer to notify with the new post that had been made.
      * @param observer Obserer to subscribe to this notifier.
      */
-    public void addOnlineUserObserver(IObserver observer);
+    public void addOnlineUserObserver(IOnlineUserObserver observer);
     
     /**
      * Removes the observer of the notify list.
      * @param observer Observer to unsubscribe.
      */
-    public void removeOnlineUserObserver(IObserver observer);
+    public void removeOnlineUserObserver(IOnlineUserObserver observer);
     
     /**
      * Notifies all subscribers that a new post has been made and sends said post.

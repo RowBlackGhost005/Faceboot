@@ -39,7 +39,9 @@ public class CreatePostController implements Initializable{
     File file;
     Boolean activeFileChooser = false;
     List<User> taggedUsers;
-    private boolean editing=false;
+    
+    private boolean editing = false;
+    
     @FXML
     private Button btnAttach;
     @FXML
@@ -100,7 +102,8 @@ public class CreatePostController implements Initializable{
         Post post = new Post(null, txtMessage.getText(), GUILogic.getLogic().getUserLogged());
         
         post.setDateTime(new Date());
-            String savingPath = null;
+        
+        String savingPath = null;
 
         if (!txtMessage.getText().isBlank()) {
 
@@ -160,7 +163,7 @@ public class CreatePostController implements Initializable{
     }
 
     public void setEditPost(){
-        editing=true;
+        editing = true;
         btnDelete.setVisible(true);
     }
     

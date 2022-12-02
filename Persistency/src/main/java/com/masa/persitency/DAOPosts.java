@@ -2,9 +2,12 @@ package com.masa.persitency;
 
 import com.masa.domain.Post;
 import com.masa.domain.User;
+import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,7 @@ public class DAOPosts {
         try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("INSERT INTO posts (id, message, image_path , user) VALUES ('%s', '%s', '%s','%s');", id, post.getMessage(), post.getImagePath(), post.getUser().getId());
+            String query = String.format("INSERT INTO posts (id, message, image_path , user, date) VALUES ('%s', '%s', '%s','%s', '%s');", id, post.getMessage(), post.getImagePath(), post.getUser().getId(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(post.getDateTime()));
 
             statement.executeUpdate(query);
 
@@ -48,7 +51,7 @@ public class DAOPosts {
             
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
-            String query = String.format("INSERT INTO posts (id, message, image_path , user) VALUES ('%s', '%s', '%s','%s');", post.getId() , post.getMessage(), post.getImagePath(), post.getUser().getId());
+            String query = String.format("INSERT INTO posts (id, message, image_path , user , date) VALUES ('%s', '%s', '%s','%s' , '%s');", post.getId() , post.getMessage(), post.getImagePath(), post.getUser().getId(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(post.getDateTime()));
             
             statement.executeUpdate(query);
 
@@ -68,7 +71,7 @@ public class DAOPosts {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
 
-            String query = String.format("SELECT id, message, image_Path, user "
+            String query = String.format("SELECT id, message, image_Path, user , date "
                     + "FROM posts WHERE id = '%s';",
                     postId);
             ResultSet result = statement.executeQuery(query);
@@ -81,7 +84,16 @@ public class DAOPosts {
                 post = new Post(id, message, imagePath, new User(userId));
                 User user = new User();
                 user.setId(userId);
-                post = new Post(id, message, imagePath, user);
+                
+               Timestamp date = result.getTimestamp("date");
+                
+                Date postDate = new Date();
+                
+                if(date != null){
+                    postDate = new Date(date.getTime());
+                }
+                
+                post = new Post(id, message, imagePath, user , postDate);
             }
             
             
@@ -144,7 +156,7 @@ public class DAOPosts {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
             
-            String query = String.format("SELECT id, message, image_path, user FROM posts;");
+            String query = String.format("SELECT id, message, image_path, user , date FROM posts;");
 
             ResultSet result = statement.executeQuery(query);
 
@@ -153,9 +165,17 @@ public class DAOPosts {
                 String imagePath = result.getString("image_path");
                 String message = result.getString("message");
                 String idUser = result.getString("user");
+                Timestamp date = result.getTimestamp("date");
+                
+                Date postDate = new Date();
+                
+                if(date != null){
+                    postDate = new Date(date.getTime());
+                }
+                
                 User user = new User();
                 user.setId(idUser);
-                Post post = new Post(id, message, imagePath, user);
+                Post post = new Post(id, message, imagePath, user, postDate);
                 postsList.add(post);
             }
 

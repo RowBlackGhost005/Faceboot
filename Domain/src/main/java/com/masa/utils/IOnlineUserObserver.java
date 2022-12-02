@@ -6,7 +6,7 @@ import com.masa.domain.User;
  *
  * @author Luis Marin
  */
-public interface IOnlineUserObserver extends IObserver{
+public interface IOnlineUserObserver{
     
     public void updateOnlineUser(User user, String type);
 }

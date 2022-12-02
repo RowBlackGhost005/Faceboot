@@ -1,10 +1,11 @@
 package com.masa.communication;
 
-import domain.Request;
 import com.masa.businesslogic.IBusinessLogic;
 import com.masa.domain.Comment;
+import com.masa.domain.Peer;
 import com.masa.domain.Post;
 import com.masa.domain.PostTransferObject;
+import com.masa.domain.Request;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
 import com.masa.utils.ICommentNotifier;
@@ -12,7 +13,7 @@ import com.masa.utils.IObserver;
 import com.masa.utils.IOnlineUserNotifier;
 import com.masa.utils.IOnlineUserObserver;
 import com.masa.utils.IPostNotifier;
-import domain.Peer;
+import com.masa.utils.IPostObserver;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -24,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @author Luis Angel Marin
  */
-public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifier, IOnlineUserObserver {
+public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifier, IOnlineUserNotifier {
 
     private Communication communication;
 
@@ -32,9 +33,11 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
 
     private IBusinessLogic businessLogic;
 
-    private ArrayList<IObserver> postObservers;
+    private ArrayList<IPostObserver> postObservers;
 
     private ArrayList<IObserver> commentObservers;
+
+    private ArrayList<IOnlineUserObserver> onlineUserObservers;
 
     /**
      * Creates a new Communication Handler.
@@ -46,8 +49,9 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
 //        this.communication = communication;
         this.serializer = new Serializer();
         this.businessLogic = businessLogic;
-        this.postObservers = new ArrayList<IObserver>();
+        this.postObservers = new ArrayList<IPostObserver>();
         this.commentObservers = new ArrayList<IObserver>();
+        this.onlineUserObservers = new ArrayList<IOnlineUserObserver>();
 
     }
 
@@ -162,7 +166,7 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
                 Tag tag = (Tag) request.getParam("tag");
 
                 Post post = postTransferObject.getPostToSave();
-                
+
                 post.setUser(businessLogic.getUser(post.getUser().getId()));
 
                 if (tag != null) {
@@ -181,7 +185,6 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
 
                 communication.removePeer(peer);
 
-                
                 notifyPost(post);
 
                 break;
@@ -199,38 +202,73 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
                 communication.removePeer(peer);
 
                 break;
+
+            //Can Send: Peer
+            //Can Receive: Peer.
+            //Response to: N/A.
+            //Updates the Online users adding the new logged user
+            case "addonlineuser":
+
+                User onlineUser = (User) request.getParam("user");
+
+                notifyOnlineUser(onlineUser, "nowonline");
+
+                communication.removePeer(peer);
+
+                break;
                 
             //Can Send: Peer
             //Can Receive: Peer.
             //Response to: N/A.
             //Updates the Online users adding the new logged user
-            case "addOnlineUser":
+            case "removeonlineuser":
 
-                User onlineUser = (User) request.getParam("user");
+                User offlineUser = (User) request.getParam("user");
 
-                //businessLogic.registerExternalUser(user, false);
+                notifyOnlineUser(offlineUser, "nowoffline");
 
                 communication.removePeer(peer);
 
                 break;
-                
+
             //Can Send: Peer
             //Can Receive: Peer.
             //Response to: N/A.
             //Updates the Online users removing the logout user
-            case "addOfflineUser":
+            case "addofflineuser":
 
-                User offlineUser = (User) request.getParam("user");
+//                User offlineUser = (User) request.getParam("user");
 
                 //businessLogic.registerExternalUser(user, false);
-
                 communication.removePeer(peer);
 
                 break;
+
+            //Can Send: Peer
+            //Can Receive: Peer
+            //Response to: N/A
+            //Sends a request to get the online user of every peer connected
+            case "getonlineuser":
+
+                Request requestOnlineUsr = new Request("addOnlineUser", "AddOnlineUser");
+
+                User currentAuthUser = businessLogic.getUserLogged();
+
+                if (currentAuthUser != null) {
+                    System.out.println("Sending: " + currentAuthUser + " to: " + peer.clientSocket.getPort());
+
+                    requestOnlineUsr.append(currentAuthUser, "user");
+                    
+                    communication.send(requestOnlineUsr, request.getFrom());
+                }
+
+                communication.removePeer(peer);
+                break;
+
             //Can Send: 
             //Can Receive: 
             //Response to: 
-            //
+            // 
             default:
                 break;
 
@@ -260,20 +298,20 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
     }
 
     @Override
-    public void addPostObserver(IObserver postObserver) {
+    public void addPostObserver(IPostObserver postObserver) {
         postObservers.add(postObserver);
     }
 
     @Override
-    public void removePostObserver(IObserver postObserver) {
+    public void removePostObserver(IPostObserver postObserver) {
         postObservers.remove(postObserver);
     }
 
     @Override
     public void notifyPost(Post post) {
-        
-        for (IObserver postObserver : postObservers) {
-            postObserver.update(post);
+
+        for (IPostObserver postObserver : postObservers) {
+            postObserver.updatePost(post);
         }
     }
 
@@ -289,20 +327,27 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
 
     @Override
     public void notifyComment(Comment comment) {
-        
-        for(IObserver commentObserver : commentObservers){
+
+        for (IObserver commentObserver : commentObservers) {
             commentObserver.update(comment);
         }
     }
 
     @Override
-    public void updateOnlineUser(User user, String type) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void addOnlineUserObserver(IOnlineUserObserver observer) {
+        this.onlineUserObservers.add(observer);
     }
 
     @Override
-    public void update(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void removeOnlineUserObserver(IOnlineUserObserver observer) {
+        this.onlineUserObservers.remove(observer);
     }
 
+    @Override
+    public void notifyOnlineUser(User user, String type) {
+
+        for (IOnlineUserObserver userObserver : onlineUserObservers) {
+            userObserver.updateOnlineUser(user, type);
+        }
+    }
 }

@@ -1,7 +1,7 @@
 package com.masa.businesslogic;
 
 import com.masa.communication.ICommHandler;
-import domain.Request;
+import com.masa.domain.Request;
 
 /**
  * Class thats runs a thread to send a request into the communication component.

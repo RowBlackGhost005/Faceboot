@@ -43,8 +43,9 @@ public class LoginController {
         try {
             User existingUser = GUILogic.getLogic().login(user, "local");
             if (existingUser != null) {
-                GUILogic.getLogic().setUserLogged(existingUser);
+//                GUILogic.getLogic().setUserLogged(existingUser);
                 GUIController.showFaceboot();
+//                GUILogic.getLogic().getAllOnlineUsers();
 
                 //LogMessage log = new LogMessage();
             }
@@ -61,8 +62,9 @@ public class LoginController {
             existingUser = GUILogic.getLogic().login(new User(), "google");
 
             if (existingUser.getEmail() != null) {
-                GUILogic.getLogic().setUserLogged(existingUser);
+//                GUILogic.getLogic().setUserLogged(existingUser);
                 GUIController.showFaceboot();
+//                GUILogic.getLogic().getAllOnlineUsers();
                 //LogMessage log = new LogMessage();
             }
 

@@ -39,8 +39,6 @@ public class TagUserController {
     private List<User> taggedUsers;
 
     private CreatePostController createPostController;
-    
-    private CreateCommentController createCommentController;
 
     @FXML
     private void clickBtnTag(MouseEvent event) {
@@ -102,10 +100,6 @@ public class TagUserController {
 
     public void setCreatePostController(CreatePostController cpc) {
         createPostController = cpc;
-    }
-    
-    public void setCreateCommentController(CreateCommentController ccm){
-        createCommentController = ccm;
     }
     
 }

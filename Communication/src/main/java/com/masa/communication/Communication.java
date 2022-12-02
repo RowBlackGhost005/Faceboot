@@ -1,8 +1,7 @@
 package com.masa.communication;
 
-import com.masa.businesslogic.IBusinessLogic;
-import domain.Peer;
-import domain.Request;
+import com.masa.domain.Peer;
+import com.masa.domain.Request;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -42,6 +41,8 @@ public class Communication {
     private ICommHandler commHandler;
 
     private ArrayList<Peer> activePeers = new ArrayList<>();
+    
+    private static int CONNECTION_COUNTER = 1;
 
     /**
      * Creates a Communication object. This object will establish a first
@@ -137,7 +138,9 @@ public class Communication {
         BufferedReader socketReceived = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         //Creates a new socket to establish the connection between Peers.
-        ClientSocket newClientSocket = new ClientSocket(socket, socketSend, socketReceived, this);
+        ClientSocket newClientSocket = new ClientSocket(socket, socketSend, socketReceived, this, CONNECTION_COUNTER);
+        
+        CONNECTION_COUNTER++;
 
         peers.add(newClientSocket);
 
@@ -169,6 +172,29 @@ public class Communication {
     public void removePeer(ClientSocket peer) {
         peers.remove(peer);
         peer.shutdown();
+    }
+    
+    /**
+     * Sends the given request to the socket who is in the given port.
+     * 
+     * @param request Request to send.
+     * @param port Port to connect and send the request.
+     */
+    public void send(Request request , int port){
+        
+        ClientSocket socketToSend = null;
+        
+        String requestSerialized = serializer.Serialize(request);
+        
+        try {
+            socketToSend = createConnectionSocket(port);
+        } catch (IOException ex) {
+            Logger.getLogger(Communication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        socketToSend.send(requestSerialized);
+        
+        this.removePeer(socketToSend);
     }
 
     /**
@@ -207,6 +233,8 @@ public class Communication {
     public void sendToAllPeers(Request request) {
 
         ClientSocket firstConnection = null;
+        
+        request.setFrom(serverPort);
 
         try {
             Request requestAllPeers = new Request("getactivepeers", "Send peers");
@@ -235,6 +263,8 @@ public class Communication {
                 
                 try {
                     ClientSocket peerClient = createConnectionSocket(peerToConnnect.getPort());
+
+                    request.setTo(peerToConnnect.getPort());
 
                     Thread newSocketThread = new Thread(peerClient, name);
 
@@ -275,8 +305,10 @@ public class Communication {
         BufferedReader socketReceived = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         //Creates a new socket to establish the connection between Peers.
-        ClientSocket newClientSocket = new ClientSocket(socket, socketSend, socketReceived, this);
+        ClientSocket newClientSocket = new ClientSocket(socket, socketSend, socketReceived, this , CONNECTION_COUNTER);
 
+        CONNECTION_COUNTER++;
+        
         peers.add(newClientSocket);
 
         return newClientSocket;

@@ -13,13 +13,13 @@ public interface IPostNotifier {
      * Adds a new observer to notify with the new post that had been made.
      * @param observer Obserer to subscribe to this notifier.
      */
-    public void addPostObserver(IObserver observer);
+    public void addPostObserver(IPostObserver observer);
     
     /**
      * Removes the observer of the notify list.
      * @param observer Observer to unsubscribe.
      */
-    public void removePostObserver(IObserver observer);
+    public void removePostObserver(IPostObserver observer);
     
     /**
      * Notifies all subscribers that a new post has been made and sends said post.

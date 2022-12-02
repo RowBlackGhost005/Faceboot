@@ -6,6 +6,8 @@ import com.masa.domain.Post;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
 import com.masa.utils.IObserver;
+import com.masa.utils.IOnlineUserObserver;
+import com.masa.utils.IPostObserver;
 import java.io.IOException;
 import java.util.List;
 import org.apache.logging.log4j.Logger;
@@ -43,18 +45,25 @@ public interface IBusinessLogic {
     
     public User getUserLogged();
     
-       
     public Logger getLog();
     
     public List<Log> getAllLogs();
     
-    public void subscribePostNotifications(IObserver postObserver);
+    public void subscribePostNotifications(IPostObserver postObserver);
     
-    public void unsbuscribePostNotifications(IObserver postObserver);
+    public void unsbuscribePostNotifications(IPostObserver postObserver);
     
     public void subscribeCommentNotification(IObserver commObserver);
     
     public void unsubscribeCommentNotification(IObserver commObserver);
+    
+    public void subscribeOnlineUserNotification(IOnlineUserObserver onlineUserObserver);
+    
+    public void unsubscribeOnlineUserNotification(IOnlineUserObserver onlineUserObserver);
 
     public void sendNotification(Notification notification, String provider);
+    
+    public void getAllOnlineUsers();
+    
+    public void logout();
 }

@@ -1,6 +1,6 @@
 package com.masa.communication;
 
-import domain.Request;
+import com.masa.domain.Request;
 /**
  * Interface that define all the operations that can be done from the
  * Communication module.

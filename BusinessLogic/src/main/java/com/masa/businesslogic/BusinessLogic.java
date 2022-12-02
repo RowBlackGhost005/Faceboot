@@ -7,15 +7,16 @@ import com.masa.domain.Log;
 import com.masa.domain.Notification;
 import com.masa.domain.Post;
 import com.masa.domain.PostTransferObject;
+import com.masa.domain.Request;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
-import com.masa.persitency.Persistency;
 import com.masa.utils.IObserver;
+import com.masa.utils.IOnlineUserNotifier;
+import com.masa.utils.IOnlineUserObserver;
 import com.masa.utils.IPostNotifier;
-import domain.Request;
+import com.masa.utils.IPostObserver;
 import java.io.IOException;
 import java.util.List;
-import org.apache.logging.log4j.Level;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -60,10 +61,10 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public User registerUser(User user, boolean broadcast)  {
+    public User registerUser(User user, boolean broadcast) {
 
         User registedUser = null;
-        
+
         try {
             registedUser = userLogic.registerUser(user);
         } catch (Exception ex) {
@@ -77,10 +78,9 @@ public class BusinessLogic implements IBusinessLogic {
 
             initCommunicationThread(request);
 
-
         }
-        LOGGER.info("The user: "+user.getName()+" has succesfuly Signed Up");
-        
+        LOGGER.info("The user: " + user.getName() + " has succesfuly Signed Up");
+
         return registedUser;
     }
 
@@ -100,19 +100,18 @@ public class BusinessLogic implements IBusinessLogic {
 
             initCommunicationThread(request);
         }
-        LOGGER.info("The user: "+user.getName()+" has succesfuly Signed Up with Google");
+        LOGGER.info("The user: " + user.getName() + " has succesfuly Signed Up with Google");
         return user;
     }
 
     @Override
     public User login(User user, String method) throws Exception {
-        
-        
+
         User userLogged = userLogic.login(user, method);
-        
+
         setUserLogged(userLogged);
-        
-        LOGGER.info("The user: "+userLogged.getName()+" has Logged in");
+
+        LOGGER.info("The user: " + userLogged.getName() + " has Logged in");
         return userLogged;
     }
 
@@ -121,15 +120,15 @@ public class BusinessLogic implements IBusinessLogic {
         User user;
         switch (method) {
             case "GOOGLE":
-                
+
                 user = userLogic.loginUser(new Google());
-                LOGGER.info("The user: "+user.getName()+"has succesfuly Signed Up");
+                LOGGER.info("The user: " + user.getName() + "has succesfuly Signed Up");
                 return user;
         }
-        
+
         return null;
     }
-    
+
     @Override
     public User editUser(User user, boolean broadcast) throws Exception {
 
@@ -143,7 +142,7 @@ public class BusinessLogic implements IBusinessLogic {
             initCommunicationThread(request);
         }
 
-        LOGGER.info("The profile of: "+user.getName()+" has been edited");
+        LOGGER.info("The profile of: " + user.getName() + " has been edited");
         return user;
     }
 
@@ -178,8 +177,8 @@ public class BusinessLogic implements IBusinessLogic {
 
             initCommunicationThread(request);
         }
-        
-        LOGGER.info("The user: "+post.getUser().getName()+" created a new post");
+
+        LOGGER.info("The user: " + post.getUser().getName() + " created a new post");
     }
 
     @Override
@@ -208,7 +207,17 @@ public class BusinessLogic implements IBusinessLogic {
 
     @Override
     public void setUserLogged(User user) {
+
         this.userLogged = user;
+
+        if (user != null) {
+            Request request = new Request("addOnlineUser", "AddOnlineUser");
+
+            request.append(user, "user");
+
+            initCommunicationThread(request);
+        }
+
     }
 
     @Override
@@ -232,12 +241,12 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public void subscribePostNotifications(IObserver postObserver) {
+    public void subscribePostNotifications(IPostObserver postObserver) {
         ((IPostNotifier) communication).addPostObserver(postObserver);
     }
 
     @Override
-    public void unsbuscribePostNotifications(IObserver postObserver) {
+    public void unsbuscribePostNotifications(IPostObserver postObserver) {
         ((IPostNotifier) communication).removePostObserver(postObserver);
     }
 
@@ -251,19 +260,49 @@ public class BusinessLogic implements IBusinessLogic {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
     }
-    
+
     @Override
     public void sendNotification(Notification notification, String provider) {
         notificationLogic.sendNotification(notification, provider);
     }
-    
+
     @Override
-    public List<Log> getAllLogs(){
+    public List<Log> getAllLogs() {
         return logsLogic.getlogs();
     }
-    
+
     @Override
-    public Logger getLog(){
+    public Logger getLog() {
         return LOGGER;
+    }
+
+    @Override
+    public void subscribeOnlineUserNotification(IOnlineUserObserver onlineUserObserver) {
+        ((IOnlineUserNotifier) communication).addOnlineUserObserver(onlineUserObserver);
+    }
+
+    @Override
+    public void unsubscribeOnlineUserNotification(IOnlineUserObserver onlineUserObserver) {
+        ((IOnlineUserNotifier) communication).removeOnlineUserObserver(onlineUserObserver);
+    }
+
+    @Override
+    public void getAllOnlineUsers() {
+
+        Request request = new Request("getOnlineUser", "GetOnlineUser");
+
+        initCommunicationThread(request);
+    }
+
+    @Override
+    public void logout() {
+        
+        Request request = new Request("removeOnlineUser", "RemoveOnlineUser");
+
+        request.append(userLogged, "user");
+
+        initCommunicationThread(request);
+
+        this.setUserLogged(null);
     }
 }

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +23,8 @@ public class ClientSocket implements Runnable{
     BufferedReader socketReceived;
     Communication server;
     
+    private int id;
+    
     private boolean isOn = true;
     
     /**
@@ -32,12 +35,13 @@ public class ClientSocket implements Runnable{
      * @param socketReceived The stream to receive information.
      * @param server Communication object that work as a server to send the information.
      */
-    public ClientSocket(Socket clientSocket, PrintWriter socketSend, BufferedReader socketReceived, Communication server) {
+    public ClientSocket(Socket clientSocket, PrintWriter socketSend, BufferedReader socketReceived, Communication server, int id) {
         
         this.clientSocket = clientSocket;
         this.socketSend = socketSend;
         this.socketReceived = socketReceived;
         this.server = server;
+        this.id = id;
     }
     
     /**
@@ -110,4 +114,28 @@ public class ClientSocket implements Runnable{
             }
         }
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ClientSocket other = (ClientSocket) obj;
+        return this.id == other.id;
+    }
+
+    
 }

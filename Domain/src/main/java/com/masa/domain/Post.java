@@ -52,12 +52,20 @@ public class Post {
         this.id = id;
         this.message = message;
     }
-
+    
     public Post(String id, String message, String imagePath, User user) {
         this.id = id;
         this.imagePath = imagePath;
         this.message = message;
         this.user = user;
+    }
+    
+    public Post(String id, String message, String imagePath, User user, Date date) {
+        this.id = id;
+        this.imagePath = imagePath;
+        this.message = message;
+        this.user = user;
+        this.dateTime = date;
     }
 
     public Post(String message, BufferedImage image, ArrayList<User> users, ArrayList<Tag> tags, ArrayList<Comment> comments, User user) {

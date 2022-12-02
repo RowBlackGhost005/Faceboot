@@ -158,7 +158,7 @@ public class GUIBuilder {
         controller.setUser(post.getUser().getName());
 
         if (post.getDateTime() != null) {
-            controller.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(post.getDateTime()));
+            controller.setDate(new SimpleDateFormat("HH:mm dd/MM/yyyy").format(post.getDateTime()));
         }
         
         if(post.getUser().getId().equals(GUILogic.getLogic().getUserLogged().getId())){
