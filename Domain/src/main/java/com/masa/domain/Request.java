@@ -1,8 +1,5 @@
 package com.masa.domain;
 
-import com.masa.domain.PostTransferObject;
-import com.masa.domain.Tag;
-import com.masa.domain.User;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +28,7 @@ public class Request {
     private PostTransferObject postTransfer;
     private Tag tag;
     private Notification notification;
+    private Comment comment;
     //End objecs that can be send into a request.
     
     
@@ -105,6 +103,10 @@ public class Request {
                 this.notification = (Notification) object;
                 break;
                 
+            case "comment":
+                this.comment = (Comment) object;
+                break;
+                
             default:
                 break;
         }
@@ -133,6 +135,8 @@ public class Request {
                 return tag;
             case "notification":
                 return notification;
+            case "comment":
+                return comment;
             default:
                 return null;
         }

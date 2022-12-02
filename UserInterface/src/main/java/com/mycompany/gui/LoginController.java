@@ -65,7 +65,7 @@ public class LoginController {
             
             if(existingUser.getId() == null){
                 GUIController.show("RegisterPhone");
-                GUILogic.getLogic().setUserLogged(existingUser);
+//                GUILogic.getLogic().setUserLogged(existingUser);
             }
 
             else if (existingUser.getEmail() != null) {

@@ -132,7 +132,7 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
 
                 User userToAdd = (User) request.getParam("user");
 
-                {
+                 {
                     try {
                         businessLogic.registerUser(userToAdd, false);
                     } catch (Exception ex) {
@@ -288,16 +288,55 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
                 communication.removePeer(peer);
 
                 break;
-                
+
             case "createnotification":
-                
+
                 Notification notificationToAdd = (Notification) request.getParam("notification");
-                
+
                 businessLogic.createNotification(notificationToAdd, false);
-                
+
                 communication.removePeer(peer);
-                
+
                 break;
+
+            case "registercomment":
+
+                Comment commentToAdd = (Comment) request.getParam("comment");
+
+                 {
+                    try {
+                        businessLogic.createComment(commentToAdd, false);
+                    } catch (IOException ex) {
+                        Logger.getLogger(CommHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                communication.removePeer(peer);
+
+                break;
+
+            case "updatepost":
+
+                PostTransferObject postUpdateTO = (PostTransferObject) request.getParam("post");
+
+                Post postTuUpdate = postUpdateTO.getPostToSave();
+
+                postTuUpdate.setUser(businessLogic.getUser(postTuUpdate.getUser().getId()));
+
+            {
+                try {
+                    businessLogic.editPost(postTuUpdate, false);
+                } catch (IOException ex) {
+                    Logger.getLogger(CommHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+                communication.removePeer(peer);
+
+//                notifyPost(post);
+
+                break;
+
 
             //Can Send: 
             //Can Receive: 

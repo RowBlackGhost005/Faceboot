@@ -30,12 +30,21 @@ public class Authentication implements IAuthentication {
         
         switch (type.toLowerCase()) {
 
-            case "local" -> authenticatedUser = localAuth.login(user);
+            case "local" :
+                authenticatedUser = localAuth.login(user);
+                break;
 
-            case "google" -> authenticatedUser = googleAuth.login(user);
+            case "google" : 
+                authenticatedUser = googleAuth.login(user);
+                
+//                authenticatedUser = persistency.createUser(user);
+                
+                break;
 
             //TODO AUTHENTICATION WITH TWITTER
-            case "twitter" -> {}
+            case "twitter" : 
+                
+                break;
         }
         
         return authenticatedUser;

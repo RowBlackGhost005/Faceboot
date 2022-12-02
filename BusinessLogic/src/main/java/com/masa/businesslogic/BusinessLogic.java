@@ -213,10 +213,18 @@ public class BusinessLogic implements IBusinessLogic {
             initCommunicationThread(request);
         }
     }
-    
+
     @Override
-    public void createComment(Comment comment, boolean broadcast)throws IOException{
+    public void createComment(Comment comment, boolean broadcast) throws IOException {
         Comment createdComment = commentsLogic.create(comment);
+
+        if (broadcast) {
+            Request request = new Request("registerComment", "RegisterComment");
+
+            request.append(comment, "comment");
+
+            initCommunicationThread(request);
+        }
     }
 
     @Override
@@ -327,8 +335,24 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public Post editPost(Post post) throws IOException{
-        return postLogic.editPost(post);
+    public Post editPost(Post post, boolean broadcast) throws IOException {
+
+        String pathToEdit = post.getImagePath();
+
+        Post postNew = postLogic.editPost(post);
+
+        if (broadcast) {
+            Request request = new Request("updatePost", "UpdatePost");
+
+            PostTransferObject postTransferObject = new PostTransferObject(postNew, pathToEdit);
+
+            request.append(postTransferObject, "post");
+
+            initCommunicationThread(request);
+
+        }
+
+        return postNew;
     }
 
     public List<Post> getPostByTag(String tag) {
@@ -364,14 +388,13 @@ public class BusinessLogic implements IBusinessLogic {
     public Notification createNotification(Notification notification, boolean broadcast) {
 
         Notification notificationNew = null;
-        
-        
-        if(notification.getId() != null){
+
+        if (notification.getId() != null) {
             notificationNew = notificationLogic.mirror(notification);
-        }else{
+        } else {
             notificationNew = notificationLogic.create(notification);
         }
-        
+
         Request request = new Request("createNotification", "CreateNotification");
 
         if (broadcast) {

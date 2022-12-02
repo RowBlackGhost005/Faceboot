@@ -48,8 +48,10 @@ public class RegisterPhoneController implements Initializable {
         user.setPhone(this.txtPhone.getText());
         
         try {
-            GUILogic.getLogic().registerExternalUser(user, true);
+            User newUser = GUILogic.getLogic().registerExternalUser(user, true);
             GUIController.show("Faceboot");
+            
+            GUILogic.getLogic().setUserLogged(newUser);
             
 //            Stage stage = (Stage) pane.getScene().getWindow();
 //            stage.close();

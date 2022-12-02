@@ -142,7 +142,7 @@ public class CreatePostController implements Initializable {
             if (editing) {
                 GUIBuilder builder = new GUIBuilder();
                 post.setId(postController.getPostObject().getId());
-                GUILogic.getLogic().editPost(post);
+                GUILogic.getLogic().editPost(post, true);
                 postController.setPost(post);
                 postController.updatePost(post);
                 btnPost.getScene().getWindow().hide();

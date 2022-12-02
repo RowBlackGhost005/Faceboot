@@ -42,7 +42,7 @@ public interface IBusinessLogic {
     
     public void createPost(Post post) throws IOException;
     
-    public Post editPost(Post post)throws IOException;
+    public Post editPost(Post post, boolean broadcast)throws IOException;
     
     public List<Post> getAllPost();
     
