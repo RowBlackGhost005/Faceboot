@@ -11,23 +11,25 @@ import javax.swing.Icon;
  * @author Andrea
  */
 public class Comment {
-
+    private String idPost;
     private String id;
     private User user;
     private Date dateTime;
     private String message;
 
-    public Comment(User user, Date dateTime, String message) {
+    public Comment(User user, Date dateTime, String message, String idPost) {
         this.user = user;
         this.dateTime = dateTime;
         this.message = message;
+        this.idPost=idPost;
     }
 
-    public Comment(String id, User user, Date dateTime, String message) {
+    public Comment(String id, User user, Date dateTime, String message, String idPost) {
         this.id = id;
         this.user = user;
         this.dateTime = dateTime;
         this.message = message;
+        this.idPost=idPost;
     }
 
     public String getId() {
@@ -60,6 +62,14 @@ public class Comment {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getIdPost() {
+        return idPost;
+    }
+
+    public void setIdPost(String idPost) {
+        this.idPost = idPost;
     }
     
 

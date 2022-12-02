@@ -1,5 +1,6 @@
 package com.masa.businesslogic;
 
+import com.masa.domain.Comment;
 import com.masa.domain.Post;
 import com.masa.domain.RelPostTag;
 import com.masa.domain.RelPostUser;
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.imageio.ImageIO;
 import java.util.UUID;
 
@@ -64,6 +66,37 @@ public class PostLogic {
         return posts.get(0);
     }
 
+   public Post editPost(Post post) throws IOException{
+       String savingPath=null;
+       if (post.getImagePath() != null) {
+            if (!post.getImagePath().contains("postsImg")) {
+
+                String imagePath = post.getImagePath();
+                String extension = imagePath.substring(imagePath.length() - 3);
+                File image = new File(imagePath);
+                BufferedImage bImage = ImageIO.read(image);
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss");
+//            String currentTimeStamp = dateFormat.format(new Date());
+
+                if (extension.equalsIgnoreCase("jpg")) {
+                    savingPath = "./resources/postsImg/" + UUID.randomUUID() + ".jpg";
+                } else if (extension.equalsIgnoreCase("png")) {
+                    savingPath = "./resources/postsImg/" + UUID.randomUUID() + ".png";
+                }
+
+                File outputFile = new File(savingPath);
+
+                System.out.println(outputFile.getCanonicalFile());
+
+                outputFile.createNewFile();
+
+                ImageIO.write(bImage, extension, outputFile);
+
+                post.setImagePath(savingPath);
+            }
+        }
+       return persistency.editPost(post);
+   }
     public List<Post> getAllPost() {
         List<Post> posts = persistency.getAllPost();
 
@@ -84,6 +117,17 @@ public class PostLogic {
             }
             post.setUsers(usersList);
             post.getUser().setName(persistency.getUser(post.getUser().getId()).getName());
+            
+            List<Comment> comments = persistency.getCommentsByPost(post.getId());
+            ArrayList commentsList = new ArrayList();
+            if(comments!=null){
+                for(Comment comment:comments){
+                    User newUser = new User(comment.getUser().getId(),persistency.getUser(comment.getUser().getId()).getName(),null,null);
+                    comment.setUser(newUser);
+                    commentsList.add(comment);
+                }
+            }
+            post.setComments(commentsList);
         }
 
         return posts;

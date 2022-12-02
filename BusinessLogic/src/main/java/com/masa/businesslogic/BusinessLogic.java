@@ -3,6 +3,7 @@ package com.masa.businesslogic;
 import com.masa.authentication.Google;
 import com.masa.communication.CommHandler;
 import com.masa.communication.ICommHandler;
+import com.masa.domain.Comment;
 import com.masa.domain.Log;
 import com.masa.domain.Notification;
 import com.masa.domain.Post;
@@ -35,6 +36,7 @@ public class BusinessLogic implements IBusinessLogic {
     private TagLogic tagLogic;
     private NotificationLogic notificationLogic;
     private LogsLogic logsLogic;
+    private CommentLogic commentsLogic;
 
     private User userLogged;
     private ICommHandler communication;
@@ -46,6 +48,7 @@ public class BusinessLogic implements IBusinessLogic {
         this.tagLogic = new TagLogic();
         this.notificationLogic = new NotificationLogic();
         this.logsLogic = new LogsLogic();
+        this.commentsLogic = new CommentLogic();
     }
 
     public static IBusinessLogic createBusinessLogic() {
@@ -210,6 +213,11 @@ public class BusinessLogic implements IBusinessLogic {
             initCommunicationThread(request);
         }
     }
+    
+    @Override
+    public void createComment(Comment comment, boolean broadcast)throws IOException{
+        Comment createdComment = commentsLogic.create(comment);
+    }
 
     @Override
     public void createPost(Post post) throws IOException {
@@ -319,6 +327,10 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
+    public Post editPost(Post post) throws IOException{
+        return postLogic.editPost(post);
+    }
+
     public List<Post> getPostByTag(String tag) {
         Tag tagStored = tagLogic.getByName(tag);
 

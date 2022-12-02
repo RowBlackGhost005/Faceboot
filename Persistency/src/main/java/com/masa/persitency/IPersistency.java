@@ -1,5 +1,6 @@
 package com.masa.persitency;
 
+import com.masa.domain.Comment;
 import com.masa.domain.Log;
 import com.masa.domain.Notification;
 import com.masa.domain.Post;
@@ -44,6 +45,8 @@ public interface IPersistency {
     
     public Tag editTag(Tag tag);
     
+    public Post editPost(Post post);
+    
     public List<Tag> getAllTags();
     
     public List<Tag> getTagsByPost(String postId);
@@ -71,5 +74,8 @@ public interface IPersistency {
     public List<Notification> getNotificationsByUser(String userId);
     
     public Notification createNotificationMirror(Notification notification);
+    public Comment createComment(Comment comment);
+    
+    public List<Comment> getCommentsByPost(String idPost);
     
 }

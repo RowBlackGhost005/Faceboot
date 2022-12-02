@@ -1,8 +1,12 @@
 com\masa\domain\RelPostUser.class
+com\masa\utils\IOnlineUserObserver.class
 com\masa\utils\IPostObserver.class
 com\masa\domain\CommentTransferObject.class
 com\masa\domain\PostTransferObject.class
+com\masa\domain\Request.class
 com\masa\domain\User.class
+com\masa\domain\Peer.class
+com\masa\utils\IOnlineUserNotifier.class
 com\masa\utils\IPostNotifier.class
 com\masa\domain\RelPostTag.class
 com\masa\domain\Tag.class

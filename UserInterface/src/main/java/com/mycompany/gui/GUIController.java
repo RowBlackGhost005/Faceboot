@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.StageStyle;
 import logic.GUILogic;
 
@@ -97,6 +99,14 @@ public class GUIController extends Application {
 
     static void showEditProfile() throws IOException {
         guiBuilder.buildEditProfile(scene);
+    }
+    
+    static void showEditPost(PostController postController){
+        try {
+            guiBuilder.builEditPost(postController);
+        } catch (IOException ex) {
+            Logger.getLogger(GUIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -51,7 +51,7 @@
             </GridPane>
             <Label fx:id="lblPostText" layoutX="55.0" layoutY="40.0" text="This is a test post" />
             <ImageView fx:id="postPhoto" fitHeight="150.0" fitWidth="200.0" layoutX="307.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" styleClass="imagePost" />
-            <Button fx:id="btnEdit" layoutX="743.0" layoutY="3.0" mnemonicParsing="false" styleClass="btnEdit" visible="false" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
+            <Button fx:id="btnEdit" layoutX="743.0" layoutY="3.0" mnemonicParsing="false" onMouseClicked="#clickBtnEdit" styleClass="btnEdit" visible="false" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
             <Label fx:id="lblTags" layoutX="15.0" layoutY="245.0" styleClass="tags" text="#tags" />
             <Label fx:id="lblTaggedUsers" layoutX="15.0" layoutY="271.0" styleClass="taggedUsers" text="\@users" />
             <Separator layoutX="6.0" layoutY="297.0" prefHeight="5.0" prefWidth="756.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
@@ -60,18 +60,19 @@
             <Insets />
          </GridPane.margin>
       </AnchorPane>
-      <GridPane fx:id="commentsPane" hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="765.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+      <GridPane fx:id="commentsPane" hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="765.0" vgap="5.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
          <padding>
             <Insets bottom="5.0" right="5.0" top="5.0" />
          </padding>
          <children>
-            <Button fx:id="btnAddComment" layoutX="706.0" layoutY="14.0" mnemonicParsing="false" styleClass="comment" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" GridPane.columnIndex="3" />
-            <TextField prefHeight="38.0" prefWidth="708.0" promptText="Comment" GridPane.columnIndex="2" />
+             <AnchorPane prefHeight="41.0" prefWidth="759.0">
+             <Button fx:id="btnAddComment" layoutX="706.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnAddComment" styleClass="comment" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" GridPane.columnIndex="3" />
+             <TextField fx:id="txtComment" prefHeight="38.0" prefWidth="708.0" promptText="Comment" GridPane.columnIndex="2" />
+             </AnchorPane>
          </children>
          <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints />
-            <ColumnConstraints prefWidth="708.0" />
             <ColumnConstraints />
          </columnConstraints>
          <rowConstraints>
