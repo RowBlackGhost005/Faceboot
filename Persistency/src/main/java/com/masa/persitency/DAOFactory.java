@@ -32,7 +32,11 @@ public class DAOFactory {
         return new DAOLogs();
     }
     
-    public DAOComments createDAOComments(){
+    public DAONotifications createDAONotifications(){
+        return new DAONotifications(bdConnection);
+    }
+
+    DAOComments createDAOComments() {
         return new DAOComments(bdConnection);
     }
 

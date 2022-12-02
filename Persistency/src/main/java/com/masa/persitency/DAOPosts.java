@@ -189,13 +189,14 @@ public class DAOPosts {
     
     public List<Post> getByTag(Tag tag){
         
-        List<Post> postsList = null;
+        List<Post> postsList = new ArrayList<Post>();
         
        try {
             java.sql.Connection connection = this.connectionDB.connectionDB();
             Statement statement = connection.createStatement();
             
-            String query = String.format("SELECT id, message, image_path, user , date FROM posts;");
+            String query = String.format("SELECT posts.id, posts.message, posts.image_path, posts.user , date FROM posts INNER JOIN relPostTag ON posts.id = relPostTag.id_post AND relPostTag.id_tag = '%s';", 
+                                            tag.getId());
 
             ResultSet result = statement.executeQuery(query);
 

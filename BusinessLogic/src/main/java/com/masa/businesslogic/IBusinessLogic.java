@@ -73,4 +73,10 @@ public interface IBusinessLogic {
     public void logout();
     
     public List<Post> getPostByTag(String tag);
+    
+    public Notification createNotification(Notification notification, boolean broadcast);
+    
+    public Notification getNotification(String notificaitonId);
+    
+    public List<Notification> getNotificationsByUser(String userId);
 }

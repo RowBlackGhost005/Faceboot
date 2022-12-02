@@ -9,6 +9,7 @@ import com.masa.notifications.INotifications;
 import com.masa.notifications.Notifications;
 import com.masa.persitency.IPersistency;
 import com.masa.persitency.Persistency;
+import java.util.List;
 
 /**
  *
@@ -42,5 +43,21 @@ public class NotificationLogic {
     
     public void registerUser(String number) {
         notifications.registerNumberUser(number);
+    }
+    
+    public Notification create(Notification notification){
+        return persistency.createNotification(notification);
+    }
+    
+    public Notification mirror(Notification notification){
+        return persistency.createNotificationMirror(notification);
+    }
+    
+    public Notification get(String notificaitonId){
+        return persistency.getNotification(notificaitonId);
+    }
+    
+    public List<Notification> getByUser(String userId){
+        return persistency.getNotificationsByUser(userId);
     }
 }

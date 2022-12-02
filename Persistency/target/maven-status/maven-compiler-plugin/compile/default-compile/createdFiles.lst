@@ -12,5 +12,6 @@ com\masa\persitency\Connection.class
 com\masa\persitency\DAORelPostTag.class
 com\masa\persitency\DAOUsers.class
 com\masa\persitency\Persistency.class
+com\masa\persitency\DAONotifications.class
 run\Run.class
 com\masa\persitency\DAOLogs.class

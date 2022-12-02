@@ -28,7 +28,7 @@
          </font>
       </Label>
       <Button fx:id="btnLogginWithGoogle" layoutX="234.0" layoutY="419.0" mnemonicParsing="false" onMouseClicked="#clickBtnLoginWithGoogle" styleClass="btnGoogle" />
-      <Button fx:id="btnLogginWithTwitter" layoutX="513.0" layoutY="419.0" mnemonicParsing="false" styleClass="btnTwitter" />
+      <Button fx:id="btnLogginWithTwitter" layoutX="513.0" layoutY="419.0" mnemonicParsing="false" styleClass="btnTwitter" visible="false" />
       <Pane fx:id="mainBar" prefHeight="24.0" prefWidth="960.0">
  
       </Pane>

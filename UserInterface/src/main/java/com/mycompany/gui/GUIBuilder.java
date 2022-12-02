@@ -1,6 +1,7 @@
 package com.mycompany.gui;
 
 import com.masa.domain.Comment;
+import com.masa.domain.Notification;
 import com.masa.domain.Post;
 import com.masa.domain.Tag;
 import com.masa.domain.User;
@@ -81,7 +82,7 @@ public class GUIBuilder {
         return stage;
     }
 
-    public Stage buildViewProfile( Scene scene) throws IOException {
+    public Stage buildViewProfile(Scene scene) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("ViewProfile.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         ViewProfileController controller = fxmlLoader.<ViewProfileController>getController();
@@ -163,9 +164,27 @@ public class GUIBuilder {
         return commentTamplate;
 
     }
-    
-    public void buildSendNotification(User receptor) throws IOException{
+
+    public AnchorPane buildNotificationHistory(Notification notification) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Comment.fxml"));
+        AnchorPane notificationTemplate = (AnchorPane) fxmlLoader.load();
+        CommentController controller = fxmlLoader.<CommentController> getController();
         
+        String type = notification.getType();
+        
+        if(type.equalsIgnoreCase("both")){
+            type = "E-MAIL/SMS";
+        }
+        
+        controller.setCommentText(notification.getMessage() + " \nSended by " + type);
+        controller.setUser(notification.getTo().getName());
+        controller.setDate(new SimpleDateFormat("HH:mm dd/MM/yyyy").format(notification.getDate()));
+
+        return notificationTemplate;
+    }
+
+    public void buildSendNotification(User receptor) throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("SendNotification.fxml"));
         AnchorPane sendNotificationTamplate = (AnchorPane) fxmlLoader.load();
         SendNotificationController controller = fxmlLoader.<SendNotificationController>getController();
@@ -175,7 +194,7 @@ public class GUIBuilder {
         stage.setTitle("Send notification");
         stage.setResizable(false);
         stage.show();
-        
+
     }
 
     public void buildRegisterPhone(User user) throws IOException {
@@ -195,6 +214,35 @@ public class GUIBuilder {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Post.fxml"));
         Parent postTamplate = (Parent) fxmlLoader.load();
         PostController controller = fxmlLoader.<PostController>getController();
+
+        controller.setPostText(post.getMessage());
+
+        controller.setUser(post.getUser().getName());
+
+        if (post.getDateTime() != null) {
+            controller.setDate(new SimpleDateFormat("HH:mm dd/MM/yyyy").format(post.getDateTime()));
+        }
+
+        if (post.getUser().getId().equals(GUILogic.getLogic().getUserLogged().getId())) {
+            controller.enableBtnEdit();
+        }
+
+        if (post.getImagePath() != null && !post.getImagePath().equalsIgnoreCase("null")) {
+
+            String imagePath = post.getImagePath();
+
+            if (post.getImagePath().startsWith(".")) {
+
+                imagePath = imagePath.substring(2, imagePath.length());
+
+                imagePath = "file:" + imagePath;
+
+                System.out.println(imagePath);
+
+                controller.setPhotoPost(new Image(imagePath));
+            }
+        }
+
         controller.setPost(post);
         controller.updatePost(post);
         if (post.getComments() != null) {

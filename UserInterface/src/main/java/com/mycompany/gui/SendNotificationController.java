@@ -1,24 +1,19 @@
 package com.mycompany.gui;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 import com.masa.domain.Notification;
 import com.masa.domain.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javax.swing.JOptionPane;
 import logic.GUILogic;
 
 
@@ -29,7 +24,7 @@ import logic.GUILogic;
  */
 public class SendNotificationController implements Initializable {
 
-  @FXML
+    @FXML
     private Button btnSend;
     @FXML
     private Button btnBack;
@@ -58,25 +53,30 @@ public class SendNotificationController implements Initializable {
     @FXML
     private void clickBtnSend(MouseEvent event) throws IOException {
 
-
-        User from = new User();
-        from.setEmail("jose.angulo215058@potros.itson.edu.mx");
+//        String selectedUser = cmbTo.getSelectionModel().getSelectedItem();
+//        User to = new User();
+//        for (User user : users) {
+//            if (user.getName().equalsIgnoreCase(selectedUser)) {
+//                to = user;
+//            }
+//        }
+        
+        User from = GUILogic.getLogic().getUserLogged();
+        from.setEmail("faceboot.arquitectura@gmail.com");
 
         Notification notification = new Notification();
         notification.setTo(userReceptor);
         notification.setFrom(from);
         notification.setMessage(txtMessage.getText());
 
-        GUILogic.getLogic().sendNotification(notification, "sms");
-        switch(cmbNotificationMode.getSelectionModel().getSelectedItem()){
-            case "Phone": GUILogic.getLogic().sendNotification(notification, "sms");
-        }
-        
-
         txtTo.setText("");
 
         String option = cmbNotificationMode.getSelectionModel().getSelectedItem();
 
+        notification.setType(option);
+        
+        notification.setDate(new Date());
+        
         sendNotification(notification, option);
         clear();
     }
