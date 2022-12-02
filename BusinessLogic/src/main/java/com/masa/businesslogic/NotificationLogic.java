@@ -39,4 +39,8 @@ public class NotificationLogic {
     public void notificationHistory(String id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public void registerUser(String number) {
+        notifications.registerNumberUser(number);
+    }
 }

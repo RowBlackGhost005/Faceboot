@@ -133,6 +133,11 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
         }
 
     }
+    
+    @FXML
+    private void clickBtnSearch(MouseEvent event) {
+
+    }
 
     @FXML
     private void clickBtnViewProfile(MouseEvent event) throws IOException {

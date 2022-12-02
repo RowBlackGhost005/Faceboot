@@ -103,7 +103,7 @@ public class SendNotificationController implements Initializable {
     }
 
     private void sendNotification(Notification notification, String option) throws IOException {
-         GUILogic.getLogic().sendNotification(notification, option);
+        GUILogic.getLogic().sendNotification(notification, option);
         GUIController.showDialog("Notification sent!", "Your notification was sent succesfully!", 0);
     }
 

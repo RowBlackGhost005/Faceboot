@@ -17,4 +17,6 @@ public interface INotifications {
     public void sendEmailNotification(Notification notification);
     
     public void sendMultipleTypes(Notification notification);
+    
+    public void registerNumberUser(String number); // Nuevo método
 }

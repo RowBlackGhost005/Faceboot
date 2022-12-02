@@ -44,7 +44,7 @@ public class UserLogic {
         
         if(user.getId() != null){
             craetedUser = persistency.mirrorUser(user);
-        }else{
+        } else {
             craetedUser = persistency.createUser(user);
         }
         
