@@ -156,4 +156,9 @@ public class Persistency implements IPersistency {
         return users.mirrorUser(user);
     }
 
+    @Override
+    public List<Post> getPostByTag(Tag tag) {
+        return posts.getByTag(tag);
+    }
+
 }

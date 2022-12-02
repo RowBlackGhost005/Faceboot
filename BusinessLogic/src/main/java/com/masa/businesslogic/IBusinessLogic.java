@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
  */
 public interface IBusinessLogic {
     
-    public User registerUser(User user, boolean broadcast);
+    public User registerUser(User user, boolean broadcast) throws Exception;
     
     public User registerExternalUser(User user, boolean broadcast);
   
@@ -66,4 +66,6 @@ public interface IBusinessLogic {
     public void getAllOnlineUsers();
     
     public void logout();
+    
+    public List<Post> getPostByTag(String tag);
 }

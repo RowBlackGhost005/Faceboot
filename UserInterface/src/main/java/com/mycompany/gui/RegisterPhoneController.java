@@ -36,7 +36,7 @@ public class RegisterPhoneController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        user = GUILogic.getLogic().getUserLogged();
     }    
 
     @FXML
@@ -46,12 +46,13 @@ public class RegisterPhoneController implements Initializable {
     @FXML
     private void btnClickSignUp(MouseEvent event) {
         user.setPhone(this.txtPhone.getText());
+        
         try {
             GUILogic.getLogic().registerExternalUser(user, true);
             GUIController.show("Faceboot");
             
-            Stage stage = (Stage) pane.getScene().getWindow();
-            stage.close();
+//            Stage stage = (Stage) pane.getScene().getWindow();
+//            stage.close();
             
         } catch (Exception ex) {
             Logger.getLogger(RegisterPhoneController.class.getName()).log(Level.SEVERE, null, ex);

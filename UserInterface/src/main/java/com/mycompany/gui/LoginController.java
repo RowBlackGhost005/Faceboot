@@ -48,10 +48,12 @@ public class LoginController {
 //                GUILogic.getLogic().getAllOnlineUsers();
 
                 //LogMessage log = new LogMessage();
+            }else{
+                throw new Exception("");
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
-            GUIController.showDialog("Error", ex.getMessage(), 1);
+//            ex.printStackTrace();
+            GUIController.showDialog("Invalid Credentials", "Try agin", 1);
         }
     }
 
@@ -60,8 +62,13 @@ public class LoginController {
         
         try {
             existingUser = GUILogic.getLogic().login(new User(), "google");
+            
+            if(existingUser.getId() == null){
+                GUIController.show("RegisterPhone");
+                GUILogic.getLogic().setUserLogged(existingUser);
+            }
 
-            if (existingUser.getEmail() != null) {
+            else if (existingUser.getEmail() != null) {
 //                GUILogic.getLogic().setUserLogged(existingUser);
                 GUIController.showFaceboot();
 //                GUILogic.getLogic().getAllOnlineUsers();

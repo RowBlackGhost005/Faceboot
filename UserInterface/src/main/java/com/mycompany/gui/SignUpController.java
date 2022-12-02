@@ -65,21 +65,30 @@ public class SignUpController {
     }
 
     private void SignUp() throws IOException {
-        String phone = txtPhoneNumber.getText();
-        String name = txtName.getText();
-        String email = txtEmail.getText();
-        String gender = cmbGender.getValue();
-        String date = datePicker.getValue().toString();
-        String pssword = txtPassword.getText();
-
-        User user = new User(name, email, phone, gender, date, pssword);
 
 //        GUILogic.registerUser(user);
         try {
+            String phone = txtPhoneNumber.getText();
+            String name = txtName.getText();
+            String email = txtEmail.getText();
+            String gender = cmbGender.getValue();
+            String date = null;
+            
+            if(datePicker.getValue() != null){
+                date = datePicker.getValue().toString();
+            }
+            
+            String pssword = txtPassword.getText();
+
+            User user = new User(name, email, phone, gender, date, pssword);
+
             User createdUser = GUILogic.getLogic().registerUser(user, true);
             GUILogic.getLogic().setUserLogged(createdUser);
+            
         } catch (Exception ex) {
             GUIController.showDialog("Error!", ex.getMessage(), 1);
+            return;
+//            GUIController.showDialog("Invalid data", "Complete all the fields", 1);
         }
 
         GUIController.showDialog("Success!", "Your account has been successfuly created", 0);

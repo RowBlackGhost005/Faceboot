@@ -59,6 +59,8 @@ public interface IPersistency {
     
     public RelPostTag getRelPostTag(String postId, String tagId);
     
-    public  List<Log> getAllLogs();
+    public List<Log> getAllLogs();
+    
+    public List<Post> getPostByTag(Tag tag);
     
 }

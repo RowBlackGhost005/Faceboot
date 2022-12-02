@@ -110,7 +110,10 @@ public class CreatePostController implements Initializable{
             if (imgView.getImage() != null) {
                 String imagePath = imgView.getImage().getUrl();
                 post.setImagePath(imagePath);
+            }else{
+                post.setImagePath(null);
             }
+            
             if (taggedUsers != null) {
                 ArrayList<User> usersList = new ArrayList<>();
                 for (User user : taggedUsers) {
@@ -118,6 +121,7 @@ public class CreatePostController implements Initializable{
                 }
                 post.setUsers(usersList);
             }
+            
             if (!txtTags.getText().isBlank()) {
                 String[] tagsNamesList = txtTags.getText().split(" ");
                 ArrayList<Tag> tagsList = new ArrayList<>();
@@ -130,7 +134,7 @@ public class CreatePostController implements Initializable{
             GUILogic.getLogic().createPost(post, true);
 
         } else {
-            GUIController.showDialog("Error", "The introduced data is not valid", 1);
+            GUIController.showDialog("Error", "Add a description to the post", 1);
         }
     }
 
