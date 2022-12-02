@@ -8,6 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="467.0" prefWidth="942.0" styleClass="mainFxmlClass" stylesheets="@../../../css/sendNotification.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.SendNotificationController">
      <children>
+        <Button fx:id="btnSend" layoutX="694.0" layoutY="397.0" mnemonicParsing="false" onMouseClicked="#clickBtnSend" text="Send" />
       <Label layoutX="31.0" layoutY="117.0" text="MESSAGE" />
       <Label layoutX="27.0" layoutY="41.0" text="TO" />
       <TextField fx:id="txtTo" editable="false" layoutX="27.0" layoutY="61.0" prefHeight="27.0" prefWidth="395.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="520.0" />
