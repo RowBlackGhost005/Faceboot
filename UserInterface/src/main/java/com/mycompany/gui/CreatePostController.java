@@ -31,7 +31,7 @@ import logic.GUILogic;
  *
  * @author Andrea
  */
-public class CreatePostController implements Initializable{
+public class CreatePostController implements Initializable {
 
     JFileChooser chooser;
     BufferedImage img;
@@ -39,9 +39,9 @@ public class CreatePostController implements Initializable{
     File file;
     Boolean activeFileChooser = false;
     List<User> taggedUsers;
-    
+
     private boolean editing = false;
-    
+
     @FXML
     private Button btnAttach;
     @FXML
@@ -65,14 +65,18 @@ public class CreatePostController implements Initializable{
     @FXML
     private AnchorPane MainPane;
 
+    private PostController postController;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cmbNotifyBy.setItems(FXCollections.observableArrayList(
                 "Email", "Phone", "All"));
     }
+
     @FXML
     private void clickBtnPost(MouseEvent event) throws IOException {
         post();
+
     }
 
     @FXML
@@ -100,15 +104,19 @@ public class CreatePostController implements Initializable{
     private void post() throws IOException {
 
         Post post = new Post(null, txtMessage.getText(), GUILogic.getLogic().getUserLogged());
-        
+
         post.setDateTime(new Date());
-        
+
         String savingPath = null;
 
         if (!txtMessage.getText().isBlank()) {
 
             if (imgView.getImage() != null) {
                 String imagePath = imgView.getImage().getUrl();
+//                if (editing) {
+//                    imagePath = imagePath.substring(5, imagePath.length());
+//                    imagePath = "./" + imagePath;
+//                }
                 post.setImagePath(imagePath);
             }
             if (taggedUsers != null) {
@@ -126,8 +134,18 @@ public class CreatePostController implements Initializable{
                 }
                 post.setTags(tagsList);
             }
-        
-            GUILogic.getLogic().createPost(post, true);
+
+            if (editing) {
+                GUIBuilder builder = new GUIBuilder();
+                post.setId(postController.getPostObject().getId());
+                GUILogic.getLogic().editPost(post);
+                postController.setPost(post);
+                postController.updatePost(post);
+                btnPost.getScene().getWindow().hide();
+                
+            } else {
+                GUILogic.getLogic().createPost(post, true);
+            }
 
         } else {
             GUIController.showDialog("Error", "The introduced data is not valid", 1);
@@ -162,25 +180,33 @@ public class CreatePostController implements Initializable{
         txtTaggedUsers.setText(taggedUsers.toString());
     }
 
-    public void setEditPost(){
+    public void setEditPost() {
         editing = true;
         btnDelete.setVisible(true);
+        btnBack.setVisible(false);
     }
-    
-    public void setMessage(String message){
+
+    public void setMessage(String message) {
         txtMessage.setText(message);
     }
-    
-    public void setTags(String tags){
+
+    public void setTags(String tags) {
         txtTags.setText(tags);
     }
-    
-    public void setTaggedUsers(String users){
+
+    public void setTaggedUsers(String users) {
         txtTaggedUsers.setText(users);
     }
 
-    public void enableNotifyBy(){
+    public void enableNotifyBy() {
         cmbNotifyBy.setVisible(true);
     }
- 
+
+    public void setImage(Image image) {
+        imgView.setImage(image);
+    }
+
+    public void setPostController(PostController postController) {
+        this.postController = postController;
+    }
 }

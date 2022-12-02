@@ -6,6 +6,7 @@ com\masa\persitency\DAOPosts.class
 com\masa\persitency\DAOTags.class
 com\masa\persitency\IPersistency.class
 com\masa\persitency\IConnection.class
+com\masa\persitency\DAOComments.class
 com\masa\persitency\SQLConnection.class
 com\masa\persitency\Connection.class
 com\masa\persitency\DAORelPostTag.class

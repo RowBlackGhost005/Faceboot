@@ -106,30 +106,29 @@ public class DAOPosts {
         }
     }
 
-//    public boolean edit(User user) {
-//        try {
-//            java.sql.Connection connection = this.connectionDB.connectionDB();
-//            Statement statement = connection.createStatement();
-//            String query = String.format("UPDATE users SET name='%s', email='%s', phone='%s', gender='%s', birthDate='%s', password='%s' WHERE id = %d;",
-//                    user.getName(),
-//                    user.getEmail(),
-//                    user.getPhone(),
-//                    user.getGender(),
-//                    user.getBirthDate(),
-//                    user.getPassword(),
-//                    user.getId());
-//
-//            int registries = statement.executeUpdate(query);
-//
-//            connection.close();
-//
-//            return registries == 1;
-//
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//            return false;
-//        }
-//    }
+    public Post edit(Post post) {
+       
+        try {
+            java.sql.Connection connection = this.connectionDB.connectionDB();
+            Statement statement = connection.createStatement();
+            String query = String.format("UPDATE posts SET message='%s', image_path='%s', user='%s', date='%s' WHERE id = '%s';",
+                    post.getMessage(),
+                    post.getImagePath(),
+                    post.getUser().getId(),
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(post.getDateTime().getTime()),
+                    post.getId());
+
+            int registries = statement.executeUpdate(query);
+
+            connection.close();
+
+            return get(post.getId());
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
 //
 //    public boolean delete(Integer userId) {
 //        try {

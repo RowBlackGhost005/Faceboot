@@ -1,5 +1,6 @@
 package com.masa.persitency;
 
+import com.masa.domain.Comment;
 import com.masa.domain.Log;
 import com.masa.domain.Post;
 import com.masa.domain.RelPostTag;
@@ -43,6 +44,8 @@ public interface IPersistency {
     
     public Tag editTag(Tag tag);
     
+    public Post editPost(Post post);
+    
     public List<Tag> getAllTags();
     
     public List<Tag> getTagsByPost(String postId);
@@ -60,5 +63,9 @@ public interface IPersistency {
     public RelPostTag getRelPostTag(String postId, String tagId);
     
     public  List<Log> getAllLogs();
+    
+    public Comment createComment(Comment comment);
+    
+    public List<Comment> getCommentsByPost(String idPost);
     
 }

@@ -121,6 +121,7 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
     public void removePost(Initializable post) {
         PostController controller = (PostController) post;
         postPane.getChildren().remove(controller.getPost());
+        
         postsControllers.remove(post);
     }
 
@@ -195,7 +196,9 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
     private void clickOnlineUser(MouseEvent event) throws IOException {
         User userSelected = listOnlineUsers.getSelectionModel().getSelectedItem();
         GUIBuilder guiBuilder = new GUIBuilder();
-        guiBuilder.buildSendNotification(userSelected);
+        if(userSelected!=null){
+            guiBuilder.buildSendNotification(userSelected);
+        }
 
     }
 
@@ -203,7 +206,10 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
     private void clickOfflineUser(MouseEvent event) throws IOException {
         User userSelected = listOfflineUsers.getSelectionModel().getSelectedItem();
         GUIBuilder guiBuilder = new GUIBuilder();
-        guiBuilder.buildSendNotification(userSelected);
+        if(userSelected!=null){
+              guiBuilder.buildSendNotification(userSelected);
+        }
+      
     }
 
     private void configMenuConfigurations() {

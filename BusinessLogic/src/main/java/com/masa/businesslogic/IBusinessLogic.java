@@ -1,5 +1,6 @@
 package com.masa.businesslogic;
 
+import com.masa.domain.Comment;
 import com.masa.domain.Log;
 import com.masa.domain.Notification;
 import com.masa.domain.Post;
@@ -35,9 +36,13 @@ public interface IBusinessLogic {
     
     public void createPost(Post post, boolean broadcast) throws IOException;
     
+    public void createComment(Comment comment, boolean broadcast)throws IOException;
+    
     public void createPost(Post post, Tag tags, boolean broadcast) throws IOException;
     
     public void createPost(Post post) throws IOException;
+    
+    public Post editPost(Post post);
     
     public List<Post> getAllPost();
     

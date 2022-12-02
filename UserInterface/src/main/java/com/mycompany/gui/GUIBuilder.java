@@ -106,6 +106,47 @@ public class GUIBuilder {
 
         return stage;
     }
+    
+    public void builEditPost(PostController postController) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("CreatePost.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        CreatePostController controller = fxmlLoader.<CreatePostController>getController();
+        controller.setEditPost();
+        Post post =postController.getPostObject();
+        controller.setMessage(post.getMessage());
+        controller.setTaggedUsers(post.getUsers());
+        controller.setPostController(postController);
+        StringBuilder tags = new StringBuilder();
+         if (post.getTags() != null) {
+            for (Tag tag : post.getTags()) {
+                tags.append("").append(tag.getName()).append(" ");
+            }
+            controller.setTags(tags.toString());
+        }
+        controller.setTags(tags.toString());
+        
+        String imagePath = post.getImagePath();
+        if (post.getImagePath() != null && !post.getImagePath().equalsIgnoreCase("null")) {
+            if (post.getImagePath().startsWith(".")) {
+
+                imagePath = imagePath.substring(2, imagePath.length());
+
+                imagePath = "file:" + imagePath;
+
+                System.out.println(imagePath);
+
+                controller.setImage(new Image(imagePath));
+            }
+        }
+
+        
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Edit post");
+        stage.setResizable(false);
+        stage.show();
+
+    }
 
     public AnchorPane buildComment(Comment comment) throws IOException {
 
@@ -113,9 +154,11 @@ public class GUIBuilder {
         AnchorPane commentTamplate = (AnchorPane) fxmlLoader.load();
         CommentController controller = fxmlLoader.<CommentController>getController();
 
+        if (comment.getDateTime() != null) {
+            controller.setDate(new SimpleDateFormat("HH:mm dd/MM/yyyy").format(comment.getDateTime()));
+        }
         controller.setCommentText(comment.getMessage());
         controller.setUser(comment.getUser().getName());
-        controller.setDate(comment.getDateTime().toString());
 
         return commentTamplate;
 
@@ -144,7 +187,7 @@ public class GUIBuilder {
         stage.setResizable(false);
         stage.setScene(new Scene(registerPhone));
         stage.show();
-
+        
     }
 
     public PostController buildPost(Post post) throws IOException {
@@ -152,58 +195,14 @@ public class GUIBuilder {
         FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("Post.fxml"));
         Parent postTamplate = (Parent) fxmlLoader.load();
         PostController controller = fxmlLoader.<PostController>getController();
-
-        controller.setPostText(post.getMessage());
-
-        controller.setUser(post.getUser().getName());
-
-        if (post.getDateTime() != null) {
-            controller.setDate(new SimpleDateFormat("HH:mm dd/MM/yyyy").format(post.getDateTime()));
-        }
-        
-        if(post.getUser().getId().equals(GUILogic.getLogic().getUserLogged().getId())){
-            controller.enableBtnEdit();
-        }
-
-        if (post.getImagePath() != null && !post.getImagePath().equalsIgnoreCase("null")) {
-
-            String imagePath = post.getImagePath();
-
-            if (post.getImagePath().startsWith(".")) {
-
-                imagePath = imagePath.substring(2, imagePath.length());
-
-                imagePath = "file:" + imagePath;
-
-                System.out.println(imagePath);
-
-                controller.setPhotoPost(new Image(imagePath));
-            }
-        }
-
+        controller.setPost(post);
+        controller.updatePost(post);
         if (post.getComments() != null) {
             for (Comment comment : post.getComments()) {
                 controller.addComment(buildComment(comment));
             }
 
         }
-
-        StringBuilder tags = new StringBuilder();
-        if (post.getTags() != null) {
-            for (Tag tag : post.getTags()) {
-                tags.append("#").append(tag.getName()).append(" ");
-            }
-            controller.setTags(tags.toString());
-        }
-
-        StringBuilder users = new StringBuilder();
-        if (post.getUsers() != null) {
-            for (User user : post.getUsers()) {
-                users.append("@").append(user.getName()).append(" ");
-            }
-            controller.setTaggedUsers(users.toString());
-        }
-
         return controller;
     }
 

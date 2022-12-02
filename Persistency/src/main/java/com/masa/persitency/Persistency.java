@@ -1,5 +1,6 @@
 package com.masa.persitency;
 
+import com.masa.domain.Comment;
 import com.masa.domain.Log;
 import com.masa.domain.Post;
 import com.masa.domain.RelPostTag;
@@ -18,6 +19,7 @@ public class Persistency implements IPersistency {
     private DAORelPostTag postTags;
     private DAORelPostUser postUsers;
     private DAOLogs logs;
+    private DAOComments comments;
 
     public Persistency() {
         daoFactory = new DAOFactory();
@@ -27,6 +29,7 @@ public class Persistency implements IPersistency {
         postTags = daoFactory.createDAORelPostTag();
         postUsers=daoFactory.createDAORelPostUser();
         logs = daoFactory.createDAOLogs();
+        comments=daoFactory.createDAOComments();
 
     }
 
@@ -70,6 +73,10 @@ public class Persistency implements IPersistency {
         return posts.create(post);
     }
 
+    @Override
+    public Post editPost(Post post){
+        return posts.edit(post);
+    }
     @Override
     public Post getPost(String postId) {
         return posts.get(postId);
@@ -154,6 +161,16 @@ public class Persistency implements IPersistency {
     @Override
     public User mirrorUser(User user) {
         return users.mirrorUser(user);
+    }
+    
+    @Override
+    public Comment createComment(Comment comment){
+        return comments.create(comment);
+    }
+    
+    @Override
+    public List<Comment> getCommentsByPost(String idPost){
+        return comments.getByPost(idPost);
     }
 
 }

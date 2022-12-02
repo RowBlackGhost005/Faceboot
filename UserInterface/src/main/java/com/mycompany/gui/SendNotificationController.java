@@ -29,7 +29,7 @@ import logic.GUILogic;
  */
 public class SendNotificationController implements Initializable {
 
-    @FXML
+  @FXML
     private Button btnSend;
     @FXML
     private Button btnBack;
@@ -41,27 +41,13 @@ public class SendNotificationController implements Initializable {
     private ComboBox<String> cmbNotificationMode;
     
     private User userReceptor;
-    @FXML
-    private ComboBox<String> cmbProvider;
-    @FXML
-    private ComboBox<String> cmbTo;
-
-    private List<User> users;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cmbProvider.getItems().removeAll(cmbProvider.getItems());
-        cmbProvider.getItems().addAll("SMS", "E-MAIL", "BOTH");
-        cmbProvider.getSelectionModel().select("SMS");
+        cmbNotificationMode.getItems().removeAll(cmbNotificationMode.getItems());
+        cmbNotificationMode.getItems().addAll("SMS", "E-MAIL", "BOTH");
+        cmbNotificationMode.getSelectionModel().select("SMS");
 
-        users = GUILogic.getLogic().getAllUsers();
-        List<String> userNames = new ArrayList();
-        users.forEach(user -> {
-            userNames.add(user.getName());
-        });
-        cmbTo.getItems().removeAll(cmbTo.getItems());
-        cmbTo.getItems().addAll(userNames);
-        cmbTo.getSelectionModel().select(userNames.get(0));
     }
 
     @FXML
@@ -72,19 +58,12 @@ public class SendNotificationController implements Initializable {
     @FXML
     private void clickBtnSend(MouseEvent event) throws IOException {
 
-        String selectedUser = cmbTo.getSelectionModel().getSelectedItem();
-        User to = new User();
-        for (User user : users) {
-            if (user.getName().equalsIgnoreCase(selectedUser)) {
-                to = user;
-            }
-        }
-        
+
         User from = new User();
         from.setEmail("jose.angulo215058@potros.itson.edu.mx");
 
         Notification notification = new Notification();
-        notification.setTo(to);
+        notification.setTo(userReceptor);
         notification.setFrom(from);
         notification.setMessage(txtMessage.getText());
 
@@ -96,7 +75,7 @@ public class SendNotificationController implements Initializable {
 
         txtTo.setText("");
 
-        String option = cmbProvider.getSelectionModel().getSelectedItem();
+        String option = cmbNotificationMode.getSelectionModel().getSelectedItem();
 
         sendNotification(notification, option);
         clear();

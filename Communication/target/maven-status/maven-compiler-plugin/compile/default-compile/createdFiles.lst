@@ -1,6 +1,6 @@
+com\masa\communication\ServerSocketHandler.class
 com\masa\communication\CommHandler.class
 com\masa\communication\Communication.class
 com\masa\communication\ICommHandler.class
-com\masa\communication\ClientSocket.class
-com\masa\communication\ServerSocketHandler.class
 com\masa\communication\Serializer.class
+com\masa\communication\ClientSocket.class
