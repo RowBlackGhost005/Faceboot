@@ -1,6 +1,7 @@
 package com.masa.persitency;
 
 import com.masa.domain.Log;
+import com.masa.domain.Notification;
 import com.masa.domain.Post;
 import com.masa.domain.RelPostTag;
 import com.masa.domain.RelPostUser;
@@ -62,5 +63,13 @@ public interface IPersistency {
     public List<Log> getAllLogs();
     
     public List<Post> getPostByTag(Tag tag);
+    
+    public Notification createNotification(Notification notification);
+    
+    public Notification getNotification(String notificaitonId);
+    
+    public List<Notification> getNotificationsByUser(String userId);
+    
+    public Notification createNotificationMirror(Notification notification);
     
 }

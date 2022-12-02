@@ -19,8 +19,8 @@ public class SMSProvider extends BaseNotificator {
 
     public SMSProvider(INotificator notificator) {
         super(notificator);
-        this.ACCOUNT_SID = "";
-        this.AUTH_TOKEN = "";
+        this.ACCOUNT_SID = "ACe5022c2150a048820cb2b9e0e9221e94";
+        this.AUTH_TOKEN = "9fb247fa27955757721c3e99099f29c8";
         
     }
 

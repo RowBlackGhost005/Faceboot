@@ -31,5 +31,9 @@ public class DAOFactory {
     public DAOLogs createDAOLogs(){
         return new DAOLogs();
     }
+    
+    public DAONotifications createDAONotifications(){
+        return new DAONotifications(bdConnection);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.masa.persitency;
 
 import com.masa.domain.Log;
+import com.masa.domain.Notification;
 import com.masa.domain.Post;
 import com.masa.domain.RelPostTag;
 import com.masa.domain.RelPostUser;
@@ -18,7 +19,8 @@ public class Persistency implements IPersistency {
     private DAORelPostTag postTags;
     private DAORelPostUser postUsers;
     private DAOLogs logs;
-
+    private DAONotifications notifications;
+    
     public Persistency() {
         daoFactory = new DAOFactory();
         users = daoFactory.createDAOUsers();
@@ -27,6 +29,7 @@ public class Persistency implements IPersistency {
         postTags = daoFactory.createDAORelPostTag();
         postUsers=daoFactory.createDAORelPostUser();
         logs = daoFactory.createDAOLogs();
+        notifications = daoFactory.createDAONotifications();
 
     }
 
@@ -159,6 +162,26 @@ public class Persistency implements IPersistency {
     @Override
     public List<Post> getPostByTag(Tag tag) {
         return posts.getByTag(tag);
+    }
+
+    @Override
+    public Notification createNotification(Notification notification) {
+        return notifications.create(notification);
+    }
+
+    @Override
+    public Notification getNotification(String notificaitonId) {
+        return notifications.get(notificaitonId);
+    }
+
+    @Override
+    public List<Notification> getNotificationsByUser(String userId) {
+        return notifications.getByUser(userId);
+    }
+
+    @Override
+    public Notification createNotificationMirror(Notification notification) {
+        return notifications.mirror(notification);
     }
 
 }

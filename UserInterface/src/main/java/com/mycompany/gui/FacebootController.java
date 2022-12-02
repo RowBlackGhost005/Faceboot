@@ -133,10 +133,10 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
         }
 
     }
-    
+
     @FXML
     private void clickBtnSearch(MouseEvent event) {
-
+        searchPostByTag();
     }
 
     @FXML
@@ -160,18 +160,18 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
             listOnlineUsers.getItems().add(user);
         }
     }
-    
-    public void removeOnlineUser(User user){
+
+    public void removeOnlineUser(User user) {
         ObservableList<User> usersOnline = listOnlineUsers.getItems();
 
         User userToRemove = null;
-        
+
         for (User userOnline : usersOnline) {
             if (userOnline.equals(user)) {
                 userToRemove = userOnline;
             }
         }
-        
+
         listOnlineUsers.getItems().remove(userToRemove);
 
     }
@@ -179,15 +179,19 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
     public void addOfflineUser(User user) {
         listOfflineUsers.getItems().add(user);
     }
-    
-    
 
     @FXML
     private void clickBtnSendNotification(MouseEvent event) {
 
-        List<Log> logs = GUILogic.getLogic().getAllLogs();
-        for (Log log : logs) {//print the logger in console
-            System.out.println(log.getDate() + " " + log.getLevel() + " " + log.getMessage() + " ");
+        try {
+            GUIController.show("NotificationHistory");
+            
+//        List<Log> logs = GUILogic.getLogic().getAllLogs();
+//        for (Log log : logs) {//print the logger in console
+//            System.out.println(log.getDate() + " " + log.getLevel() + " " + log.getMessage() + " ");
+//        }
+        } catch (IOException ex) {
+            Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -268,5 +272,42 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
                     }
                 }
         );
+    }
+
+    public void searchPostByTag() {
+        String tagToSearch = txtSearch.getText();
+
+        List<Initializable> currentPosts = new ArrayList<>();
+
+        for (Initializable post : postsControllers) {
+            currentPosts.add(post);
+        }
+
+        for (Initializable post : currentPosts) {
+            removePost(post);
+        }
+
+        if (tagToSearch == "") {
+            updatePosts();
+
+        } else {
+
+            List<Post> filteredPosts = GUILogic.getLogic().getPostByTag(tagToSearch);
+
+            for (Post postWithFilter : filteredPosts) {
+                GUIBuilder builder = new GUIBuilder();
+
+                Platform.runLater(
+                        () -> {
+                            try {
+                                this.addPost(builder.buildPost(postWithFilter));
+                            } catch (IOException ex) {
+                                Logger.getLogger(GUIUpdates.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                );
+
+            }
+        }
     }
 }

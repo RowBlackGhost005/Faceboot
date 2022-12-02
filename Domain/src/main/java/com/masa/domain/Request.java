@@ -30,6 +30,7 @@ public class Request {
     private User user;
     private PostTransferObject postTransfer;
     private Tag tag;
+    private Notification notification;
     //End objecs that can be send into a request.
     
     
@@ -100,6 +101,10 @@ public class Request {
                 this.tag = (Tag) object;
                 break;
                 
+            case "notification":
+                this.notification = (Notification) object;
+                break;
+                
             default:
                 break;
         }
@@ -126,6 +131,8 @@ public class Request {
                 return postTransfer;
             case "tag":
                 return tag;
+            case "notification":
+                return notification;
             default:
                 return null;
         }

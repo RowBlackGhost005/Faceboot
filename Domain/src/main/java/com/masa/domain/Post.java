@@ -171,7 +171,8 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" + "id=" + id + ", message=" + message + '}';
+        return "Post{" + "id=" + id + ", message=" + message + ", imagePath=" + imagePath + ", userId=" + userId + ", users=" + users + ", tags=" + tags + ", comments=" + comments + ", user=" + user + ", dateTime=" + dateTime + '}';
     }
+
 
 }

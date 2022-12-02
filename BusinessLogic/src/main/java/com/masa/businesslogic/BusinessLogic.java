@@ -16,6 +16,7 @@ import com.masa.utils.IOnlineUserObserver;
 import com.masa.utils.IPostNotifier;
 import com.masa.utils.IPostObserver;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -65,16 +66,12 @@ public class BusinessLogic implements IBusinessLogic {
 
         User registedUser = null;
 
-<<<<<<< HEAD
-        registedUser = userLogic.registerUser(user);
-=======
         try {
             registedUser = userLogic.registerUser(user);
             notificationLogic.registerUser(user.getPhone());
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage());
         }
->>>>>>> origin/develop
 
         if (broadcast) {
             Request request = new Request("registeruser", "RegisterUser");
@@ -278,6 +275,7 @@ public class BusinessLogic implements IBusinessLogic {
     @Override
     public void sendNotification(Notification notification, String provider) {
         notificationLogic.sendNotification(notification, provider);
+        createNotification(notification, true);
     }
 
     @Override
@@ -325,7 +323,87 @@ public class BusinessLogic implements IBusinessLogic {
         Tag tagStored = tagLogic.getByName(tag);
 
         List<Post> postsWithTag = postLogic.getByTag(tagStored);
-        
-        return postsWithTag;
+
+        ArrayList<Tag> tags = new ArrayList<Tag>();
+
+        tags.add(tagStored);
+
+        List<Post> posts = new ArrayList<Post>();
+
+        for (Post buildPost : postsWithTag) {
+
+            Post postbd = postLogic.get(buildPost.getId());
+
+            System.out.println(postbd);
+
+            posts.add(postbd);
+
+//            buildPost.setTags(tags);
+//            
+//            User user = userLogic.get(buildPost.getId());
+//            
+//            buildPost.setUser(user);
+        }
+
+        return posts;
     }
+
+    @Override
+    public Notification createNotification(Notification notification, boolean broadcast) {
+
+        Notification notificationNew = null;
+        
+        
+        if(notification.getId() != null){
+            notificationNew = notificationLogic.mirror(notification);
+        }else{
+            notificationNew = notificationLogic.create(notification);
+        }
+        
+        Request request = new Request("createNotification", "CreateNotification");
+
+        if (broadcast) {
+            request.append(notificationNew, "notification");
+
+            initCommunicationThread(request);
+        }
+
+        return notificationNew;
+    }
+
+    @Override
+    public Notification getNotification(String notificaitonId) {
+
+        Notification bdNotification = notificationLogic.get(notificaitonId);
+
+        User userFrom = userLogic.get(bdNotification.getFrom().getId());
+        User userTo = userLogic.get(bdNotification.getTo().getId());
+
+        bdNotification.setFrom(userFrom);
+        bdNotification.setTo(userTo);
+
+        return bdNotification;
+    }
+
+    @Override
+    public List<Notification> getNotificationsByUser(String userId) {
+
+        List<Notification> bdNotifications = notificationLogic.getByUser(userId);
+
+        List<Notification> userNotifications = new ArrayList<>();
+
+        for (Notification notification : bdNotifications) {
+
+            User userFrom = userLogic.get(notification.getFrom().getId());
+            User userTo = userLogic.get(notification.getTo().getId());
+
+            notification.setFrom(userFrom);
+            notification.setTo(userTo);
+
+            userNotifications.add(notification);
+        }
+
+        return userNotifications;
+    }
+
 }

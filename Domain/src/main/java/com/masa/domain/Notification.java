@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.masa.domain;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -12,15 +9,17 @@ import java.util.Objects;
  */
 public class Notification {
     
-    private Integer id;
+    private String id;
     private User to;
     private User from;
     private String message;
+    private String type;
+    private Date date;
 
     public Notification() {
     }
 
-    public Notification(Integer id) {
+    public Notification(String id) {
         this.id = id;
     }
 
@@ -30,18 +29,38 @@ public class Notification {
         this.message = message;
     }
 
-    public Notification(Integer id, User to, User from, String message) {
+    public Notification(String id, User to, User from, String message) {
         this.id = id;
         this.to = to;
         this.from = from;
         this.message = message;
     }
 
-    public Integer getId() {
+    public Notification(String id, User to, User from, String message, String type) {
+        this.id = id;
+        this.to = to;
+        this.from = from;
+        this.message = message;
+        this.type = type;
+    }
+
+    public Notification(String id, User to, User from, String message, String type, Date date) {
+        this.id = id;
+        this.to = to;
+        this.from = from;
+        this.message = message;
+        this.type = type;
+        this.date = date;
+    }
+    
+    
+    
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -69,6 +88,25 @@ public class Notification {
         this.message = message;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;

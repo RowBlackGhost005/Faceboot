@@ -9,16 +9,15 @@ import com.masa.domain.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javax.swing.JOptionPane;
 import logic.GUILogic;
 
 
@@ -80,24 +79,23 @@ public class SendNotificationController implements Initializable {
             }
         }
         
-        User from = new User();
-        from.setEmail("jose.angulo215058@potros.itson.edu.mx");
+        User from = GUILogic.getLogic().getUserLogged();
+        from.setEmail("faceboot.arquitectura@gmail.com");
 
         Notification notification = new Notification();
         notification.setTo(to);
         notification.setFrom(from);
         notification.setMessage(txtMessage.getText());
-
-        GUILogic.getLogic().sendNotification(notification, "sms");
-        switch(cmbNotificationMode.getSelectionModel().getSelectedItem()){
-            case "Phone": GUILogic.getLogic().sendNotification(notification, "sms");
-        }
         
 
         txtTo.setText("");
 
         String option = cmbProvider.getSelectionModel().getSelectedItem();
 
+        notification.setType(option);
+        
+        notification.setDate(new Date());
+        
         sendNotification(notification, option);
         clear();
     }

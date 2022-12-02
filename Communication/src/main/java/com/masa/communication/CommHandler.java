@@ -2,6 +2,7 @@ package com.masa.communication;
 
 import com.masa.businesslogic.IBusinessLogic;
 import com.masa.domain.Comment;
+import com.masa.domain.Notification;
 import com.masa.domain.Peer;
 import com.masa.domain.Post;
 import com.masa.domain.PostTransferObject;
@@ -286,6 +287,16 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
 
                 communication.removePeer(peer);
 
+                break;
+                
+            case "createnotification":
+                
+                Notification notificationToAdd = (Notification) request.getParam("notification");
+                
+                businessLogic.createNotification(notificationToAdd, false);
+                
+                communication.removePeer(peer);
+                
                 break;
 
             //Can Send: 

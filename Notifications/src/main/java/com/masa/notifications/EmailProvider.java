@@ -26,7 +26,7 @@ public class EmailProvider extends BaseNotificator {
 
     public EmailProvider(INotificator notificator) {
         super(notificator);
-        this.API_KEY = "";
+        this.API_KEY = "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";
     }
 
     @Override

@@ -33,6 +33,36 @@ public class PostLogic {
     public Post create(Post post) {
         return persistency.createPost(post);
     }
+    
+    public Post get(String id){
+        
+        Post postBd = persistency.getPost(id);
+
+        List<Post> posts = new ArrayList<>();
+        
+        posts.add(postBd);
+        
+        for (Post post : posts) {
+            List<Tag> tagsIdList = persistency.getTagsByPost(post.getId());
+            ArrayList<Tag> tagsList = new ArrayList<>();
+            for (Tag tag : tagsIdList) {
+                Tag newTag = persistency.getTag(tag.getId());
+                tagsList.add(newTag);
+            }
+            post.setTags(tagsList);
+
+            List<User> usersIdList = persistency.getUsersTagged(post.getId());
+            ArrayList<User> usersList = new ArrayList<>();
+            for (User user : usersIdList) {
+                User newUser = new User(user.getId(), persistency.getUser(user.getId()).getName(), null, null);
+                usersList.add(newUser);
+            }
+            post.setUsers(usersList);
+            post.getUser().setName(persistency.getUser(post.getUser().getId()).getName());
+        }
+
+        return posts.get(0);
+    }
 
     public List<Post> getAllPost() {
         List<Post> posts = persistency.getAllPost();
