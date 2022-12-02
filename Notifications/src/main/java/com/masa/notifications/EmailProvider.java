@@ -22,10 +22,11 @@ import java.util.logging.Logger;
  */
 public class EmailProvider extends BaseNotificator {
 
-    public final String API_KEY = "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";
+    public final String API_KEY;
 
     public EmailProvider(INotificator notificator) {
         super(notificator);
+        this.API_KEY = "";
     }
 
     @Override
