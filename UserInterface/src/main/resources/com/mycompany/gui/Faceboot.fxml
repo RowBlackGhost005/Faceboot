@@ -6,6 +6,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -26,22 +28,25 @@
     <children>
         <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="814.0">
             <children>
-                <TextField fx:id="txtSearch" prefHeight="25.0" prefWidth="542.0" promptText="Search" styleClass="search" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                <TextField fx:id="txtSearch" layoutX="76.0" layoutY="10.0" prefHeight="25.0" prefWidth="542.0" promptText="Search" styleClass="search" AnchorPane.leftAnchor="76.0" AnchorPane.topAnchor="10.0" />
                 <Button fx:id="btnPublish" layoutX="665.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#clickBtnPublish" prefHeight="25.0" prefWidth="63.0" styleClass="publish" text="Publish" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                <Button fx:id="btnSearch" ellipsisString="" layoutX="391.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#clickBtnSearch" prefHeight="7.0" styleClass="btnSearch" />
+                <Button fx:id="btnSearch" ellipsisString="" layoutX="454.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#clickBtnSearch" prefHeight="7.0" styleClass="btnSearch" />
+            <ImageView fx:id="imgLogo" fitHeight="41.0" fitWidth="37.0" layoutX="24.0" layoutY="7.0" onMouseClicked="#clickLogo" pickOnBounds="true" preserveRatio="true" styleClass="faceboot">
+               <image>
+                  <Image url="@../../../img/faceboot.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
         <Pane fx:id="paneUsers" prefHeight="431.0" prefWidth="158.0" styleClass="paneUsers" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <children>
-                <ListView fx:id="listOnlineUsers" layoutX="4.0" layoutY="37.0" maxWidth="1.7976931348623157E308" prefHeight="169.0" />
-                <ListView fx:id="listOfflineUsers" layoutX="5.0" layoutY="246.0" maxWidth="1.7976931348623157E308" prefHeight="169.0" />
-                <ListView fx:id="listOnlineUsers" layoutX="4.0" layoutY="37.0" maxWidth="1.7976931348623157E308" onMouseClicked="#clickOnlineUser" prefHeight="169.0" />
-                <ListView fx:id="listOfflineUsers" layoutX="5.0" layoutY="246.0" maxWidth="1.7976931348623157E308" onMouseClicked="#clickOfflineUser" prefHeight="169.0" />
+                <ListView fx:id="listOnlineUsers" layoutX="4.0" layoutY="37.0" onMouseClicked="#clickOnlineUser" prefHeight="169.0" prefWidth="138.0" />
+                <ListView fx:id="listOfflineUsers" layoutX="5.0" layoutY="246.0" maxWidth="1.7976931348623157E308" onMouseClicked="#clickOfflineUser" prefHeight="169.0" prefWidth="138.0" />
                 <Label layoutX="5.0" layoutY="12.0" text="ONLINE" />
                 <Label layoutX="3.0" layoutY="218.0" text="OFFLINE" />
             </children>
         </Pane>
-        <Pane fx:id="paneUser" prefHeight="57.0" prefWidth="172.0" styleClass="paneUser" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <AnchorPane fx:id="paneUser" prefHeight="57.0" prefWidth="172.0" styleClass="paneUser" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <children>
                 <Label layoutX="14.0" layoutY="15.0" prefHeight="17.0" prefWidth="16.0" styleClass="photoUser" />
 
@@ -53,7 +58,7 @@
                 </Button>
 
             </children>
-        </Pane>
+        </AnchorPane>
         <ScrollPane prefHeight="502.0" prefWidth="814.0" styleClass="panePost" GridPane.rowIndex="2" GridPane.rowSpan="2">
             <content>
           

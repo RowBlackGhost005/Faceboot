@@ -29,7 +29,7 @@ Button.back:hover{
     -fx-cursor:hand;
 }
 
-GridPane{    
+GridPane.notificationsContaner{    
     -fx-padding: 8px 8px 10px 8px;
     -fx-background-color: #40444b;
     -fx-background-radius: 14px;

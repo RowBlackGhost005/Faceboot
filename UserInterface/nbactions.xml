@@ -2,6 +2,7 @@
 <actions>
         <action>
             <actionName>run</actionName>
+            <preAction>build-with-dependencies</preAction>
             <packagings>
                 <packaging>jar</packaging>
             </packagings>
@@ -9,6 +10,10 @@
                 <goal>clean</goal>
                 <goal>javafx:run</goal>
             </goals>
+            <properties>
+                <env.ACCOUNT_SID>"ACe5022c2150a048820cb2b9e0e9221e94"</env.ACCOUNT_SID>
+                <env.AUTH_TOKEN>"9fb247fa27955757721c3e99099f29c8"</env.AUTH_TOKEN>
+            </properties>
         </action>
         <action>
             <actionName>debug</actionName>

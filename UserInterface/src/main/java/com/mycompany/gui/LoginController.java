@@ -57,7 +57,7 @@ public class LoginController {
         }
     }
 
-    private void loginGoogle() {
+    private void loginGoogle() throws IOException {
         User existingUser = null;
         
         try {
@@ -76,12 +76,14 @@ public class LoginController {
             }
 
         } catch (Exception ex) {
+            GUIController.showDialog("Error", ex.getMessage(), 1);
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
 
     @FXML
-    private void clickBtnLoginWithGoogle(MouseEvent event) {
+    private void clickBtnLoginWithGoogle(MouseEvent event) throws IOException {
         loginGoogle();
     }
 }

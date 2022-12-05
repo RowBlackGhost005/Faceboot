@@ -22,7 +22,7 @@ public interface IBusinessLogic {
     
     public User registerUser(User user, boolean broadcast) throws Exception;
     
-    public User registerExternalUser(User user, boolean broadcast);
+    public User registerExternalUser(User user, boolean broadcast) throws Exception;
   
     public User login(User user, String method) throws Exception;
     
@@ -31,12 +31,16 @@ public interface IBusinessLogic {
     public User editUser(User user, boolean broadcast) throws Exception;
 
     public User getUser(String userId);
+    
+    public void deletePost(String postId, boolean broadcast);
 
     public List<User> getAllUsers();
     
     public void createPost(Post post, boolean broadcast) throws IOException;
     
-    public void createComment(Comment comment, boolean broadcast)throws IOException;
+    public Comment createComment(Comment comment, boolean broadcast)throws IOException;
+    
+    public void deleteComment(String commentId, boolean broadcast)throws IOException;
     
     public void createPost(Post post, Tag tags, boolean broadcast) throws IOException;
     

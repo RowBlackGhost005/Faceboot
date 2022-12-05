@@ -52,6 +52,21 @@ public class DAOComments {
         }
     }
     
+     public void delete(String commentId) {
+        try {
+            java.sql.Connection connection = this.connectionDB.connectionDB();
+            Statement statement = connection.createStatement();
+            String query = String.format("DELETE FROM comments WHERE id= '%s';", 
+                    commentId);
+
+            statement.executeUpdate(query);
+
+            connection.close();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
     public Comment get(String idComment){
         
        Comment comment = null;

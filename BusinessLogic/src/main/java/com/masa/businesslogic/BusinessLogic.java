@@ -69,12 +69,10 @@ public class BusinessLogic implements IBusinessLogic {
 
         User registedUser = null;
 
-        try {
+
             registedUser = userLogic.registerUser(user);
-            notificationLogic.registerUser(user.getPhone());
-        } catch (Exception ex) {
-            LOGGER.error(ex.getMessage());
-        }
+            //notificationLogic.registerUser(user.getPhone());
+
 
         if (broadcast) {
             Request request = new Request("registeruser", "RegisterUser");
@@ -90,16 +88,11 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public User registerExternalUser(User user, boolean broadcast) {
+    public User registerExternalUser(User user, boolean broadcast)  throws Exception{
 
         User registeredUser = null;
 
-        try {
             registeredUser = userLogic.registerExternalUser(user);
-
-        } catch (Exception ex) {
-            LOGGER.error(ex.getMessage());
-        }
 
         if (broadcast) {
             Request request = new Request("registerexternalusers", "RegisterExternalUser");
@@ -108,6 +101,7 @@ public class BusinessLogic implements IBusinessLogic {
 
             initCommunicationThread(request);
         }
+        
 
         LOGGER.info("The user: " + registeredUser.getName() + " has succesfuly Signed Up with Google");
         return registeredUser;
@@ -215,7 +209,7 @@ public class BusinessLogic implements IBusinessLogic {
     }
 
     @Override
-    public void createComment(Comment comment, boolean broadcast) throws IOException {
+    public Comment createComment(Comment comment, boolean broadcast) throws IOException {
         Comment createdComment = commentsLogic.create(comment);
 
         if (broadcast) {
@@ -225,6 +219,12 @@ public class BusinessLogic implements IBusinessLogic {
 
             initCommunicationThread(request);
         }
+        return createdComment;
+    }
+    
+    @Override
+    public void deleteComment(String commentId, boolean broadcast)throws IOException{
+        commentsLogic.delete(commentId);
     }
 
     @Override
@@ -439,6 +439,11 @@ public class BusinessLogic implements IBusinessLogic {
         }
 
         return userNotifications;
+    }
+
+    @Override
+    public void deletePost(String postId, boolean broadcast) {
+        postLogic.deletePost(postId);
     }
 
 }

@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javax.swing.JFileChooser;
 import logic.GUILogic;
@@ -81,7 +82,10 @@ public class CreatePostController implements Initializable {
 
     @FXML
     private void clickBtnDelete(MouseEvent event) throws IOException {
-
+        GUILogic.getLogic().deletePost(postController.getPostObject().getId(), true);
+        GridPane buildPost = postController.getPost();
+        ((GridPane) buildPost.getParent()).getChildren().remove(buildPost);
+        btnDelete.getScene().getWindow().hide();
     }
 
     @FXML
@@ -149,6 +153,7 @@ public class CreatePostController implements Initializable {
                 
             } else {
                 GUILogic.getLogic().createPost(post, true);
+                back();
             }
 
         } else {

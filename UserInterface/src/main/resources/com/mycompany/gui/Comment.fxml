@@ -4,13 +4,28 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="89.0" prefWidth="600.0" styleClass="comment" stylesheets="@../../../css/comment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.CommentController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="89.0" prefWidth="600.0" styleClass="comment" stylesheets="@../../../css/comment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gui.CommentController">
    <children>
-      <ImageView fx:id="userPhoto" fitHeight="33.0" fitWidth="29.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" styleClass="photoUser" />
-      <Label fx:id="lblUser" layoutX="55.0" layoutY="13.0" text="Usuario" />
-      <Label fx:id="lblDate" layoutX="128.0" layoutY="13.0" styleClass="date" text="Date" />
+      <GridPane hgap="5.0" prefHeight="47.0" prefWidth="580.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="userPhoto" fitHeight="33.0" fitWidth="29.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" styleClass="photoUser" />
+            <Label fx:id="lblUser" layoutX="70.0" layoutY="1.0" text="Usuario" GridPane.columnIndex="1" />
+            <Label fx:id="lblDate" layoutX="152.0" layoutY="1.0" prefHeight="26.0" styleClass="date" text="Date" GridPane.columnIndex="2" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints maxWidth="40.80001220703125" minWidth="34.400018310546876" prefWidth="40.80001220703125" />
+            <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="49.599987792968754" />
+            <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="52.799963378906256" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+      </GridPane>
       <Label fx:id="lblCommentText" layoutX="55.0" layoutY="51.0" text="Comment text" AnchorPane.leftAnchor="48.0" />
-      <Button fx:id="btnEdit" layoutX="753.0" layoutY="13.0" mnemonicParsing="false" styleClass="btnEdit" visible="false" AnchorPane.rightAnchor="16.0" />
+      <Button fx:id="btnEdit" layoutX="753.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#clickBtnDelete" styleClass="btnDelete" visible="false" AnchorPane.rightAnchor="16.0" />
    </children>
 </AnchorPane>

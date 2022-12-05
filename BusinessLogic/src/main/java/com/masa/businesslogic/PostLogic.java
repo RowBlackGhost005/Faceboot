@@ -244,4 +244,8 @@ public class PostLogic {
         
         return persistency.getPostByTag(tag);
     }
+    
+    public void deletePost(String postId){
+        persistency.deletePost(postId);
+    }
 }
