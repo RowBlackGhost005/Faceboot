@@ -69,12 +69,8 @@ public class BusinessLogic implements IBusinessLogic {
 
         User registedUser = null;
 
-        try {
-            registedUser = userLogic.registerUser(user);
-            notificationLogic.registerUser(user.getPhone());
-        } catch (Exception ex) {
-            LOGGER.error(ex.getMessage());
-        }
+        registedUser = userLogic.registerUser(user);
+//        notificationLogic.registerUser(user.getPhone());
 
         if (broadcast) {
             Request request = new Request("registeruser", "RegisterUser");
