@@ -27,3 +27,12 @@ Label{
 Label.date{
       -fx-text-fill:#b9b4b4;
 }
+Button.btnDelete{
+      -fx-pref-width: 16px;
+    -fx-pref-height: 16px;
+    -fx-background-image:url("../img/bin.png");
+    -fx-background-color: transparent;
+    -fx-background-size:16px 16px;
+    -fx-background-repeat:no-repeat;
+    -fx-background-position:center;
+}

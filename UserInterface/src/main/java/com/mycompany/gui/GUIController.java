@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.image.Image;
 import javafx.stage.StageStyle;
 import logic.GUILogic;
 
@@ -52,6 +53,7 @@ public class GUIController extends Application {
         stage.setScene(scene);
         stage.setTitle("Faceboot");
         stage.show();
+        stage.getIcons().add(new Image(GUIController.class.getResourceAsStream( "/img/faceboot.png" ))); 
     }
 
     /**

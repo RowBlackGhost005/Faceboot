@@ -17,6 +17,7 @@ logic\GUILogic.class
 com\mycompany\gui\SendNotificationController.class
 com\mycompany\gui\EditProfileController.class
 logic\TableUser.class
+com\mycompany\gui\ViewLogController.class
 com\masa\main\Main.class
 logic\GUIControllerLogic.class
 com\mycompany\gui\TagUserController.class

@@ -26,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -65,10 +66,10 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
 
     private List<Initializable> postsControllers;
 
-    PostController postTest;
-
     @FXML
     private ContextMenu configMenu;
+    @FXML
+    private ImageView imgLogo;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -242,9 +243,21 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
                 Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
+        MenuItem item3 = new MenuItem("View Log");
+        item3.addEventHandler(EventType.ROOT, event ->{
+            GUIBuilder builder = new GUIBuilder();
+            try {
+                builder.buildViewLog();
+            } catch (IOException ex) {
+                Logger.getLogger(FacebootController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        });
 
         configMenu.getItems().add(item);
         configMenu.getItems().add(item2);
+        configMenu.getItems().add(item3);
     }
 
     @Override
@@ -283,15 +296,7 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
     public void searchPostByTag() {
         String tagToSearch = txtSearch.getText();
 
-        List<Initializable> currentPosts = new ArrayList<>();
-
-        for (Initializable post : postsControllers) {
-            currentPosts.add(post);
-        }
-
-        for (Initializable post : currentPosts) {
-            removePost(post);
-        }
+        cleanPosts();
 
         if (tagToSearch == "") {
             updatePosts();
@@ -314,6 +319,24 @@ public class FacebootController implements Initializable, IPostObserver, IOnline
                 );
 
             }
+        }
+    }
+
+    @FXML
+    private void clickLogo(MouseEvent event) {
+        cleanPosts();
+        updatePosts();
+    }
+    
+    private void cleanPosts(){
+        List<Initializable> currentPosts = new ArrayList<>();
+
+        for (Initializable post : postsControllers) {
+            currentPosts.add(post);
+        }
+
+        for (Initializable post : currentPosts) {
+            removePost(post);
         }
     }
 }

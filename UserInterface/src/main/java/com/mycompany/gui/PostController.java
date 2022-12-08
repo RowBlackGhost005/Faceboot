@@ -126,10 +126,12 @@ public class PostController implements Initializable {
     private void comment() throws IOException{
         if(!txtComment.getText().equals("")){
         Comment comment = new Comment(GUILogic.getLogic().getUserLogged(),new Date(),txtComment.getText(),idPost);
+        Comment newComment = GUILogic.getLogic().createComment(comment, true);
+        comment.setId(newComment.getId());
         GUIBuilder builder = new GUIBuilder();
         this.addComment(builder.buildComment(comment));
         txtComment.setText("");
-        GUILogic.getLogic().createComment(comment, true);
+        
         }
     }
     

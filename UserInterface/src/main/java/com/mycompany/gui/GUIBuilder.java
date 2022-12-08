@@ -158,9 +158,13 @@ public class GUIBuilder {
         if (comment.getDateTime() != null) {
             controller.setDate(new SimpleDateFormat("HH:mm dd/MM/yyyy").format(comment.getDateTime()));
         }
+        controller.setComment(comment);
         controller.setCommentText(comment.getMessage());
         controller.setUser(comment.getUser().getName());
 
+        if (comment.getUser().getId().equals(GUILogic.getLogic().getUserLogged().getId())) {
+            controller.enableDelete();
+        }
         return commentTamplate;
 
     }
@@ -254,4 +258,13 @@ public class GUIBuilder {
         return controller;
     }
 
+    public void buildViewLog() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(GUIBuilder.class.getResource("ViewLog.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Log");
+        stage.setResizable(false);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
 }

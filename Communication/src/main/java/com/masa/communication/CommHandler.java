@@ -204,11 +204,18 @@ public class CommHandler implements ICommHandler, IPostNotifier, ICommentNotifie
 
                 User user = (User) request.getParam("user");
 
-                businessLogic.registerExternalUser(user, false);
+            {
+                try {
+                    businessLogic.registerExternalUser(user, false);
+                } catch (Exception ex) {
+                    Logger.getLogger(CommHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 
                 communication.removePeer(peer);
 
                 break;
+
 
             //Can Send: Peer
             //Can Receive: Peer.

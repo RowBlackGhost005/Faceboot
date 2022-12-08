@@ -10,10 +10,14 @@ Pane.mainBar, AnchorPane, ScrollPane.panePost, .viewport{
     -fx-background-color: #37383f;
 }
 
+ImageView.faceboot{
+    -fx-cursor:hand;
+}
+
 ScrollPane.panePost{
     -fx-padding:8px;
 }
-.scroll-bar:vertical .track{
+.scroll-bar:vertical .track,.scroll-bar:horizontal .track{
     -fx-background-color :#37383f;
     -fx-border-color:#37383f;
     -fx-background-radius : 8px;
@@ -26,20 +30,24 @@ ScrollPane.panePost{
 }*/
 
 .scroll-bar:vertical .increment-button ,
-.scroll-bar:vertical .decrement-button {
+.scroll-bar:vertical .decrement-button,
+.scroll-bar:horizontal .increment-button ,
+.scroll-bar:horizontal .decrement-button{
     -fx-background-color :transparent;
     -fx-background-radius : 0.0px;
    -fx-padding :0.0 8.0 0.0 0.0;
 }
 
 .scroll-bar:vertical .increment-arrow,
-.scroll-bar:vertical .decrement-arrow{
+.scroll-bar:vertical .decrement-arrow,
+.scroll-bar:horizontal .increment-arrow,
+.scroll-bar:horizontal .decrement-arrow{
     -fx-shape : " ";
     -fx-background-color :transparent;
     -fx-padding : 0.00.0 0.0 .18em;
 }
 
-.scroll-bar:vertical .thumb {
+.scroll-bar:vertical .thumb, .scroll-bar:horizontal .thumb {
     -fx-background-color :#202324;
     -fx-background-radius : 8px;
 }

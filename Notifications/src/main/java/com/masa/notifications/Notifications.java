@@ -36,7 +36,7 @@ public class Notifications implements INotifications {
     }  
 
     @Override
-    public void registerNumberUser(String number) { // Nuevo método de registro de usuarios en la API
+    public void registerNumberUser(String number) { // register user's number in the API
         ISMSRegister register = new SMSRegister();
         register.registerUser(number);
     }

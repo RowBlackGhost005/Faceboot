@@ -28,4 +28,8 @@ public class CommentLogic {
      public List<Comment> getCommentsByPost(String idPost){
          return persistency.getCommentsByPost(idPost);
      }
+     
+    public void delete(String commentId){
+         persistency.deleteComment(commentId);
+    }
 }

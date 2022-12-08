@@ -129,25 +129,22 @@ public class DAOPosts {
             return null;
         }
     }
-//
-//    public boolean delete(Integer userId) {
-//        try {
-//            java.sql.Connection connection = this.connectionDB.connectionDB();
-//            Statement statement = connection.createStatement();
-//            String query = String.format("DELETE FROM users WHERE id= %d;",
-//                    userId);
-//
-//            int registries = statement.executeUpdate(query);
-//
-//            connection.close();
-//
-//            return registries == 1;
-//
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//            return false;
-//        }
-//    }
+
+    public void delete(String postId) {
+        try {
+            java.sql.Connection connection = this.connectionDB.connectionDB();
+            Statement statement = connection.createStatement();
+            String query = String.format("DELETE FROM posts WHERE id= '%s'; DELETE FROM comments WHERE id_post= '%s';",
+                    postId,postId);
+
+            statement.executeUpdate(query);
+
+            connection.close();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
     public List<Post> getAll() {
         List<Post> postsList = new ArrayList<>();
 

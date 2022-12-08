@@ -173,6 +173,11 @@ public class Persistency implements IPersistency {
     }
     
     @Override
+    public void deleteComment(String commentId){
+         comments.delete(commentId);
+    }
+    
+    @Override
     public List<Comment> getCommentsByPost(String idPost){
         return comments.getByPost(idPost);
     }
@@ -200,6 +205,11 @@ public class Persistency implements IPersistency {
     @Override
     public Notification createNotificationMirror(Notification notification) {
         return notifications.mirror(notification);
+    }
+
+    @Override
+    public void deletePost(String post) {
+        posts.delete(post);
     }
 
 }

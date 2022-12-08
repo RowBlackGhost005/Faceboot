@@ -47,6 +47,8 @@ public interface IPersistency {
     
     public Post editPost(Post post);
     
+    public void deletePost(String post);
+    
     public List<Tag> getAllTags();
     
     public List<Tag> getTagsByPost(String postId);
@@ -74,8 +76,12 @@ public interface IPersistency {
     public List<Notification> getNotificationsByUser(String userId);
     
     public Notification createNotificationMirror(Notification notification);
+   
     public Comment createComment(Comment comment);
     
+    public void deleteComment(String commentId);
+    
     public List<Comment> getCommentsByPost(String idPost);
+    
     
 }

@@ -1,6 +1,7 @@
 com\masa\domain\RelPostUser.class
 com\masa\utils\IOnlineUserObserver.class
 com\masa\utils\IPostObserver.class
+com\masa\utils\ICommentObserver.class
 com\masa\domain\CommentTransferObject.class
 com\masa\domain\PostTransferObject.class
 com\masa\domain\Request.class

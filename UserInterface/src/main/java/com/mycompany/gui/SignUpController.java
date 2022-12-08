@@ -60,8 +60,8 @@ public class SignUpController {
     }
 
     @FXML
-    private void clickBtnSignUp(MouseEvent event) throws IOException {
-        SignUp();
+    private void clickBtnSignUp(MouseEvent event) throws IOException{
+            SignUp();
     }
 
     private void SignUp() throws IOException {
@@ -86,9 +86,8 @@ public class SignUpController {
             GUILogic.getLogic().setUserLogged(createdUser);
             
         } catch (Exception ex) {
-            GUIController.showDialog("Error!", ex.getMessage(), 1);
+                GUIController.showDialog("Error!", ex.getMessage(), 1);
             return;
-//            GUIController.showDialog("Invalid data", "Complete all the fields", 1);
         }
 
         GUIController.showDialog("Success!", "Your account has been successfuly created", 0);
